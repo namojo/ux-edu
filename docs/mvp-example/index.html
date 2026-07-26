@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>빈살롱 — 사내 카페 온보딩 프로토타입</title>
+<style>
+  :root {
+    --bg: #f4efe9;
+    --frame: #ffffff;
+    --ink: #2b2320;
+    --sub: #8a7f77;
+    --line: #ece5dd;
+    --brand: #6f4e37;
+    --brand-soft: #f3ece4;
+    --accent: #c98a3c;
+    --ok: #3f8f5f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: #d9cfc4;
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 0;
+  }
+  /* 데스크톱에서도 폰처럼 보이게 하는 모바일 프레임 */
+  .phone {
+    width: 375px;
+    max-width: 100vw;
+    height: 780px;
+    max-height: 100vh;
+    background: var(--bg);
+    border-radius: 40px;
+    box-shadow: 0 24px 60px rgba(0,0,0,.28), 0 2px 0 rgba(255,255,255,.4) inset;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .statusbar {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+  .statusbar .dots { letter-spacing: 2px; }
+  .viewport { flex: 1; position: relative; overflow: hidden; }
+  .screen {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    overflow-y: auto;
+    animation: fade .32s ease;
+  }
+  .screen.active { display: flex; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px);} to { opacity:1; transform:none; } }
+
+  /* 공통 요소 */
+  .pad { padding: 0 22px; }
+  .topbar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 22px 4px; flex-shrink: 0;
+  }
+  .back {
+    width: 34px; height: 34px; border-radius: 50%;
+    border: none; background: var(--brand-soft); color: var(--brand);
+    font-size: 18px; cursor: pointer; flex-shrink: 0;
+  }
+  .btn {
+    display: block; width: 100%; border: none; cursor: pointer;
+    background: var(--brand); color: #fff;
+    font-size: 16px; font-weight: 700; padding: 16px; border-radius: 16px;
+    transition: transform .08s ease, opacity .2s;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn.ghost { background: transparent; color: var(--sub); font-weight: 600; padding: 12px; }
+  .btn[disabled] { opacity: .4; cursor: not-allowed; }
+  .footer { padding: 14px 22px calc(14px + env(safe-area-inset-bottom)); flex-shrink: 0; }
+
+  /* 1. 환영 화면 */
+  #welcome { justify-content: space-between; }
+  .hero {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; padding: 0 30px;
+  }
+  .cup {
+    width: 132px; height: 132px; border-radius: 50%;
+    background: radial-gradient(circle at 34% 30%, #8a6448, var(--brand));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 62px; margin-bottom: 30px;
+    box-shadow: 0 16px 34px rgba(111,78,55,.35);
+  }
+  .hero h1 { font-size: 26px; line-height: 1.35; margin-bottom: 12px; letter-spacing: -.5px; }
+  .hero h1 b { color: var(--brand); }
+  .hero p { color: var(--sub); font-size: 15px; line-height: 1.6; }
+  .brandtag {
+    display: inline-block; margin-bottom: 22px; padding: 6px 14px;
+    background: var(--brand-soft); color: var(--brand);
+    border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .5px;
+  }
+
+  /* 2. 선호 음료 선택 */
+  .step { font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: .5px; }
+  .head { font-size: 22px; line-height: 1.35; margin: 6px 0 4px; letter-spacing: -.5px; }
+  .head + .desc { color: var(--sub); font-size: 14px; margin-bottom: 4px; }
+  .chips {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    padding: 16px 22px 8px;
+  }
+  .chip {
+    border: 2px solid var(--line); background: var(--frame);
+    border-radius: 18px; padding: 18px 14px; cursor: pointer;
+    display: flex; flex-direction: column; gap: 6px; align-items: flex-start;
+    transition: border-color .15s, background .15s, transform .08s;
+    position: relative;
+  }
+  .chip:active { transform: scale(.97); }
+  .chip .emo { font-size: 30px; }
+  .chip .name { font-weight: 700; font-size: 15px; }
+  .chip .en { font-size: 11px; color: var(--sub); }
+  .chip.on { border-color: var(--brand); background: var(--brand-soft); }
+  .chip.on::after {
+    content: "✓"; position: absolute; top: 10px; right: 12px;
+    width: 22px; height: 22px; border-radius: 50%; background: var(--brand); color: #fff;
+    font-size: 13px; display: flex; align-items: center; justify-content: center;
+  }
+  .selhint { text-align: center; font-size: 13px; color: var(--sub); padding: 6px 0 0; }
+
+  /* 3. 홈 */
+  .home-head { padding: 6px 22px 0; }
+  .greet { font-size: 21px; letter-spacing: -.5px; }
+  .greet b { color: var(--brand); }
+  .subgreet { color: var(--sub); font-size: 13px; margin-top: 3px; }
+  .reco-banner {
+    margin: 14px 22px 4px; padding: 14px 16px; border-radius: 16px;
+    background: linear-gradient(120deg, #6f4e37, #8a6448); color: #fff;
+    display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600;
+  }
+  .sect-title { font-size: 15px; font-weight: 800; padding: 16px 22px 2px; display:flex; justify-content: space-between; align-items:baseline;}
+  .sect-title span { font-size: 12px; color: var(--sub); font-weight: 600; }
+  .list { padding: 6px 22px 0; display: flex; flex-direction: column; gap: 12px; }
+  .card {
+    background: var(--frame); border: 1px solid var(--line); border-radius: 18px;
+    padding: 12px; display: flex; gap: 12px; align-items: center; cursor: pointer;
+    transition: transform .08s, box-shadow .2s;
+  }
+  .card:active { transform: scale(.98); }
+  .thumb {
+    width: 58px; height: 58px; border-radius: 14px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 30px;
+    background: var(--brand-soft);
+  }
+  .card .info { flex: 1; min-width: 0; }
+  .card .info .n { font-weight: 700; font-size: 15px; }
+  .card .info .m { font-size: 12px; color: var(--sub); margin-top: 2px; }
+  .card .info .p { font-size: 14px; font-weight: 700; margin-top: 4px; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700; color: var(--accent);
+    background: #fbf1e2; padding: 2px 7px; border-radius: 6px; margin-left: 4px;
+  }
+  .add {
+    width: 34px; height: 34px; border-radius: 50%; border: none; flex-shrink: 0;
+    background: var(--brand); color: #fff; font-size: 20px; cursor: pointer;
+  }
+  .add:active { transform: scale(.9); }
+
+  /* 4. 주문 완료 */
+  #done { align-items: center; justify-content: center; text-align: center; padding: 0 34px; }
+  .check {
+    width: 96px; height: 96px; border-radius: 50%; background: var(--ok);
+    display: flex; align-items: center; justify-content: center; font-size: 48px; color: #fff;
+    margin-bottom: 24px; animation: pop .4s ease; box-shadow: 0 14px 30px rgba(63,143,95,.35);
+  }
+  @keyframes pop { 0%{transform:scale(.4);opacity:0} 70%{transform:scale(1.08)} 100%{transform:scale(1);opacity:1} }
+  #done h2 { font-size: 23px; margin-bottom: 10px; letter-spacing: -.5px; }
+  #done p { color: var(--sub); font-size: 14px; line-height: 1.6; margin-bottom: 6px; }
+  .receipt {
+    width: 100%; background: var(--frame); border: 1px solid var(--line);
+    border-radius: 16px; padding: 16px; margin: 22px 0 8px; text-align: left;
+  }
+  .receipt .row { display: flex; justify-content: space-between; font-size: 14px; padding: 5px 0; }
+  .receipt .row.total { border-top: 1px dashed var(--line); margin-top: 6px; padding-top: 10px; font-weight: 800; }
+  .receipt .row .muted { color: var(--sub); }
+  .pickup {
+    font-size: 13px; color: var(--brand); font-weight: 700;
+    background: var(--brand-soft); padding: 8px 14px; border-radius: 999px; margin-top: 4px;
+  }
+
+  /* 토스트 */
+  .toast {
+    position: absolute; left: 50%; bottom: 96px; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: #fff; padding: 11px 18px; border-radius: 999px;
+    font-size: 13px; font-weight: 600; opacity: 0; pointer-events: none;
+    transition: opacity .25s, transform .25s; white-space: nowrap; z-index: 50;
+  }
+  .toast.show { opacity: .96; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar">
+    <span>9:41</span>
+    <span class="dots">●●●  ▮</span>
+  </div>
+  <div class="viewport">
+
+    <!-- 화면 1: 환영 -->
+    <section id="welcome" class="screen active">
+      <div class="hero">
+        <div class="cup">☕️</div>
+        <span class="brandtag">사내 카페 · 빈살롱</span>
+        <h1>반가워요!<br><b>빈살롱</b>에 오신 걸 환영해요</h1>
+        <p>줄 서지 않고 자리에서 주문하세요.<br>취향을 알려주시면 딱 맞는 음료를 추천해 드려요.</p>
+      </div>
+      <div class="footer">
+        <button class="btn" onclick="showScreen('taste')">시작하기</button>
+        <button class="btn ghost" onclick="skipToHome()">나중에 할게요</button>
+      </div>
+    </section>
+
+    <!-- 화면 2: 선호 음료 선택 -->
+    <section id="taste" class="screen">
+      <div class="topbar">
+        <button class="back" onclick="showScreen('welcome')">‹</button>
+      </div>
+      <div class="pad">
+        <div class="step">STEP 1 / 1</div>
+        <div class="head">어떤 음료를 즐기시나요?</div>
+        <div class="desc">좋아하는 걸 모두 골라주세요. 추천에 반영돼요.</div>
+      </div>
+      <div class="chips" id="chipGrid">
+        <div class="chip" data-taste="아메리카노" onclick="toggleChip(this)">
+          <span class="emo">☕️</span><span class="name">아메리카노</span><span class="en">진하고 깔끔한</span>
+        </div>
+        <div class="chip" data-taste="라떼" onclick="toggleChip(this)">
+          <span class="emo">🥛</span><span class="name">라떼 · 밀크</span><span class="en">부드럽고 고소한</span>
+        </div>
+        <div class="chip" data-taste="디카페인" onclick="toggleChip(this)">
+          <span class="emo">🌙</span><span class="name">디카페인</span><span class="en">오후에도 편하게</span>
+        </div>
+        <div class="chip" data-taste="티" onclick="toggleChip(this)">
+          <span class="emo">🍵</span><span class="name">티 · 허브</span><span class="en">가볍고 산뜻한</span>
+        </div>
+        <div class="chip" data-taste="에이드" onclick="toggleChip(this)">
+          <span class="emo">🥤</span><span class="name">에이드 · 주스</span><span class="en">상큼하고 시원한</span>
+        </div>
+        <div class="chip" data-taste="달콤" onclick="toggleChip(this)">
+          <span class="emo">🍫</span><span class="name">달콤한 음료</span><span class="en">초코 · 바닐라</span>
+        </div>
+      </div>
+      <div class="selhint" id="selHint">1개 이상 선택하면 다음으로 넘어가요</div>
+      <div class="footer">
+        <button class="btn" id="tasteNext" disabled onclick="goHome()">내 취향 저장하기</button>
+      </div>
+    </section>
+
+    <!-- 화면 3: 홈 (추천 노출) -->
+    <section id="home" class="screen">
+      <div class="home-head">
+        <div class="greet">안녕하세요, <b>남호</b>님 👋</div>
+        <div class="subgreet" id="homeSub">오늘도 좋은 하루 되세요</div>
+      </div>
+      <div class="reco-banner">✨ <span id="recoText">취향에 맞춰 골라봤어요</span></div>
+
+      <div class="sect-title">추천 음료 <span>당신의 취향 기반</span></div>
+      <div class="list" id="recoList"><!-- JS로 채움 --></div>
+
+      <div class="sect-title">이번 주 인기 <span>사내 TOP</span></div>
+      <div class="list">
+        <div class="card" onclick="order('토피넛 라떼', 4800)">
+          <div class="thumb">🥛</div>
+          <div class="info">
+            <div class="n">토피넛 라떼 <span class="badge">인기 1위</span></div>
+            <div class="m">고소한 헤이즐넛 · ICE/HOT</div>
+            <div class="p">4,800원</div>
+          </div>
+          <button class="add" onclick="event.stopPropagation(); order('토피넛 라떼', 4800)">+</button>
+        </div>
+        <div class="card" onclick="order('자몽 허니 블랙티', 5200)">
+          <div class="thumb">🍵</div>
+          <div class="info">
+            <div class="n">자몽 허니 블랙티</div>
+            <div class="m">상큼한 자몽 과육 · ICE</div>
+            <div class="p">5,200원</div>
+          </div>
+          <button class="add" onclick="event.stopPropagation(); order('자몽 허니 블랙티', 5200)">+</button>
+        </div>
+      </div>
+      <div style="height:16px"></div>
+    </section>
+
+    <!-- 화면 4: 주문 완료 -->
+    <section id="done" class="screen">
+      <div class="check">✓</div>
+      <h2>주문이 완료됐어요!</h2>
+      <p id="doneMsg">잠시 후 픽업대에서 받아가세요.</p>
+      <div class="receipt">
+        <div class="row"><span id="rcpName">아메리카노</span><span id="rcpPrice">4,500원</span></div>
+        <div class="row"><span class="muted">사내 복지 포인트 (30%)</span><span class="muted" id="rcpDiscount">-1,350원</span></div>
+        <div class="row total"><span>결제 금액</span><span id="rcpTotal">3,150원</span></div>
+      </div>
+      <div class="pickup">📍 3층 빈살롱 · 대기번호 <b id="waitNo">A-27</b></div>
+      <div class="footer" style="width:100%">
+        <button class="btn" onclick="showScreen('home')">홈으로 돌아가기</button>
+      </div>
+    </section>
+
+  </div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+  // ---- 상태 (로컬, 새로고침 시 초기화 — MVP 범위) ----
+  var selectedTastes = [];
+
+  // 취향 → 추천 음료 매핑 (더미 데이터)
+  var RECO = {
+    "아메리카노": [["콜드브루 오리지널", "12시간 저온 추출 · 깊은 바디", 4500, "☕️"]],
+    "라떼":       [["오트 밀크 라떼", "고소한 오트 · 우유 변경 무료", 5300, "🥛"]],
+    "디카페인":   [["디카페인 플랫화이트", "스위스 워터 방식 · 오후 추천", 5000, "🌙"]],
+    "티":         [["캐모마일 허니티", "카페인 없는 편안한 한 잔", 4800, "🍵"]],
+    "에이드":     [["청귤 스파클 에이드", "제주 청귤 · 탄산 상큼", 5500, "🥤"]],
+    "달콤":       [["더블초코 프라페", "벨기에 초코 · 휘핑 추가", 5900, "🍫"]]
+  };
+  var DEFAULT_RECO = [["오늘의 드립 커피", "바리스타 추천 싱글 오리진", 4300, "☕️"]];
+
+  function showScreen(id) {
+    var screens = document.querySelectorAll('.screen');
+    for (var i = 0; i < screens.length; i++) screens[i].classList.remove('active');
+    document.getElementById(id).classList.add('active');
+    document.querySelector('.viewport').scrollTop = 0;
+  }
+
+  function toggleChip(el) {
+    el.classList.toggle('on');
+    var t = el.getAttribute('data-taste');
+    var idx = selectedTastes.indexOf(t);
+    if (idx === -1) selectedTastes.push(t); else selectedTastes.splice(idx, 1);
+    var btn = document.getElementById('tasteNext');
+    var hint = document.getElementById('selHint');
+    if (selectedTastes.length > 0) {
+      btn.disabled = false;
+      hint.textContent = selectedTastes.length + '개 선택됨 · 저장하고 추천 받기';
+    } else {
+      btn.disabled = true;
+      hint.textContent = '1개 이상 선택하면 다음으로 넘어가요';
+    }
+  }
+
+  function buildReco() {
+    var list = document.getElementById('recoList');
+    list.innerHTML = '';
+    var items = [];
+    if (selectedTastes.length === 0) {
+      items = DEFAULT_RECO;
+      document.getElementById('recoText').textContent = '빈살롱 바리스타 추천 음료예요';
+      document.getElementById('homeSub').textContent = '취향을 등록하면 더 잘 맞춰드려요';
+    } else {
+      for (var i = 0; i < selectedTastes.length; i++) {
+        var r = RECO[selectedTastes[i]];
+        if (r) items = items.concat(r);
+      }
+      if (items.length === 0) items = DEFAULT_RECO;
+      document.getElementById('recoText').textContent =
+        '‘' + selectedTastes.join(', ') + '’ 취향에 맞춰 골랐어요';
+      document.getElementById('homeSub').textContent = '취향 ' + selectedTastes.length + '개 반영 완료';
+    }
+    for (var j = 0; j < items.length; j++) {
+      var it = items[j];
+      var card = document.createElement('div');
+      card.className = 'card';
+      var name = it[0], memo = it[1], price = it[2], emo = it[3];
+      card.innerHTML =
+        '<div class="thumb">' + emo + '</div>' +
+        '<div class="info"><div class="n">' + name + ' <span class="badge">추천</span></div>' +
+        '<div class="m">' + memo + '</div>' +
+        '<div class="p">' + price.toLocaleString() + '원</div></div>' +
+        '<button class="add">+</button>';
+      (function(n, p) {
+        card.onclick = function() { order(n, p); };
+        card.querySelector('.add').onclick = function(e) { e.stopPropagation(); order(n, p); };
+      })(name, price);
+      list.appendChild(card);
+    }
+  }
+
+  function goHome() {
+    buildReco();
+    showScreen('home');
+    toast('취향이 저장됐어요 ✨');
+  }
+
+  function skipToHome() {
+    selectedTastes = [];
+    buildReco();
+    showScreen('home');
+  }
+
+  function order(name, price) {
+    var discount = Math.round(price * 0.3);
+    var total = price - discount;
+    document.getElementById('rcpName').textContent = name;
+    document.getElementById('rcpPrice').textContent = price.toLocaleString() + '원';
+    document.getElementById('rcpDiscount').textContent = '-' + discount.toLocaleString() + '원';
+    document.getElementById('rcpTotal').textContent = total.toLocaleString() + '원';
+    document.getElementById('doneMsg').textContent = name + ' 한 잔, 잠시 후 픽업대에서 받아가세요.';
+    var no = 'A-' + (10 + Math.floor(Math.random() * 80));
+    document.getElementById('waitNo').textContent = no;
+    showScreen('done');
+  }
+
+  var toastTimer;
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() { t.classList.remove('show'); }, 1800);
+  }
+</script>
+</body>
+</html>

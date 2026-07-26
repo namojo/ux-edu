@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>리서치 데이터에서 페르소나 2종 + 저니맵 한 장 뽑기 — 월요일 아침에 바로 쓰는 AI</title>
+<meta name="description" content="활용 사례 · 리서치 · 리서치 데이터에서 페르소나 2종 + 저니맵 한 장 뽑기">
+<meta property="og:title" content="리서치 데이터에서 페르소나 2종 + 저니맵 한 장 뽑기 — 월요일 아침에 바로 쓰는 AI">
+<meta property="og:description" content="활용 사례 · 리서치 · 리서치 데이터에서 페르소나 2종 + 저니맵 한 장 뽑기">
+<meta property="og:image" content="https://namojo.github.io/ux-edu/assets/img/hero.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect x=%2210%22 y=%2210%22 width=%2280%22 height=%2280%22 rx=%2218%22 fill=%22%23FFE455%22/%3E%3Ctext x=%2250%22 y=%2268%22 font-size=%2252%22 text-anchor=%22middle%22 font-family=%22monospace%22 fill=%22%2322242A%22%3E%E2%80%BA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=Gaegu:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="topnav"><div class="wrap"><a class="brand" href="../index.html"><span class="dot"></span>월요일 아침에 바로 쓰는 AI</a><nav><a href="../index.html">홈</a><a href="../curriculum.html">커리큘럼</a><a href="../index.html#modules">모듈</a><a href="../index.html#cases" aria-current=page>사례집</a><a href="../instructor.html">운영 가이드</a></nav></div></header>
+
+<div class="wrap page-head">
+  <div class="eyebrow">활용 사례 · 리서치</div>
+  <h1>리서치 데이터에서 페르소나 2종 + 저니맵 한 장 뽑기</h1>
+  <div class="meta"><span class="badge l2">따라 하기</span><span>리서치 데이터로 근거 있는 페르소나·저니맵 초안이 필요할 때</span></div>
+</div>
+<div class="wrap layout">
+  <article class="prose"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>영역</td>
+<td>페르소나 &amp; 저니맵</td>
+</tr>
+<tr>
+<td>난이도</td>
+<td>중급</td>
+</tr>
+<tr>
+<td>소요 시간</td>
+<td>약 30~45분</td>
+</tr>
+<tr>
+<td>준비물</td>
+<td>인터뷰 요약·설문 응답을 모은 텍스트 파일 1개, Claude Code가 설치된 컴퓨터</td>
+</tr>
+</tbody>
+</table>
+<h2 id="이런-상황에서-쓰세요">이런 상황에서 쓰세요</h2>
+<p>인터뷰 8건을 마치고 설문까지 돌렸는데, 이제 이걸 페르소나와 저니맵으로 옮기는 단계에서 매번 막힙니다. 노트를 다시 훑고, 공통점을 포스트잇으로 묶고, "이 사람은 몇 살로 할까" 고민하다 보면 하루가 갑니다. 게다가 급하면 실제 데이터가 아니라 머릿속 인상으로 페르소나를 지어내게 되고, 저니맵의 감정 곡선은 근거 없이 "여기서 답답함" 식으로 대충 찍게 됩니다. 이 작업의 1차 초안 — 데이터를 유형별로 묶고, 페르소나 골격을 세우고, 저니맵의 뼈대를 채우는 일 — 을 AI에게 맡기고, 사람은 "이게 진짜 우리가 만난 사용자가 맞나"를 검토·보정하는 데 집중하는 방법입니다.</p>
+<h2 id="따라-하기">따라 하기</h2>
+<h3 id="1단계-준비">1단계: 준비</h3>
+<p>먼저 리서치 데이터를 <strong>하나의 텍스트 파일</strong>로 모읍니다.</p>
+<ol>
+<li>바탕화면이나 문서 폴더에 작업용 폴더를 하나 만듭니다. 예: <code>persona-2026-앱개편</code></li>
+<li>인터뷰 요약과 설문 응답을 그 폴더 안에 <code>research.txt</code>(메모장/텍스트편집기로 만든 파일)로 저장합니다. 형식은 자유지만, 아래처럼 구분되어 있으면 AI가 더 잘 읽습니다.
+   - 인터뷰는 참가자별로 <code>[P1]</code>, <code>[P2]</code>처럼 구분선을 넣어 주세요. 나이·직업·이용 빈도 같은 기본 정보가 있으면 맨 앞에 적어 둡니다.
+   - 설문은 엑셀에서 응답 열을 통째로 복사해 붙여넣으면 됩니다. 주관식 답변이 특히 유용합니다.</li>
+<li>터미널(명령어를 입력하는 창)을 엽니다. <strong>Mac</strong>은 Spotlight(화면 오른쪽 위 돋보기 아이콘 또는 <code>Cmd</code>+<code>Space</code>)에서 <code>터미널</code>을 검색해 엽니다. <strong>Windows</strong>는 시작 메뉴에서 <code>PowerShell</code>을 검색해 엽니다.</li>
+<li>방금 연 창에서 1번에서 만든 폴더로 이동합니다. 창에 <code>cd</code> 를 치고 <strong>한 칸 띄운 뒤</strong>, 1번에서 만든 폴더를 마우스로 창 안에 끌어다 놓으면 폴더 경로가 자동으로 입력됩니다. 그 상태로 <code>Enter</code>를 누릅니다. (예: <code>cd /Users/내이름/Desktop/persona-2026-앱개편</code> 형태가 됩니다.)</li>
+<li>이어서 <code>claude</code> 를 입력하고 <code>Enter</code>를 눌러 Claude Code를 켭니다. Claude Code는 그 폴더 안의 파일을 읽고 쓸 수 있는 AI 도구입니다. 처음 켜면 로그인 안내나 폴더 접근 허용을 묻는 창이 뜰 수 있는데, 안내대로 진행/허용하면 됩니다.</li>
+</ol>
+<blockquote>
+<p>데이터가 적어도 괜찮습니다. 인터뷰 3~4건만 있어도 초안은 나옵니다. 다만 데이터가 적을수록 AI가 빈칸을 상상으로 메울 위험이 커지므로(아래 "꼭 사람이 확인하세요" 참고), 근거를 반드시 원문에서만 뽑도록 프롬프트에서 못 박습니다.</p>
+<p>개인정보 주의: 인터뷰 참가자 실명·연락처·회사명이 들어 있다면 붙여넣기 전에 <code>P1</code>, <code>40대 직장인</code>처럼 익명 표기로 바꿉니다.</p>
+</blockquote>
+<h3 id="2단계-프롬프트-입력">2단계: 프롬프트 입력</h3>
+<p>아래를 복사해 붙여넣고, {중괄호} 부분만 바꾸세요:</p>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>research.txt 파일을 읽어줘. 이건 {우리 가계부 앱}의 사용자 인터뷰 요약과 설문 응답 모음이야.
+
+이 데이터만 근거로 페르소나 초안 2종과 저니맵 1종을 만들어줘.
+
+[페르소나 2종]
+- 데이터에서 행동·니즈가 뚜렷하게 갈리는 두 무리를 찾아 각각 페르소나 1명으로 대표시켜줘. 유형을 미리 정하지 말고 실제 응답에서 자연스럽게 묶어줘.
+- 각 페르소나마다: (a) 한 줄 별칭과 대표 인용문 1개(원문 그대로), (b) 기본 정보(나이대·직업·앱 이용 빈도 — 데이터에 있는 것만, 없으면 '미확인'), (c) 목표 2~3개, (d) 핵심 페인포인트 2~3개, (e) 이 페르소나를 뒷받침하는 참가자 번호(P2, P5처럼).
+
+[저니맵 1종]
+- 두 페르소나 중 먼저 나온(첫 번째) 페르소나를 기준으로, 이 앱을 쓰는 과정을 4~6단계로 나눠줘.
+- 각 단계마다 표로: 단계명 | 사용자 행동 | 감정(한 단어+1점~5점) | 페인포인트 | 기회(개선 힌트).
+- 감정 점수와 페인포인트는 반드시 데이터에 근거가 있을 때만 적고, 근거가 된 참가자 번호를 함께 표시해줘.
+
+원문에 없는 정보는 절대 지어내지 마. 데이터로 뒷받침이 안 되는 칸은 '데이터 없음'이라고 솔직히 적어줘. 추측이 필요한 부분은 [추정]이라고 표시해줘.
+</pre></div></div></div>
+<h3 id="3단계-결과-확인">3단계: 결과 확인</h3>
+<p>이런 식의 결과가 나옵니다(내용은 예시입니다):</p>
+<p><strong>페르소나 A — "쫓기는 사회초년생 지현"</strong></p>
+<blockquote>
+<p>"돈이 어디로 새는지 모르겠어요. 월급날 되면 이미 통장이 비어 있어요." (P3, 원문 인용)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>기본 정보</td>
+<td>20대 후반 / 직장 2년차 / 앱 이용 주 1회 미만 (근거 P3, P7)</td>
+</tr>
+<tr>
+<td>목표</td>
+<td>① 이번 달 지출이 예산을 넘었는지 빠르게 확인 ② 고정지출을 한눈에 파악</td>
+</tr>
+<tr>
+<td>페인포인트</td>
+<td>① 카드 여러 개를 일일이 입력하기 귀찮음(P3, P7) ② 알림이 너무 많아 무시하게 됨(P7)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>페르소나 B — "꼼꼼한 외벌이 가장 민수"</strong> (별칭·표 동일 형식으로 이어짐)</p>
+<p><strong>저니맵 — 지현 기준</strong></p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>사용자 행동</th>
+<th>감정</th>
+<th>페인포인트</th>
+<th>기회</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 가입/연동</td>
+<td>카드사 연동 시도</td>
+<td>기대 4/5</td>
+<td>연동할 카드가 많아 중간에 포기(P3)</td>
+<td>주거래 카드 1개만 먼저 연동하는 간편 경로</td>
+</tr>
+<tr>
+<td>2. 첫 지출 확인</td>
+<td>이번 주 지출 조회</td>
+<td>혼란 2/5</td>
+<td>카테고리가 자동 분류돼 실제와 다름(P3, P7)</td>
+<td>분류 수정을 한 번에 학습시키는 UI</td>
+</tr>
+<tr>
+<td>3. 예산 초과 알림</td>
+<td>푸시 알림 받음</td>
+<td>짜증 2/5</td>
+<td>알림이 잦아 꺼버림(P7)</td>
+<td>주간 1회 요약 알림으로 빈도 조절</td>
+</tr>
+</tbody>
+</table>
+<p>각 페인포인트·감정 점수 옆에 <code>(P3)</code>처럼 근거 참가자 번호가 붙어 나옵니다. 근거가 없는 칸은 <code>데이터 없음</code> 또는 <code>[추정]</code>으로 표시됩니다.</p>
+<h3 id="4단계-다듬기">4단계: 다듬기</h3>
+<p>첫 결과가 나오면 후속 프롬프트로 원하는 각도로 좁혀 갑니다. 아래처럼 이어서 입력하면 됩니다:</p>
+<ul>
+<li><code>저니맵 3단계 '예산 초과 알림'의 감정 점수 근거가 P7 하나뿐이네. research.txt에서 알림 관련 언급을 전부 다시 찾아서, 근거가 더 있으면 붙이고 없으면 "근거 1건, 일반화 주의"라고 표시해줘.</code></li>
+<li><code>이 결과를 persona-journey.md 파일로 저장해줘. 그리고 페르소나마다 "우리가 아직 모르는 것(리서치 공백)" 항목을 한 줄씩 추가해줘 — 다음 인터뷰에서 물어볼 거리를 위한 거야.</code></li>
+</ul>
+<p>두 번째처럼 파일로 저장(<a href="../cases/persona-journey.html"><code>persona-journey.md</code></a>는 마크다운, 즉 표·제목을 기호로 표현한 텍스트 파일)해 두면 회의 자료로 바로 공유하거나 다음 라운드 리서치와 비교할 수 있습니다. <code>.md</code> 파일은 메모장으로도 열리지만 표가 기호로 보입니다. 표·제목이 정돈된 형태로 보려면 저장된 내용을 그대로 복사해 회의용 문서(Notion·Google Docs 등)에 붙여넣으세요.</p>
+<div class="human-check"><h2 id="꼭-사람이-확인하세요">꼭 사람이 확인하세요</h2>
+<ul>
+<li><strong>AI가 '그럴듯한 사람'을 지어내지 않았는지 근거 번호로 검증하세요.</strong> 페르소나·저니맵에서 가장 위험한 것은 데이터에 없는 특성을 AI가 상식으로 채워 넣는 것입니다(이를 '스테레오타입 누출'이라 합니다 — 예: "20대라서 SNS를 즐겨 함" 같은 근거 없는 추가). 각 칸의 <code>(P3)</code> 근거 번호를 실제 <code>research.txt</code>에서 검색해, 정말 그 참가자가 그렇게 말했는지 몇 개는 대조하세요. 근거 번호가 없거나 <code>[추정]</code>이 붙은 칸은 사람이 판단할 몫입니다.</li>
+<li><strong>감정 점수는 눈금이 아니라 힌트로 받아들이세요.</strong> "짜증 2/5"의 숫자는 AI가 임의로 매긴 것입니다. 어느 단계가 더 힘든지의 순서는 참고하되, 숫자 자체를 지표로 옮기지 마세요.</li>
+<li><strong>페르소나 2명이 진짜 다른 무리인지 보세요.</strong> 데이터가 적으면 AI가 억지로 둘로 쪼개, 사실상 같은 사람을 이름만 바꿔 낼 수 있습니다. 두 페르소나의 목표·페인포인트가 실제로 갈리는지, 각각을 뒷받침하는 참가자가 겹치지 않는지 확인하세요.</li>
+<li><strong>소수의 강한 신호가 평균에 묻히지 않게 보세요.</strong> 8명 중 1명만 말한 심각한 불편(예: 접근성 문제)은 "대표적이지 않다"며 빠질 수 있습니다. 페르소나에 안 담긴 소수 의견도 한 번 훑고, 중요하면 별도로 기록하세요.</li>
+<li><strong>같은 데이터라도 다시 돌리면 결과가 달라질 수 있습니다.</strong> AI는 같은 <code>research.txt</code>를 넣어도 실행할 때마다 페르소나 구성이나 표현이 조금씩 바뀝니다(모델 버전이 올라가면 더 크게 달라지기도 합니다). 한 번 나온 초안을 확정본으로 착각하지 말고, 중요한 결정 앞에서는 2~3번 다시 돌려 <strong>매번 공통으로 나오는 신호</strong>(반복 등장하는 페인포인트·무리)를 기준으로 삼으세요.</li>
+<li><strong>이건 '초안'이지 '결론'이 아닙니다.</strong> AI 페르소나는 실제 리서치를 <strong>대체</strong>하는 게 아니라 <strong>1차 정리를 도와주는</strong> 도구입니다. 팀과 함께 검토·수정한 뒤에야 공유 문서가 됩니다. 산출물 어딘가에 "AI 초안, 사람 검토 필요"와 사용한 데이터 범위를 적어 두면 나중에 오해를 막습니다.</li>
+</ul>
+</div><h2 id="한-걸음-더">한 걸음 더</h2>
+<p>리서치 라운드마다 이 작업이 반복된다면, 매번 프롬프트를 붙여넣는 대신 <strong>에이전트 팀(하네스)</strong> 으로 승격할 가치가 있습니다. 하네스는 역할이 나뉜 AI들이 순서대로 일하는 작은 팀입니다. 예를 들어:</p>
+<ul>
+<li><strong>정리 담당</strong>: 인터뷰·설문 원본을 참가자별로 구분된 표준 형식(<code>[P1]</code> 구분, 기본 정보 정렬)으로 다듬음</li>
+<li><strong>유형화 담당</strong>: 응답을 행동·니즈 기준으로 묶어 페르소나 후보 무리를 도출</li>
+<li><strong>작성 담당</strong>: 위 2단계 프롬프트를 고정 규칙으로 실행해 페르소나 2종 + 저니맵 생성</li>
+<li><strong>검증 담당</strong>: 모든 칸의 근거 번호가 원문에 실제로 있는지 대조하고, 근거 없는 칸을 <code>[추정]</code>으로 강제 표시 + 개인정보 잔존 점검</li>
+</ul>
+<p>이렇게 만들어 두면 다음 라운드에는 원본 파일만 넣고 실행하면 같은 형식·같은 검증 수준의 초안이 나옵니다. 특히 "근거 번호 대조"처럼 사람이 지겨워하지만 꼭 해야 하는 검증을 검증 담당이 매번 빠짐없이 해준다는 게 하네스의 진짜 이점입니다. "매번 같은 방식으로, 같은 형식의 초안이 필요하다"가 반복될 때가 하네스로 만들 시점입니다.</p>
+<h2 id="참고한-업계-동향">참고한 업계 동향</h2>
+<ul>
+<li>AI로 페르소나·저니맵 초안을 만드는 흐름은 이미 업계 표준 도구(UXPressia 등)와 실무자 워크플로우로 자리잡고 있습니다. (<a href="https://uxdesign.cc/using-ai-to-streamline-persona-and-journey-map-creation-37fa859dafb0">UX Collective — Kyle Soucy</a>, <a href="https://uxpressia.com/blog/ai-mapping">UXPressia AI Mapping</a>)</li>
+<li>동시에 학계·실무 양쪽에서 위험이 반복 지적됩니다: AI 페르소나는 스테레오타입 누출, 근거 없는 제약 상상(환각), 모델 버전에 따른 결과 변동, 실제 사용자와의 불일치를 보입니다. 결론은 <strong>"AI 페르소나는 실제 리서치를 보완할 뿐 대체하지 않으며, 사용한 데이터 출처와 검토 이력을 함께 밝혀야 한다"</strong> 입니다. 이 사례의 프롬프트가 근거 참가자 번호와 <code>[추정]</code> 표시를 강제하는 이유가 여기에 있습니다. (<a href="https://dl.acm.org/doi/10.1145/3772363.3778745">CHI 2026 — Responsible Use of AI Personas</a>, <a href="https://ixdf.org/literature/article/ai-vs-researched-personas">IxDF — AI vs Researched Personas</a>, <a href="https://arxiv.org/html/2504.04927v2">arXiv 스코핑 리뷰(81편)</a>)</li>
+</ul><div class="pager"><a href="research-synthesis.html"><span class="dir">← 이전 사례</span><b>사용자 리서치 종합</b></a><a class="next" href="usability-analysis.html"><span class="dir">다음 사례 →</span><b>사용성 테스트 분석</b></a></div></article>
+  <aside class="side"><div class="side-box toc"><h4>목차</h4><a href="#이런-상황에서-쓰세요">이런 상황에서 쓰세요</a><a href="#따라-하기">따라 하기</a><a href="#꼭-사람이-확인하세요">꼭 사람이 확인하세요</a><a href="#한-걸음-더">한 걸음 더</a><a href="#참고한-업계-동향">참고한 업계 동향</a></div></aside>
+</div>
+<footer><div class="wrap">
+  <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>
+  <div><a href="https://github.com/namojo/ux-edu">GitHub</a> · UX 인에이블먼트 하네스로 제작</div>
+</div></footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

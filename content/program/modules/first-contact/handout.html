@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>첫 실습 치트시트 — 터미널·cd·권한 확인 창</title>
+<style>
+  :root {
+    --main-color: #000000;
+    --bg-light: #F5F5F5;
+    --text-dark: #000000;
+    --text-gray: #666666;
+    --border-color: #999999;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', 'Pretendard', sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: var(--text-dark);
+    background: #888;
+    margin: 0;
+    padding: 20px 0;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: #fff;
+    margin: 0 auto;
+    padding: 12mm 15mm;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    position: relative;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #000;
+  }
+  .header h1 { font-size: 20pt; margin: 0 0 4px; }
+  .header p { font-size: 9pt; color: var(--text-gray); margin: 0; }
+
+  .section { margin-bottom: 12px; }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5pt;
+    font-weight: 700;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #000;
+    margin-bottom: 8px;
+  }
+  .section-number {
+    width: 22px; height: 22px;
+    background: #000; color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 11pt;
+    flex-shrink: 0;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 8px 10px;
+  }
+  .two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .card-title {
+    font-weight: 700;
+    font-size: 10.5pt;
+    padding-bottom: 3px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+  }
+  .card ol, .card ul { margin: 0; padding-left: 16px; }
+  .card li { margin-bottom: 3px; }
+
+  code, .mono {
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 9.5pt;
+  }
+
+  .prompt-box {
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 10pt;
+    margin: 5px 0;
+  }
+
+  .tip-box {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-left: 3px solid #000;
+    border-radius: 0 5px 5px 0;
+    padding: 6px 10px;
+    font-size: 9pt;
+    color: var(--text-dark);
+  }
+  .tip-box b { color: #000; }
+
+  .checklist { list-style: none; padding-left: 0; margin: 6px 0 0; }
+  .checklist li {
+    padding-left: 18px;
+    position: relative;
+    margin-bottom: 5px;
+    font-size: 9.5pt;
+  }
+  .checklist li::before {
+    content: "☐";
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 8mm;
+    left: 15mm;
+    right: 15mm;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: var(--text-gray);
+    border-top: 1px solid var(--border-color);
+    padding-top: 5px;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; margin: 0; width: auto; min-height: auto; }
+    @page { size: A4; margin: 0; }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body { background: #222; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <h1>첫 실습 치트시트</h1>
+    <p>터미널 열기 · 폴더 이동(cd) · 권한 확인 창 대응 — first-contact 모듈 · 책상에 두고 보세요</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">1</span> 오늘의 순서</div>
+    <div class="card">
+      <b>폴더 만들기</b> → <b>터미널 열기</b> → <code>claude</code> 입력 → 파일 읽혀 요약 요청 → 권한 확인 창에서 <code>Yes</code> → 결과 확인 → 후속 요청으로 다듬기
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">2</span> 터미널 여는 두 가지 방법</div>
+    <div class="two-column">
+      <div class="card">
+        <div class="card-title">방법 B · cd로 이동하기 (기본 추천)</div>
+        <ol>
+          <li>터미널 실행 (Cmd+Space → "터미널")</li>
+          <li><code>cd </code> 입력 후 띄어쓰기</li>
+          <li>작업 폴더를 창 위로 드래그앤드롭 → Enter</li>
+        </ol>
+      </div>
+      <div class="card">
+        <div class="card-title">방법 A · 폴더에서 바로 열기 (보조)</div>
+        <ol>
+          <li>작업 폴더 우클릭</li>
+          <li>"폴더에서 새 터미널 열기" 클릭</li>
+          <li>이 메뉴는 기본값으로 없을 수 있음 — 없으면 바로 방법 B</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">3</span> 잘 들어왔는지 확인 &amp; 실행</div>
+    <div class="two-column">
+      <div class="card">
+        <div class="card-title">폴더 안 파일 목록 보기</div>
+        <div class="prompt-box">ls</div>
+        <span style="font-size:9pt;color:var(--text-gray)">→ <code>sample-reviews.txt</code>가 보이면 OK</span>
+      </div>
+      <div class="card">
+        <div class="card-title">Claude Code 켜기</div>
+        <div class="prompt-box">claude</div>
+        <span style="font-size:9pt;color:var(--text-gray)">→ 화면이 바뀌면 대화창 시작</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">4</span> 오늘 쓸 프롬프트 (그대로 복붙)</div>
+    <div class="card">
+      <div class="prompt-box">sample-reviews.txt 파일을 읽고 무슨 내용인지 3줄로 요약해줘.</div>
+      <div class="prompt-box">방금 요약을 표로 다시 보여줘.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">5</span> <code>claude</code> 처음 켤 때 나오는 화면들 (순서대로)</div>
+    <div class="two-column">
+      <div class="card">
+        <div class="card-title">① 로그인/계정 화면</div>
+        기본값으로 넘길 수 없는 <b>실제 인증</b> 화면입니다. 사전 로그인이 안 됐다면 혼자 진행하지 말고 바로 손을 들어 강사를 부르세요.
+      </div>
+      <div class="card">
+        <div class="card-title">② 폴더 신뢰 확인 (Do you trust the files...?)</div>
+        처음 보는 폴더에서 한 번 묻습니다. 우리가 만든 연습 폴더이므로 <code>Yes, proceed</code>를 선택하세요.
+      </div>
+    </div>
+    <div class="tip-box" style="margin-top:8px;">
+      <b>③ 파일 접근 권한 확인 창도 정상입니다.</b> Claude Code가 내 파일을 읽거나 만지기 전에 매번 "해도 되는지" 사람에게 확인받는 안전장치입니다.
+      지금은 우리 연습용 폴더이므로 <code>1. Yes</code>를 선택하고 Enter를 누르면 됩니다.
+    </div>
+    <ul class="checklist">
+      <li>화면에 <code>Allow?</code> 또는 허용 여부를 묻는 선택지가 보인다 → 정상, 놀라지 않는다</li>
+      <li><code>1. Yes</code> 선택 후 Enter</li>
+      <li>선택지가 사라지고 다시 작업이 진행되면 성공</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">6</span> 막히면 이렇게</div>
+    <div class="two-column">
+      <div class="card">
+        <div class="card-title"><code>command not found</code></div>
+        설치가 안 됐거나 터미널 재시작이 필요한 경우. 손을 들어 TA를 부르세요.
+      </div>
+      <div class="card">
+        <div class="card-title"><code>No such file or directory</code></div>
+        경로가 잘못 입력된 경우. 줄을 지우고 폴더를 다시 드래그앤드롭하세요.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>CX/UX AI 실무 활용 교육 · 1회차 M1 — AI에게 내 파일을 맡기는 첫 경험</span>
+    <span>1 / 1</span>
+  </div>
+</div>
+</body>
+</html>

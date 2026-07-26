@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CX/UX 팀 AI 실무 활용 교육 — &quot;월요일 아침에 바로 쓰는 AI&quot; — 월요일 아침에 바로 쓰는 AI</title>
+<meta name="description" content="강사·주최자용 · CX/UX 팀 AI 실무 활용 교육 — &quot;월요일 아침에 바로 쓰는 AI&quot;">
+<meta property="og:title" content="CX/UX 팀 AI 실무 활용 교육 — &quot;월요일 아침에 바로 쓰는 AI&quot; — 월요일 아침에 바로 쓰는 AI">
+<meta property="og:description" content="강사·주최자용 · CX/UX 팀 AI 실무 활용 교육 — &quot;월요일 아침에 바로 쓰는 AI&quot;">
+<meta property="og:image" content="https://namojo.github.io/ux-edu/assets/img/hero.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect x=%2210%22 y=%2210%22 width=%2280%22 height=%2280%22 rx=%2218%22 fill=%22%23FFE455%22/%3E%3Ctext x=%2250%22 y=%2268%22 font-size=%2252%22 text-anchor=%22middle%22 font-family=%22monospace%22 fill=%22%2322242A%22%3E%E2%80%BA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=Gaegu:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topnav"><div class="wrap"><a class="brand" href="index.html"><span class="dot"></span>월요일 아침에 바로 쓰는 AI</a><nav><a href="index.html">홈</a><a href="curriculum.html">커리큘럼</a><a href="index.html#modules">모듈</a><a href="index.html#cases">사례집</a><a href="instructor.html" aria-current=page>운영 가이드</a></nav></div></header>
+
+<div class="wrap page-head">
+  <div class="eyebrow">강사·주최자용</div>
+  <h1>CX/UX 팀 AI 실무 활용 교육 — &quot;월요일 아침에 바로 쓰는 AI&quot;</h1>
+  <div class="meta"><span>운영 준비 · 체크리스트 · 효과 측정</span></div>
+</div>
+<div class="wrap layout">
+  <article class="prose"><p>코딩 경험이 없는 CX/UX 팀원을 대상으로, Claude Code를 실무에 쓰는 사람으로 만드는 <strong>반나절 워크샵 × 3회 시리즈</strong>입니다.
+상세 설계는 <a href="curriculum.html">curriculum.md</a>를 보세요.</p>
+<blockquote>
+<p>생성: 2026-07-26, UX 인에이블먼트 하네스 (설계 → 모듈별 제작 → 전문 검수 → 수정 반영 완료)</p>
+</blockquote>
+<h2 id="회차-구성">회차 구성</h2>
+<table>
+<thead>
+<tr>
+<th>회차</th>
+<th>레벨</th>
+<th>모듈 (각 90분)</th>
+<th>학습자가 가져가는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1회차</td>
+<td>L1</td>
+<td><a href="modules/first-contact/index.html">first-contact</a> + <a href="modules/prompt-and-verify/index.html">prompt-and-verify</a></td>
+<td>첫 성공 경험 + 환각·개인정보 검증 습관</td>
+</tr>
+<tr>
+<td>2회차</td>
+<td>L2</td>
+<td><a href="modules/voc-in-practice/index.html">voc-in-practice</a> + <a href="modules/research-to-persona/index.html">research-to-persona</a></td>
+<td>자기 서비스의 VoC 개선 기회 초안 + 페르소나·저니맵 초안</td>
+</tr>
+<tr>
+<td>3회차</td>
+<td>L2+L3</td>
+<td><a href="modules/mvp-in-practice/index.html">mvp-in-practice</a> + <a href="modules/my-harness/index.html">my-harness</a></td>
+<td>자기 아이디어의 클릭되는 MVP + 반복 업무의 하네스 설계 캔버스</td>
+</tr>
+</tbody>
+</table>
+<p>각 모듈 폴더의 자료: <code>guide.md</code>(실습 가이드 — 학습자 배포), <code>handout.*</code>(치트시트 — 인쇄 배포), <code>worksheet.md</code>(실습 중 기입), <code>slides-outline.md</code>(강사용 슬라이드 개요).</p>
+<h2 id="운영-전-준비-체크리스트">운영 전 준비 체크리스트</h2>
+<ul>
+<li>[ ] <strong>설치 선결</strong>: 참가자 전원 Claude Code 설치+로그인 완료 (사내 공통 설치 가이드 링크를 각 자료의 "사내 위키 › AI 도구 › Claude Code 설치" 자리에 치환)</li>
+<li>[ ] <strong>데이터 지참 안내</strong>: 2회차부터 자기 프로젝트의 실데이터(익명화된 인터뷰·리뷰·VoC) 지참 — 사전 공지 필수</li>
+<li>[ ] <strong>인원·TA</strong>: 회당 8~12명, 강사 1 + 실습 보조 1 (비개발자 대상 — 막힌 사람 즉시 지원이 이탈 방지의 핵심)</li>
+<li>[ ] <strong>실습 교재 배포</strong>: <code>usecases/</code> 사례집과 <code>mvp/onboarding-smoke/</code> 예시를 참가자에게 미리 공유</li>
+<li>[ ] 1회차 공용 샘플: <a href="modules/first-contact/sample-reviews.txt">modules/first-contact/sample-reviews.txt</a> 배포</li>
+</ul>
+<h2 id="효과-측정">효과 측정</h2>
+<ul>
+<li>평가는 시험이 아니라 <strong>산출물 리뷰</strong> — 각 모듈의 성공 기준은 curriculum.md 모듈별 명세 참조</li>
+<li>종료 설문 3문항: ① 이번 주 실무에 쓸 것인가 ② 가장 유용한 사례는 ③ 막힌 지점은 — ③은 "하네스 회고" 요청으로 이 하네스 개선에 반영하세요</li>
+</ul>
+<h2 id="알려진-개선점-검수-잔여-minor-권고">알려진 개선점 (검수 잔여 minor 권고)</h2>
+<ul>
+<li>자료 곳곳의 "사내 위키 › AI 도구 › Claude Code 설치"는 배포 전 실제 링크로 일괄 치환 필요</li>
+<li>first-contact handout의 "권한 창 ③"은 첫 프롬프트를 보낸 뒤에 뜬다는 시점 안내를 강사가 구두 보완 권장</li>
+<li>curriculum.md의 my-harness 모듈에 도입-실습-정리 시간 배분이 명시되어 있지 않음 (자료는 30/45/15로 제작됨) — 다음 개편 시 설계서에 반영</li>
+</ul></article>
+  <aside class="side"><div class="side-box toc"><h4>목차</h4><a href="#회차-구성">회차 구성</a><a href="#운영-전-준비-체크리스트">운영 전 준비 체크리스트</a><a href="#효과-측정">효과 측정</a><a href="#알려진-개선점-검수-잔여-minor-권고">알려진 개선점 (검수 잔여 minor 권고)</a></div></aside>
+</div>
+<footer><div class="wrap">
+  <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>
+  <div><a href="https://github.com/namojo/ux-edu">GitHub</a> · UX 인에이블먼트 하네스로 제작</div>
+</div></footer>
+<script src="assets/site.js"></script>
+</body>
+</html>

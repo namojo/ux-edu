@@ -1,0 +1,379 @@
+#!/usr/bin/env python3
+"""ux-edu 정적 사이트 빌더 — content/*.md → site/*.html"""
+import os, re, shutil, html
+import markdown
+from markdown.extensions.toc import TocExtension, slugify_unicode
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+CONTENT = os.path.join(ROOT, "content")
+SITE = os.path.join(ROOT, "docs")  # GitHub Pages: main 브랜치 /docs 서빙
+
+# ---------------- 메타데이터 ----------------
+SESSIONS = [
+    {"no": "1회차", "level": "L1", "badge": "l1", "img": "session-l1.png",
+     "title": "AI와 첫 대화", "modules": ["first-contact", "prompt-and-verify"],
+     "desc": "터미널을 처음 열고, 파일을 읽히고, 결과를 검증하는 법까지. 코딩 없이 한국어 문장만으로.",
+     "take": "가져가는 것 — 첫 성공 경험 + 환각·개인정보 검증 습관"},
+    {"no": "2회차", "level": "L2", "badge": "l2", "img": "session-l2.png",
+     "title": "내 업무에 붙이기", "modules": ["voc-in-practice", "research-to-persona"],
+     "desc": "자기 서비스의 진짜 데이터(VoC·인터뷰)를 가져와 실무 산출물의 초안을 만든다.",
+     "take": "가져가는 것 — 내 서비스 VoC 개선 기회 + 페르소나·저니맵 초안"},
+    {"no": "3회차", "level": "L2+L3", "badge": "l3", "img": "session-l3.png",
+     "title": "시제품과 나만의 하네스", "modules": ["mvp-in-practice", "my-harness"],
+     "desc": "아이디어를 클릭되는 시제품으로 만들고, 반복 업무를 AI 팀(하네스)으로 설계한다.",
+     "take": "가져가는 것 — 클릭되는 MVP + 반복 업무의 하네스 설계 캔버스"},
+]
+
+MODULES = {
+    "first-contact":     {"title": "AI에게 내 파일을 맡기는 첫 경험", "level": "L1", "badge": "l1", "dur": "90분",
+                          "desc": "터미널을 열고, 폴더의 파일을 읽혀, 첫 결과를 받아낸다."},
+    "prompt-and-verify": {"title": "좋은 요청과 결과 검증 — 함정 피하기", "level": "L1", "badge": "l1", "dur": "90분",
+                          "desc": "후속 프롬프트로 결과를 다듬고, 환각·개인정보를 스스로 검증한다."},
+    "voc-in-practice":   {"title": "내 VoC 데이터로 개선 기회 뽑기", "level": "L2", "badge": "l2", "dur": "90분",
+                          "desc": "자기 서비스의 리뷰·CS 티켓에서 주제별 개선 기회 초안을 만든다."},
+    "research-to-persona": {"title": "내 리서치에서 인사이트·페르소나 만들기", "level": "L2", "badge": "l2", "dur": "90분",
+                          "desc": "인터뷰 데이터를 어피니티 종합 → 페르소나·저니맵 초안으로 잇는다."},
+    "mvp-in-practice":   {"title": "내 아이디어를 클릭되는 시제품으로", "level": "L2", "badge": "l2", "dur": "90분",
+                          "desc": "아이디어를 사용성 테스트용 HTML MVP 초안으로 만든다."},
+    "my-harness":        {"title": "반복 업무 하나를 나만의 AI 팀으로", "level": "L3", "badge": "l3", "dur": "90분+과제",
+                          "desc": "반복 업무 1개를 역할 나눈 에이전트 팀(하네스) 설계로 옮긴다."},
+}
+MODULE_ORDER = list(MODULES.keys())
+
+MATERIAL_LABEL = {"guide": "실습 가이드", "worksheet": "워크시트", "handout": "핸드아웃",
+                  "slides-outline": "강사용 슬라이드 개요", "sample-reviews": "샘플 데이터"}
+
+CASES = {
+    "research-synthesis": ("사용자 리서치 종합", "리서치", "인터뷰 녹취 더미에서 어피니티 맵·인사이트를 뽑을 때"),
+    "persona-journey":    ("페르소나 & 저니맵", "리서치", "리서치 데이터로 근거 있는 페르소나·저니맵 초안이 필요할 때"),
+    "usability-analysis": ("사용성 테스트 분석", "평가", "세션 노트에서 이슈 목록과 심각도 우선순위를 만들 때"),
+    "voc-mining":         ("VoC/CX 피드백 분석", "CX", "리뷰·CS 티켓 수백 건에서 개선 기회를 찾을 때"),
+    "ux-writing":         ("UX 라이팅", "라이팅", "마이크로카피 시안을 여러 개 뽑고 톤앤매너로 검수할 때"),
+    "ia-review":          ("IA·내비게이션 검토", "설계", "메뉴 구조의 대안과 라벨 개선안이 필요할 때"),
+    "competitor-bench":   ("경쟁사 UX 벤치마킹", "리서치", "경쟁 서비스 온보딩을 비교표 한 장으로 정리할 때"),
+    "mvp-prototype":      ("MVP 프로토타입", "프로토타이핑", "아이디어를 클릭 가능한 시제품으로 빠르게 검증할 때"),
+    "a11y-audit":         ("접근성 점검", "평가", "화면 HTML에서 접근성 이슈와 개선안을 받을 때"),
+    "design-system-doc":  ("디자인 시스템 문서화", "시스템", "컴포넌트 규칙 메모를 일관된 가이드 문서로 만들 때"),
+}
+CASE_ORDER = list(CASES.keys())
+
+FONTS = (
+    '<link rel="preconnect" href="https://fonts.googleapis.com">'
+    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+    '<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=Gaegu:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">'
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">'
+)
+FAVICON = ('<link rel="icon" href="data:image/svg+xml,'
+           '%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E'
+           '%3Crect x=%2210%22 y=%2210%22 width=%2280%22 height=%2280%22 rx=%2218%22 fill=%22%23FFE455%22/%3E'
+           '%3Ctext x=%2250%22 y=%2268%22 font-size=%2252%22 text-anchor=%22middle%22 font-family=%22monospace%22 fill=%22%2322242A%22%3E%E2%80%BA%3C/text%3E%3C/svg%3E">')
+
+SITE_URL = "https://namojo.github.io/ux-edu"
+
+# ---------------- 마크다운 렌더 ----------------
+def md_render(text):
+    mdp = markdown.Markdown(extensions=[
+        "tables", "fenced_code", "sane_lists",
+        TocExtension(slugify=slugify_unicode, separator="-", toc_depth="2-3"),
+    ])
+    return mdp.convert(text), mdp.toc_tokens
+
+def postprocess(body, root):
+    # 코드블록 → 친근한 터미널 프롬프트 카드
+    def to_card(m):
+        code = m.group(1)
+        return ('<div class="prompt-card"><div class="terminal">'
+                '<div class="terminal-bar"><i></i><i></i><i></i>'
+                '<span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div>'
+                f'<div class="terminal-body"><pre>{code}</pre></div></div></div>')
+    body = re.sub(r'<pre><code[^>]*>(.*?)</code></pre>', to_card, body, flags=re.S)
+    # ⚠️ 블록쿼트 → warn
+    body = re.sub(r'<blockquote>(\s*<p>[^<]{0,12}(?:⚠️|주의:|개인정보 주의))',
+                  r'<blockquote class="warn">\1', body)
+    # "꼭 사람이 확인하세요" 섹션 → 포스트잇 래핑 (h2 + 다음 리스트/문단 묶음)
+    body = re.sub(
+        r'(<h2 id="[^"]*">꼭 사람이 확인하세요</h2>)(.*?)(?=<h2 |<div class="pager"|$)',
+        r'<div class="human-check">\1\2</div>', body, flags=re.S)
+    # 내부 링크 매핑
+    body = re.sub(r'href="(?:\.\./)*usecases/([a-z0-9-]+)\.md"', rf'href="{root}cases/\1.html"', body)
+    body = re.sub(r'href="\.\./mvp/onboarding-smoke/?[^"]*"', rf'href="{root}mvp-example/index.html"', body)
+    body = re.sub(r'href="mvp/onboarding-smoke/?[^"]*"', rf'href="{root}mvp-example/index.html"', body)
+    body = re.sub(r'href="modules/([a-z0-9-]+)/?"', rf'href="{root}modules/\1/index.html"', body)
+    body = re.sub(r'href="curriculum\.md"', rf'href="{root}curriculum.html"', body)
+    body = re.sub(r'href="(worksheet|handout|guide|slides-outline)\.md"', r'href="\1.html"', body)
+    body = body.replace('href="slides-outline.html"', 'href="slides.html"')
+    body = re.sub(r'href="([a-z0-9-]+)\.md"',
+                  lambda m: f'href="{m.group(1)}.html"' if m.group(1) in CASES else m.group(0), body)
+    # 코드 스팬으로 적힌 사례 경로도 클릭 가능하게
+    body = re.sub(r'<code>(?:usecases/)?([a-z0-9-]+)\.md</code>',
+                  lambda m: (f'<a href="{root}cases/{m.group(1)}.html"><code>{m.group(1)}.md</code></a>'
+                             if m.group(1) in CASES else m.group(0)), body)
+    return body
+
+# ---------------- 페이지 셸 ----------------
+def nav(root, current):
+    items = [("index", "홈", "index.html"), ("curriculum", "커리큘럼", "curriculum.html"),
+             ("modules", "모듈", "index.html#modules"), ("cases", "사례집", "index.html#cases"),
+             ("instructor", "운영 가이드", "instructor.html")]
+    links = "".join(
+        f'<a href="{root}{href}"{" aria-current=page" if key == current else ""}>{label}</a>'
+        for key, label, href in items)
+    return (f'<header class="topnav"><div class="wrap">'
+            f'<a class="brand" href="{root}index.html"><span class="dot"></span>월요일 아침에 바로 쓰는 AI</a>'
+            f'<nav>{links}</nav></div></header>')
+
+def shell(*, root, current, title, desc, body, og_img=None):
+    og = og_img or f"{SITE_URL}/assets/img/hero.png"
+    return f"""<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{html.escape(title)}</title>
+<meta name="description" content="{html.escape(desc)}">
+<meta property="og:title" content="{html.escape(title)}">
+<meta property="og:description" content="{html.escape(desc)}">
+<meta property="og:image" content="{og}">
+<meta property="og:type" content="website">
+{FAVICON}
+{FONTS}
+<link rel="stylesheet" href="{root}assets/style.css">
+</head>
+<body>
+{nav(root, current)}
+{body}
+<footer><div class="wrap">
+  <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>
+  <div><a href="https://github.com/namojo/ux-edu">GitHub</a> · UX 인에이블먼트 하네스로 제작</div>
+</div></footer>
+<script src="{root}assets/site.js"></script>
+</body>
+</html>"""
+
+def toc_html(tokens):
+    if not tokens:
+        return ""
+    links = "".join(f'<a href="#{t["id"]}">{html.escape(t["name"])}</a>' for t in tokens if t["level"] == 2)
+    return f'<div class="side-box toc"><h4>목차</h4>{links}</div>' if links else ""
+
+def strip_h1(md_text):
+    lines = md_text.split("\n")
+    title = None
+    out = []
+    for ln in lines:
+        if title is None and ln.startswith("# "):
+            title = ln[2:].strip()
+            continue
+        out.append(ln)
+    return title, "\n".join(out)
+
+# ---------------- 개별 페이지 빌드 ----------------
+def write(path, htm):
+    full = os.path.join(SITE, path)
+    os.makedirs(os.path.dirname(full), exist_ok=True)
+    with open(full, "w", encoding="utf-8") as f:
+        f.write(htm)
+
+def content_page(md_path, out_path, *, root, current, eyebrow, meta_html="", side_extra="", pager=""):
+    raw = open(md_path, encoding="utf-8").read()
+    title, rest = strip_h1(raw)
+    body_html, toc = md_render(rest)
+    body_html = postprocess(body_html, root)
+    side = side_extra + toc_html(toc)
+    layout_cls = "layout" if side else "layout single"
+    aside = f'<aside class="side">{side}</aside>' if side else ""
+    page = f"""
+<div class="wrap page-head">
+  <div class="eyebrow">{eyebrow}</div>
+  <h1>{html.escape(title or "")}</h1>
+  <div class="meta">{meta_html}</div>
+</div>
+<div class="wrap {layout_cls}">
+  <article class="prose">{body_html}{pager}</article>
+  {aside}
+</div>"""
+    write(out_path, shell(root=root, current=current, title=f"{title} — 월요일 아침에 바로 쓰는 AI",
+                          desc=(eyebrow + " · " + (title or "")), body=page))
+
+def build_modules():
+    for idx, slug in enumerate(MODULE_ORDER):
+        m = MODULES[slug]
+        srcdir = os.path.join(CONTENT, "program", "modules", slug)
+        files = set(os.listdir(srcdir))
+        # 자료 사이드박스
+        mats = []
+        if "worksheet.md" in files: mats.append(('worksheet.html', '📝 워크시트'))
+        if "handout.md" in files or "handout.html" in files: mats.append(('handout.html', '📄 핸드아웃'))
+        if "slides-outline.md" in files: mats.append(('slides.html', '🎤 강사용 슬라이드 개요'))
+        if "sample-reviews.txt" in files: mats.append(('sample-reviews.txt', '💾 샘플 데이터'))
+        matbox = ('<div class="side-box"><h4>이 모듈의 자료</h4>'
+                  + f'<a href="index.html" class="on">📘 실습 가이드</a>'
+                  + "".join(f'<a href="{h}">{t}</a>' for h, t in mats) + "</div>")
+        # 이전/다음
+        pager_items = []
+        if idx > 0:
+            p = MODULE_ORDER[idx-1]
+            pager_items.append(f'<a href="../{p}/index.html"><span class="dir">← 이전 모듈</span><b>{MODULES[p]["title"]}</b></a>')
+        if idx < len(MODULE_ORDER) - 1:
+            n = MODULE_ORDER[idx+1]
+            pager_items.append(f'<a class="next" href="../{n}/index.html"><span class="dir">다음 모듈 →</span><b>{MODULES[n]["title"]}</b></a>')
+        pager = f'<div class="pager">{"".join(pager_items)}</div>'
+        meta = (f'<span class="badge {m["badge"]}">{m["level"]}</span>'
+                f'<span>⏱ {m["dur"]}</span><span>모듈 {idx+1} / {len(MODULE_ORDER)}</span>')
+        content_page(os.path.join(srcdir, "guide.md"), f"modules/{slug}/index.html",
+                     root="../../", current="modules", eyebrow=f"모듈 {idx+1} · 실습 가이드",
+                     meta_html=meta, side_extra=matbox, pager=pager)
+        # 부속 자료 페이지
+        sub_side = matbox.replace('href="index.html" class="on"', 'href="index.html"')
+        if "worksheet.md" in files:
+            content_page(os.path.join(srcdir, "worksheet.md"), f"modules/{slug}/worksheet.html",
+                         root="../../", current="modules", eyebrow=f"{m['title']} · 워크시트",
+                         meta_html='<button class="copy-btn" onclick="window.print()" type="button">🖨 인쇄하기</button>',
+                         side_extra=sub_side.replace('📝 워크시트</a>', '📝 워크시트 (현재)</a>'))
+        if "handout.md" in files:
+            content_page(os.path.join(srcdir, "handout.md"), f"modules/{slug}/handout.html",
+                         root="../../", current="modules", eyebrow=f"{m['title']} · 핸드아웃",
+                         meta_html='<button class="copy-btn" onclick="window.print()" type="button">🖨 인쇄하기</button>',
+                         side_extra=sub_side)
+        elif "handout.html" in files:
+            shutil.copy(os.path.join(srcdir, "handout.html"), os.path.join(SITE, f"modules/{slug}/handout.html"))
+        if "slides-outline.md" in files:
+            content_page(os.path.join(srcdir, "slides-outline.md"), f"modules/{slug}/slides.html",
+                         root="../../", current="modules", eyebrow=f"{m['title']} · 강사용",
+                         side_extra=sub_side)
+        if "sample-reviews.txt" in files:
+            shutil.copy(os.path.join(srcdir, "sample-reviews.txt"), os.path.join(SITE, f"modules/{slug}/sample-reviews.txt"))
+
+def build_cases():
+    for idx, slug in enumerate(CASE_ORDER):
+        title, area, desc = CASES[slug]
+        prev_nxt = []
+        if idx > 0:
+            p = CASE_ORDER[idx-1]
+            prev_nxt.append(f'<a href="{p}.html"><span class="dir">← 이전 사례</span><b>{CASES[p][0]}</b></a>')
+        if idx < len(CASE_ORDER) - 1:
+            n = CASE_ORDER[idx+1]
+            prev_nxt.append(f'<a class="next" href="{n}.html"><span class="dir">다음 사례 →</span><b>{CASES[n][0]}</b></a>')
+        pager = f'<div class="pager">{"".join(prev_nxt)}</div>'
+        content_page(os.path.join(CONTENT, "usecases", f"{slug}.md"), f"cases/{slug}.html",
+                     root="../", current="cases", eyebrow=f"활용 사례 · {area}",
+                     meta_html=f'<span class="badge l2">따라 하기</span><span>{desc}</span>', pager=pager)
+
+def build_index():
+    session_cards = ""
+    for s in SESSIONS:
+        mods = "".join(
+            f'<a href="modules/{m}/index.html" style="font-size:14px;display:block;padding:3px 0">'
+            f'· {MODULES[m]["title"]}</a>' for m in s["modules"])
+        session_cards += f"""
+<div class="session-card">
+  <img src="assets/img/{s['img']}" alt="{s['title']} 일러스트">
+  <div class="pad">
+    <div><span class="badge {s['badge']}">{s['level']}</span>
+      <span class="eyebrow" style="display:inline;margin-left:8px">{s['no']}</span></div>
+    <h3>{s['title']}</h3>
+    <p>{s['desc']}</p>
+    <div>{mods}</div>
+    <div class="take"><b>{s['take']}</b></div>
+  </div>
+</div>"""
+    module_rows = ""
+    for i, slug in enumerate(MODULE_ORDER):
+        m = MODULES[slug]
+        module_rows += f"""
+<a class="module-row" href="modules/{slug}/index.html">
+  <span class="no">{i+1:02d}</span>
+  <span><span class="badge {m['badge']}">{m['level']}</span>
+    <h3>{m['title']}</h3><p>{m['desc']}</p>
+    <span class="mats">⏱ {m['dur']}</span></span>
+</a>"""
+    case_cards = ""
+    for slug in CASE_ORDER:
+        title, area, desc = CASES[slug]
+        case_cards += f"""
+<a class="case-card" href="cases/{slug}.html">
+  <span class="area">{area}</span><h3>{title}</h3><p>{desc}</p>
+</a>"""
+    body = f"""
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <div class="eyebrow">CX/UX 팀 사내 교육 · 반나절 워크샵 × 3회</div>
+    <h1>코딩은 몰라도 됩니다.<br><span class="hl">한국어 문장</span>이면 충분해요.</h1>
+    <p class="lead">인터뷰 녹취, 앱 리뷰, 페르소나, 시제품까지 — UX 실무자의 반복 작업을
+    AI에게 맡기는 법을 실습으로 배웁니다. 모든 세션은 <strong>여러분의 실제 업무 산출물</strong>로 끝납니다.</p>
+    <div>
+      <a class="btn btn-primary" href="modules/first-contact/index.html">첫 모듈 시작하기</a>
+      <a class="btn btn-ghost" href="curriculum.html">커리큘럼 보기</a>
+    </div>
+  </div>
+  <div>
+    <div class="terminal" id="typing-demo" aria-label="Claude Code 사용 예시 데모">
+      <div class="terminal-bar"><i></i><i></i><i></i><span>claude</span></div>
+      <div class="terminal-body"><div class="in"></div><span class="caret"></span>
+      <div class="out" style="margin-top:10px"></div></div>
+    </div>
+    <div class="hand-note">↑ 진짜로 이게 전부예요</div>
+  </div>
+</div></section>
+
+<section class="block alt" id="sessions"><div class="wrap">
+  <h2 class="sec">3번의 반나절, 3단계 성장</h2>
+  <p class="sec-sub">첫 대화(L1)에서 시작해, 내 업무 데이터(L2)를 거쳐, 나만의 AI 팀 설계(L3)까지.
+  모든 모듈은 핸즈온 50% 이상으로 설계되어 있습니다.</p>
+  <div class="sessions">{session_cards}</div>
+</div></section>
+
+<section class="block" id="modules"><div class="wrap">
+  <h2 class="sec">6개 모듈</h2>
+  <p class="sec-sub">각 90분. 실습 가이드는 화면에 보이는 그대로 따라 할 수 있게 쓰여 있고,
+  막히기 쉬운 곳마다 "이렇게 나오면 정상입니다" 안내가 있습니다.</p>
+  <div class="modules">{module_rows}</div>
+</div></section>
+
+<section class="block alt" id="cases"><div class="wrap">
+  <h2 class="sec">활용 사례집 — 10가지 실무 레시피</h2>
+  <p class="sec-sub">교육이 끝난 뒤에도 책상에 두고 쓰는 참조 자산. 모든 사례에
+  복사해 쓰는 프롬프트와 <b>"꼭 사람이 확인하세요"</b> 체크가 들어 있습니다.</p>
+  <div class="cases">{case_cards}</div>
+</div></section>
+
+<section class="block"><div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:22px" id="extra">
+  <a class="module-row" href="mvp-example/index.html" style="align-items:center">
+    <span style="font-size:28px">📱</span>
+    <span><h3>완성 MVP 예시 체험하기</h3>
+    <p>3회차에서 만드는 것과 같은, 클릭되는 시제품(카페 온보딩)을 지금 열어보세요.</p></span>
+  </a>
+  <a class="module-row" href="instructor.html" style="align-items:center">
+    <span style="font-size:28px">🎓</span>
+    <span><h3>운영 가이드 (강사·주최자용)</h3>
+    <p>준비 체크리스트, 인원·TA 구성, 효과 측정 방법.</p></span>
+  </a>
+</div></section>"""
+    write("index.html", shell(root="", current="index",
+        title="월요일 아침에 바로 쓰는 AI — CX/UX 팀 교육",
+        desc="코딩 경험이 없는 CX/UX 실무자를 위한 Claude Code 실무 활용 워크샵 시리즈. 사례집 10편과 6개 실습 모듈.",
+        body=body))
+
+def build_top_pages():
+    content_page(os.path.join(CONTENT, "program", "curriculum.md"), "curriculum.html",
+                 root="", current="curriculum", eyebrow="교육 설계서",
+                 meta_html='<span class="badge l1">L1</span><span class="badge l2">L2</span><span class="badge l3">L3</span><span>반나절 × 3회 시리즈</span>')
+    content_page(os.path.join(CONTENT, "program", "README.md"), "instructor.html",
+                 root="", current="instructor", eyebrow="강사·주최자용",
+                 meta_html='<span>운영 준비 · 체크리스트 · 효과 측정</span>')
+
+def main():
+    if os.path.exists(SITE):
+        shutil.rmtree(SITE)
+    os.makedirs(SITE)
+    shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(SITE, "assets"))
+    shutil.copytree(os.path.join(CONTENT, "mvp-example"), os.path.join(SITE, "mvp-example"))
+    build_index()
+    build_top_pages()
+    build_modules()
+    build_cases()
+    n = sum(len(fs) for _, _, fs in os.walk(SITE))
+    print(f"OK — site/ 아래 {n}개 파일 생성")
+
+if __name__ == "__main__":
+    main()

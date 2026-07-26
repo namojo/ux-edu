@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>현재 메뉴 구조 텍스트로 카드소팅 관점의 대안 IA와 라벨 개선안 뽑기 — 월요일 아침에 바로 쓰는 AI</title>
+<meta name="description" content="활용 사례 · 설계 · 현재 메뉴 구조 텍스트로 카드소팅 관점의 대안 IA와 라벨 개선안 뽑기">
+<meta property="og:title" content="현재 메뉴 구조 텍스트로 카드소팅 관점의 대안 IA와 라벨 개선안 뽑기 — 월요일 아침에 바로 쓰는 AI">
+<meta property="og:description" content="활용 사례 · 설계 · 현재 메뉴 구조 텍스트로 카드소팅 관점의 대안 IA와 라벨 개선안 뽑기">
+<meta property="og:image" content="https://namojo.github.io/ux-edu/assets/img/hero.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect x=%2210%22 y=%2210%22 width=%2280%22 height=%2280%22 rx=%2218%22 fill=%22%23FFE455%22/%3E%3Ctext x=%2250%22 y=%2268%22 font-size=%2252%22 text-anchor=%22middle%22 font-family=%22monospace%22 fill=%22%2322242A%22%3E%E2%80%BA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=Gaegu:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="topnav"><div class="wrap"><a class="brand" href="../index.html"><span class="dot"></span>월요일 아침에 바로 쓰는 AI</a><nav><a href="../index.html">홈</a><a href="../curriculum.html">커리큘럼</a><a href="../index.html#modules">모듈</a><a href="../index.html#cases" aria-current=page>사례집</a><a href="../instructor.html">운영 가이드</a></nav></div></header>
+
+<div class="wrap page-head">
+  <div class="eyebrow">활용 사례 · 설계</div>
+  <h1>현재 메뉴 구조 텍스트로 카드소팅 관점의 대안 IA와 라벨 개선안 뽑기</h1>
+  <div class="meta"><span class="badge l2">따라 하기</span><span>메뉴 구조의 대안과 라벨 개선안이 필요할 때</span></div>
+</div>
+<div class="wrap layout">
+  <article class="prose"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>영역</td>
+<td>IA·내비게이션 검토</td>
+</tr>
+<tr>
+<td>난이도</td>
+<td>중급</td>
+</tr>
+<tr>
+<td>소요 시간</td>
+<td>약 30~40분</td>
+</tr>
+<tr>
+<td>준비물</td>
+<td>현재 서비스의 메뉴 구조를 적은 텍스트 파일 1개(대·중·소분류가 계층으로 보이게 정리), Claude Code가 설치된 컴퓨터(설치·환경 준비는 이 사례의 범위 밖 — 커리큘럼의 설치 편 참고)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="이런-상황에서-쓰세요">이런 상황에서 쓰세요</h2>
+<p>메뉴가 처음엔 깔끔했는데, 기능이 하나둘 늘면서 "이건 어느 메뉴에 넣지?" 하다가 결국 아무 데나 넣어 버린 항목이 쌓였습니다. 고객은 "그 기능 어디 있어요?" 하고 CS에 묻고, 팀 안에서도 "마이페이지에 있던가, 설정에 있던가" 헷갈립니다. IA(정보구조, Information Architecture — 메뉴와 콘텐츠를 어떤 묶음과 계층으로 배치할지에 대한 설계)를 다시 짜고 싶은데, 카드소팅 워크숍(항목을 카드에 적어 사용자가 직접 그룹으로 묶게 하는 리서치)을 돌리려면 참가자 모집부터 정리까지 최소 2~3주가 걸립니다. 정식 리서치 전에, 지금 구조의 문제점과 대안 묶음을 <strong>빠르게 초안으로 뽑아</strong> 팀 논의의 출발점을 만드는 방법입니다.</p>
+<h2 id="따라-하기">따라 하기</h2>
+<h3 id="1단계-준비">1단계: 준비</h3>
+<p>먼저 <strong>지금의 메뉴 구조</strong>를 하나의 텍스트 파일로 정리합니다.</p>
+<ol>
+<li>바탕화면이나 문서 폴더에 작업용 폴더를 하나 만듭니다. 예: <code>ia-review-2026</code></li>
+<li>그 폴더 안에 <code>menu.txt</code>(메모장/텍스트편집기로 만든 파일)를 만들고, 현재 메뉴를 <strong>계층이 보이게</strong> 적습니다. 들여쓰기(공백이나 <code>-</code>)로 대분류·중분류·하위 항목을 구분하면 됩니다. 예:</li>
+</ol>
+<p><code>홈
+   카테고리
+     - 신상품
+     - 베스트
+     - 세일
+   마이페이지
+     - 주문내역
+     - 배송조회
+     - 쿠폰함
+     - 찜한상품
+     - 1:1 문의
+     - 리뷰관리
+   설정
+     - 알림설정
+     - 결제수단
+     - 배송지관리</code>
+   - 완벽하지 않아도 됩니다. 지금 앱/웹을 열어 보이는 대로 옮겨 적으면 충분합니다.
+   - 각 항목이 <strong>실제로 무슨 기능인지</strong> 이름만으로 헷갈릴 것 같으면, 항목 옆에 괄호로 한 줄 설명을 답니다. 예: <code>찜한상품(관심 상품 저장 목록)</code>. 이유는 아래 "꼭 사람이 확인하세요"에서 짚습니다.
+   - <strong>저장할 때 주의(중요):</strong> mac의 텍스트편집기는 기본이 서식 문서(RTF)라서, 파일을 만든 뒤 상단 메뉴 <code>포맷 → 일반 텍스트로 만들기</code>를 먼저 누르고 저장하세요. 저장 창에서 이름을 <code>menu.txt</code>로 하고, 하단에 <code>.txt</code> 확장자를 유지하겠냐고 물으면 <code>.txt 사용</code>을 선택합니다. (그대로 저장하면 <code>menu.rtf</code>나 <code>menu.txt.rtf</code>가 되어 2단계에서 Claude가 파일을 못 찾습니다.) Windows 메모장은 기본이 일반 텍스트지만, 저장 시 '파일 형식'을 '모든 파일'로 두고 이름을 <code>menu.txt</code>로 정확히 적으세요.
+3. 이제 <strong>터미널</strong>(명령어를 글자로 입력하는 창 — 마우스 대신 글자로 컴퓨터에 지시하는 도구)에서 방금 만든 폴더를 Claude Code에 연결합니다. 처음이라면 아래 순서를 그대로 따라 하세요.
+   - <strong>(1) 터미널을 엽니다.</strong> macOS: 화면 오른쪽 위 돋보기(Spotlight)를 누르고 <code>터미널</code>이라고 쳐서 나오는 앱을 엽니다. Windows: 시작 버튼을 누르고 <code>PowerShell</code>이라고 쳐서 나오는 앱을 엽니다.
+   - <strong>(2) 방금 만든 폴더로 이동합니다.</strong> 터미널을 처음 열면 엉뚱한 위치(홈 폴더)에 있어서, <code>menu.txt</code>가 있는 폴더로 옮겨 줘야 Claude Code가 파일을 찾습니다. 방법: 터미널에 <code>cd</code>라고 친 뒤 <strong>한 칸 띄우고</strong>, 1번에서 만든 폴더(<code>ia-review-2026</code>)를 마우스로 끌어(드래그) 터미널 창 위에 놓습니다. 그러면 폴더 경로가 자동으로 입력됩니다. 이제 <code>Enter</code>(엔터) 키를 누르면 그 폴더로 이동합니다. (Windows에서 드래그해도 경로가 안 뜨면, 폴더를 파일 탐색기에서 연 뒤 주소 표시줄을 클릭해 경로를 복사하고(Ctrl+C), 터미널에서 <code>cd</code> 한 칸 뒤에 붙여넣기(마우스 오른쪽 클릭 또는 Ctrl+V)하세요.)
+   - <strong>(3) 이동됐는지 확인합니다.</strong> 명령을 입력하는 줄 앞부분에 방금 폴더 이름(<code>ia-review-2026</code>)이 보이면 제대로 이동한 것입니다.
+   - <strong>(4) Claude Code를 켭니다.</strong> 이어서 <code>claude</code>라고 입력하고 <code>Enter</code>를 누릅니다. Claude Code는 그 폴더 안의 파일을 읽고 쓸 수 있는 AI 도구입니다.
+   - (Claude Code 설치 자체는 이 사례의 범위 밖입니다. 아직 설치 전이라면 커리큘럼의 설치·환경 준비 편을 먼저 보고 오세요.)</p>
+<h3 id="2단계-프롬프트-입력">2단계: 프롬프트 입력</h3>
+<p>아래를 복사해 붙여넣고, {중괄호} 부분만 바꾸세요:</p>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>menu.txt 파일을 읽어줘. 이건 {우리 쇼핑 앱}의 현재 메뉴 구조야.
+
+너는 IA(정보구조) 검토를 돕는 UX 리서처야. 카드소팅 관점에서 아래를 순서대로 해줘.
+원문 메뉴에 없는 기능은 새로 지어내지 말고, 있는 항목만 재배치하는 걸 원칙으로 해.
+
+1. [현재 구조 진단] 지금 구조에서 사용자가 헷갈릴 만한 지점을 짚어줘.
+   특히 (a) 한 항목이 여러 메뉴에 있어도 이상하지 않은 '모호한 소속', 
+   (b) 이름만으로 뭔지 알기 어려운 '불명확한 라벨',
+   (c) 한 메뉴에 항목이 너무 많이 몰린 '과부하'를 각각 예시와 함께.
+
+2. [대안 구조 2개] 사용자가 직접 카드소팅을 했다면 나올 법한 묶음을 상상해서,
+   서로 다른 그룹핑 논리의 대안 IA를 2개 제안해줘.
+   - 안 A와 안 B는 '무엇을 기준으로 묶었는지'가 서로 달라야 해(예: 하나는 사용 목적 기준, 하나는 대상/객체 기준).
+   - 각 안마다: 대분류 이름 목록 + 그 아래 어떤 항목이 들어가는지 + 이 안의 장점/단점 각각.
+
+3. [라벨 개선안] 현재 라벨 중 바꾸면 더 명확해질 것을 골라, 
+   '현재 라벨 → 제안 라벨 → 바꾸는 이유'를 표로 정리해줘.
+
+4. [검증 제안] 이 대안들 중 무엇이 나은지 사람에게 물어볼 때 쓸,
+   트리 테스트(사용자에게 '○○ 기능을 찾아보세요'라고 시키는 검증)용 과제 5개를 만들어줘.
+
+각 제안이 '내 추측'인지 '원문 근거'인지 구분해서 표시하고,
+확신이 낮은 부분은 솔직히 '확인 필요'라고 적어줘.
+</pre></div></div></div>
+<h3 id="3단계-결과-확인">3단계: 결과 확인</h3>
+<p>이런 식의 결과가 나옵니다(내용은 예시입니다):</p>
+<p><strong>1. 현재 구조 진단</strong></p>
+<table>
+<thead>
+<tr>
+<th>유형</th>
+<th>항목</th>
+<th>왜 문제인가</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>모호한 소속</td>
+<td>1:1 문의</td>
+<td>'마이페이지'에 있지만 '고객지원/도움말' 성격 — 사용자는 별도 고객센터에서 찾을 수 있음</td>
+</tr>
+<tr>
+<td>불명확한 라벨</td>
+<td>리뷰관리</td>
+<td>내가 쓴 리뷰인지, 상품 리뷰 보기인지 이름만으로 불명확</td>
+</tr>
+<tr>
+<td>과부하</td>
+<td>마이페이지</td>
+<td>하위 항목 6개가 서로 성격이 달라(주문/혜택/문의) 한 화면에서 훑기 어려움</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. 대안 구조 2개</strong></p>
+<blockquote>
+<p><strong>안 A — '사용 목적' 기준</strong> (근거: 원문 항목 재배치)
+- 쇼핑하기: 신상품 / 베스트 / 세일
+- 내 주문: 주문내역 / 배송조회
+- 내 혜택: 쿠폰함 / 찜한상품
+- 고객지원: 1:1 문의 / 리뷰관리
+- 설정: 알림설정 / 결제수단 / 배송지관리
+- 장점: '마이페이지' 과부하가 목적별로 분산됨 / 단점: '내 주문'과 '내 혜택' 경계를 사용자가 늘 똑같이 나눌지는 <strong>확인 필요</strong></p>
+<p><strong>안 B — '대상(객체)' 기준</strong> (근거: 원문 항목 재배치)
+- 상품: 신상품 / 베스트 / 세일 / 찜한상품
+- 주문·배송: 주문내역 / 배송조회 / 배송지관리
+- 결제·혜택: 쿠폰함 / 결제수단
+- 문의·활동: 1:1 문의 / 리뷰관리
+- 알림: 알림설정
+- 장점: 관련 기능이 같은 대상끼리 모임 / 단점: '알림'이 항목 1개뿐이라 대분류로 두기엔 빈약 — <strong>확인 필요</strong></p>
+</blockquote>
+<p><strong>3. 라벨 개선안</strong></p>
+<table>
+<thead>
+<tr>
+<th>현재 라벨</th>
+<th>제안 라벨</th>
+<th>바꾸는 이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>리뷰관리</td>
+<td>내가 쓴 리뷰</td>
+<td>'관리'는 모호 — 소유자(내 리뷰)임을 분명히</td>
+</tr>
+<tr>
+<td>찜한상품</td>
+<td>관심상품</td>
+<td>서비스 전반 용어와 통일(추측 — <strong>확인 필요</strong>)</td>
+</tr>
+<tr>
+<td>카테고리</td>
+<td>전체 상품</td>
+<td>'카테고리'는 시스템 용어에 가까움</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4. 트리 테스트 과제 5개</strong></p>
+<blockquote>
+<ol>
+<li>어제 주문한 상품이 지금 어디쯤 왔는지 확인하려면 어디로 가겠어요?</li>
+<li>받은 쿠폰을 확인하려면?</li>
+<li>배송지 주소를 새로 추가하려면?</li>
+<li>예전에 저장해 둔 관심 상품을 다시 보려면?</li>
+<li>결제가 안 될 때 문의하려면?</li>
+</ol>
+</blockquote>
+<h3 id="4단계-다듬기">4단계: 다듬기</h3>
+<p>첫 결과가 나오면 후속 프롬프트로 좁혀 갑니다. 아래처럼 이어서 입력하면 됩니다:</p>
+<ul>
+<li><code>안 A를 채택한다고 가정하고, 앞으로 '기프트카드', '정기구독' 같은 기능이 새로 생기면 각각 어느 대분류에 들어가는 게 자연스러운지 규칙을 정리해줘. 애매하면 애매하다고 표시하고.</code></li>
+<li><code>이 결과를 ia-proposal.md 파일로 저장해줘. 그리고 안 A와 안 B를 한눈에 비교하는 표를 맨 위에 추가하되, '이건 검증 전 초안'이라는 문구를 제목 아래에 꼭 넣어줘.</code></li>
+</ul>
+<p>두 번째처럼 파일로 저장(<code>ia-proposal.md</code>는 마크다운, 즉 표·제목을 기호로 표현한 텍스트 파일)해 두면 팀 회의 자료로 바로 공유하거나, 실제 카드소팅 결과가 나온 뒤 비교 기준으로 쓸 수 있습니다.</p>
+<div class="human-check"><h2 id="꼭-사람이-확인하세요">꼭 사람이 확인하세요</h2>
+<ul>
+<li><strong>AI가 만든 묶음은 '논리적으로 그럴듯한 안'이지, 사용자가 실제로 그렇게 나눈 결과가 아닙니다.</strong> AI가 시뮬레이션한 카드소팅은 구조적으로는 일관되지만, 특정 사용자 집단이 특정 콘텐츠를 <strong>뜻밖의 방식으로</strong> 묶는 맥락까지 재현하지는 못한다고 관련 연구들이 시사합니다(아래 출처, 특히 arXiv의 Card Sorting Simulator 연구 참고 — 다만 이 문장은 요약된 해석이므로 원문을 직접 확인하시길 권합니다). 즉 이 결과는 정식 카드소팅·트리 테스트를 <strong>대체하는 게 아니라 준비물</strong>입니다. 실제 검증 없이 최종 IA로 확정하지 마세요.</li>
+<li><strong>항목의 실제 기능을 AI가 이름만 보고 오해할 수 있습니다.</strong> 예를 들어 '리뷰관리'를 AI가 '내가 쓴 리뷰'로 단정했는데, 실제로는 '판매자용 리뷰 응대' 화면일 수도 있습니다. 1단계에서 헷갈릴 항목에 괄호 설명을 달아 둔 이유입니다. 배치가 어색하면 기능 설명을 보강해 다시 돌리세요.</li>
+<li><strong>라벨 제안 중 '통일했다'는 근거는 반드시 실물로 확인하세요.</strong> 위 예시의 <code>찜한상품 → 관심상품</code>처럼 "서비스 전반 용어와 통일"이라는 이유는 AI 추측일 수 있습니다(환각 — 사실이 아닌 걸 그럴듯하게 지어내는 현상). 실제 서비스에서 어떤 용어를 쓰는지 화면에서 직접 확인한 뒤 결정하세요.</li>
+<li><strong>대분류가 항목 1~2개뿐인 안은 실제로는 부적절할 때가 많습니다.</strong> AI는 균형을 맞추려 억지 대분류를 만들 수 있습니다. 각 대분류에 항목이 몇 개인지, 너무 얇거나 두껍지 않은지 사람이 훑으세요.</li>
+<li><strong>새 기능을 지어내지 않았는지 대조하세요.</strong> "원문 항목만 재배치"라고 지시해도, AI가 없는 메뉴를 슬쩍 추가할 수 있습니다. 결과의 모든 항목이 <code>menu.txt</code>에 실재하는지 한 번 맞춰 보세요.</li>
+</ul>
+</div><h2 id="한-걸음-더">한 걸음 더</h2>
+<p>이 검토가 서비스마다, 또는 개편 때마다 반복된다면 <strong>에이전트 팀(하네스)</strong> 으로 승격할 가치가 있습니다. 하네스는 역할이 나뉜 AI들이 순서대로 일하는 작은 팀입니다. 예를 들어:</p>
+<ul>
+<li><strong>구조 추출 담당</strong>: 실제 앱/웹 화면(또는 사이트맵 파일)에서 현재 메뉴를 자동으로 <code>menu.txt</code> 형태로 정리</li>
+<li><strong>진단·대안 담당</strong>: 위 2단계 프롬프트를 고정 규칙으로 실행해 진단표 + 대안 IA 2안 생성</li>
+<li><strong>검증 설계 담당</strong>: 대안별 트리 테스트 과제를 만들고, 실제 리서치 툴에 넣을 형식으로 출력</li>
+<li><strong>대조 검증 담당</strong>: 결과의 모든 항목이 원문에 실재하는지, 라벨 제안 근거가 맞는지 점검</li>
+</ul>
+<p>이렇게 만들어 두면 다음 개편 때는 화면만 넣고 실행해 같은 품질의 '검토 초안 + 검증 과제'가 나옵니다. "매번 같은 방식으로 IA를 진단하고 대안·검증안까지 세트로 필요하다"가 반복될 때가 하네스로 만들 시점입니다.</p>
+<hr />
+<p><em>외부 동향 확인: AI 보조 카드소팅의 효용과 한계는 UXmatters(2026), arXiv의 Card Sorting Simulator 연구(2025), NN/g의 카드소팅·트리테스트 비교 자료를 참고했습니다. 핵심 시사점 — AI는 논리적으로 일관된 IA 초안을 빠르게 만들지만 사용자 고유의 맥락적 분류는 대체하지 못하므로, 정식 리서치의 준비물로 쓰는 것이 안전합니다. (본문의 '뜻밖의 방식으로 묶는 맥락을 재현하지 못한다'는 서술은 위 자료들에 대한 요약 해석이며, 인용 전 원문 대조를 권장합니다.)</em>
+<em>Sources: <a href="https://www.uxmatters.com/mt/archives/2026/02/card-sorting-in-the-age-of-ai-adapting-classic-methods-for-modern-challenges.php">UXmatters — Card Sorting in the Age of AI (2026)</a>, <a href="https://arxiv.org/pdf/2505.09478">arXiv — Card Sorting Simulator (2025)</a>, <a href="https://www.nngroup.com/articles/card-sorting-tree-testing-differences/">NN/g — Card Sorting vs. Tree Testing</a></em></p><div class="pager"><a href="ux-writing.html"><span class="dir">← 이전 사례</span><b>UX 라이팅</b></a><a class="next" href="competitor-bench.html"><span class="dir">다음 사례 →</span><b>경쟁사 UX 벤치마킹</b></a></div></article>
+  <aside class="side"><div class="side-box toc"><h4>목차</h4><a href="#이런-상황에서-쓰세요">이런 상황에서 쓰세요</a><a href="#따라-하기">따라 하기</a><a href="#꼭-사람이-확인하세요">꼭 사람이 확인하세요</a><a href="#한-걸음-더">한 걸음 더</a></div></aside>
+</div>
+<footer><div class="wrap">
+  <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>
+  <div><a href="https://github.com/namojo/ux-edu">GitHub</a> · UX 인에이블먼트 하네스로 제작</div>
+</div></footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

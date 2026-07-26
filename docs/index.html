@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>월요일 아침에 바로 쓰는 AI — CX/UX 팀 교육</title>
+<meta name="description" content="코딩 경험이 없는 CX/UX 실무자를 위한 Claude Code 실무 활용 워크샵 시리즈. 사례집 10편과 6개 실습 모듈.">
+<meta property="og:title" content="월요일 아침에 바로 쓰는 AI — CX/UX 팀 교육">
+<meta property="og:description" content="코딩 경험이 없는 CX/UX 실무자를 위한 Claude Code 실무 활용 워크샵 시리즈. 사례집 10편과 6개 실습 모듈.">
+<meta property="og:image" content="https://namojo.github.io/ux-edu/assets/img/hero.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect x=%2210%22 y=%2210%22 width=%2280%22 height=%2280%22 rx=%2218%22 fill=%22%23FFE455%22/%3E%3Ctext x=%2250%22 y=%2268%22 font-size=%2252%22 text-anchor=%22middle%22 font-family=%22monospace%22 fill=%22%2322242A%22%3E%E2%80%BA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=Gaegu:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topnav"><div class="wrap"><a class="brand" href="index.html"><span class="dot"></span>월요일 아침에 바로 쓰는 AI</a><nav><a href="index.html" aria-current=page>홈</a><a href="curriculum.html">커리큘럼</a><a href="index.html#modules">모듈</a><a href="index.html#cases">사례집</a><a href="instructor.html">운영 가이드</a></nav></div></header>
+
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <div class="eyebrow">CX/UX 팀 사내 교육 · 반나절 워크샵 × 3회</div>
+    <h1>코딩은 몰라도 됩니다.<br><span class="hl">한국어 문장</span>이면 충분해요.</h1>
+    <p class="lead">인터뷰 녹취, 앱 리뷰, 페르소나, 시제품까지 — UX 실무자의 반복 작업을
+    AI에게 맡기는 법을 실습으로 배웁니다. 모든 세션은 <strong>여러분의 실제 업무 산출물</strong>로 끝납니다.</p>
+    <div>
+      <a class="btn btn-primary" href="modules/first-contact/index.html">첫 모듈 시작하기</a>
+      <a class="btn btn-ghost" href="curriculum.html">커리큘럼 보기</a>
+    </div>
+  </div>
+  <div>
+    <div class="terminal" id="typing-demo" aria-label="Claude Code 사용 예시 데모">
+      <div class="terminal-bar"><i></i><i></i><i></i><span>claude</span></div>
+      <div class="terminal-body"><div class="in"></div><span class="caret"></span>
+      <div class="out" style="margin-top:10px"></div></div>
+    </div>
+    <div class="hand-note">↑ 진짜로 이게 전부예요</div>
+  </div>
+</div></section>
+
+<section class="block alt" id="sessions"><div class="wrap">
+  <h2 class="sec">3번의 반나절, 3단계 성장</h2>
+  <p class="sec-sub">첫 대화(L1)에서 시작해, 내 업무 데이터(L2)를 거쳐, 나만의 AI 팀 설계(L3)까지.
+  모든 모듈은 핸즈온 50% 이상으로 설계되어 있습니다.</p>
+  <div class="sessions">
+<div class="session-card">
+  <img src="assets/img/session-l1.png" alt="AI와 첫 대화 일러스트">
+  <div class="pad">
+    <div><span class="badge l1">L1</span>
+      <span class="eyebrow" style="display:inline;margin-left:8px">1회차</span></div>
+    <h3>AI와 첫 대화</h3>
+    <p>터미널을 처음 열고, 파일을 읽히고, 결과를 검증하는 법까지. 코딩 없이 한국어 문장만으로.</p>
+    <div><a href="modules/first-contact/index.html" style="font-size:14px;display:block;padding:3px 0">· AI에게 내 파일을 맡기는 첫 경험</a><a href="modules/prompt-and-verify/index.html" style="font-size:14px;display:block;padding:3px 0">· 좋은 요청과 결과 검증 — 함정 피하기</a></div>
+    <div class="take"><b>가져가는 것 — 첫 성공 경험 + 환각·개인정보 검증 습관</b></div>
+  </div>
+</div>
+<div class="session-card">
+  <img src="assets/img/session-l2.png" alt="내 업무에 붙이기 일러스트">
+  <div class="pad">
+    <div><span class="badge l2">L2</span>
+      <span class="eyebrow" style="display:inline;margin-left:8px">2회차</span></div>
+    <h3>내 업무에 붙이기</h3>
+    <p>자기 서비스의 진짜 데이터(VoC·인터뷰)를 가져와 실무 산출물의 초안을 만든다.</p>
+    <div><a href="modules/voc-in-practice/index.html" style="font-size:14px;display:block;padding:3px 0">· 내 VoC 데이터로 개선 기회 뽑기</a><a href="modules/research-to-persona/index.html" style="font-size:14px;display:block;padding:3px 0">· 내 리서치에서 인사이트·페르소나 만들기</a></div>
+    <div class="take"><b>가져가는 것 — 내 서비스 VoC 개선 기회 + 페르소나·저니맵 초안</b></div>
+  </div>
+</div>
+<div class="session-card">
+  <img src="assets/img/session-l3.png" alt="시제품과 나만의 하네스 일러스트">
+  <div class="pad">
+    <div><span class="badge l3">L2+L3</span>
+      <span class="eyebrow" style="display:inline;margin-left:8px">3회차</span></div>
+    <h3>시제품과 나만의 하네스</h3>
+    <p>아이디어를 클릭되는 시제품으로 만들고, 반복 업무를 AI 팀(하네스)으로 설계한다.</p>
+    <div><a href="modules/mvp-in-practice/index.html" style="font-size:14px;display:block;padding:3px 0">· 내 아이디어를 클릭되는 시제품으로</a><a href="modules/my-harness/index.html" style="font-size:14px;display:block;padding:3px 0">· 반복 업무 하나를 나만의 AI 팀으로</a></div>
+    <div class="take"><b>가져가는 것 — 클릭되는 MVP + 반복 업무의 하네스 설계 캔버스</b></div>
+  </div>
+</div></div>
+</div></section>
+
+<section class="block" id="modules"><div class="wrap">
+  <h2 class="sec">6개 모듈</h2>
+  <p class="sec-sub">각 90분. 실습 가이드는 화면에 보이는 그대로 따라 할 수 있게 쓰여 있고,
+  막히기 쉬운 곳마다 "이렇게 나오면 정상입니다" 안내가 있습니다.</p>
+  <div class="modules">
+<a class="module-row" href="modules/first-contact/index.html">
+  <span class="no">01</span>
+  <span><span class="badge l1">L1</span>
+    <h3>AI에게 내 파일을 맡기는 첫 경험</h3><p>터미널을 열고, 폴더의 파일을 읽혀, 첫 결과를 받아낸다.</p>
+    <span class="mats">⏱ 90분</span></span>
+</a>
+<a class="module-row" href="modules/prompt-and-verify/index.html">
+  <span class="no">02</span>
+  <span><span class="badge l1">L1</span>
+    <h3>좋은 요청과 결과 검증 — 함정 피하기</h3><p>후속 프롬프트로 결과를 다듬고, 환각·개인정보를 스스로 검증한다.</p>
+    <span class="mats">⏱ 90분</span></span>
+</a>
+<a class="module-row" href="modules/voc-in-practice/index.html">
+  <span class="no">03</span>
+  <span><span class="badge l2">L2</span>
+    <h3>내 VoC 데이터로 개선 기회 뽑기</h3><p>자기 서비스의 리뷰·CS 티켓에서 주제별 개선 기회 초안을 만든다.</p>
+    <span class="mats">⏱ 90분</span></span>
+</a>
+<a class="module-row" href="modules/research-to-persona/index.html">
+  <span class="no">04</span>
+  <span><span class="badge l2">L2</span>
+    <h3>내 리서치에서 인사이트·페르소나 만들기</h3><p>인터뷰 데이터를 어피니티 종합 → 페르소나·저니맵 초안으로 잇는다.</p>
+    <span class="mats">⏱ 90분</span></span>
+</a>
+<a class="module-row" href="modules/mvp-in-practice/index.html">
+  <span class="no">05</span>
+  <span><span class="badge l2">L2</span>
+    <h3>내 아이디어를 클릭되는 시제품으로</h3><p>아이디어를 사용성 테스트용 HTML MVP 초안으로 만든다.</p>
+    <span class="mats">⏱ 90분</span></span>
+</a>
+<a class="module-row" href="modules/my-harness/index.html">
+  <span class="no">06</span>
+  <span><span class="badge l3">L3</span>
+    <h3>반복 업무 하나를 나만의 AI 팀으로</h3><p>반복 업무 1개를 역할 나눈 에이전트 팀(하네스) 설계로 옮긴다.</p>
+    <span class="mats">⏱ 90분+과제</span></span>
+</a></div>
+</div></section>
+
+<section class="block alt" id="cases"><div class="wrap">
+  <h2 class="sec">활용 사례집 — 10가지 실무 레시피</h2>
+  <p class="sec-sub">교육이 끝난 뒤에도 책상에 두고 쓰는 참조 자산. 모든 사례에
+  복사해 쓰는 프롬프트와 <b>"꼭 사람이 확인하세요"</b> 체크가 들어 있습니다.</p>
+  <div class="cases">
+<a class="case-card" href="cases/research-synthesis.html">
+  <span class="area">리서치</span><h3>사용자 리서치 종합</h3><p>인터뷰 녹취 더미에서 어피니티 맵·인사이트를 뽑을 때</p>
+</a>
+<a class="case-card" href="cases/persona-journey.html">
+  <span class="area">리서치</span><h3>페르소나 & 저니맵</h3><p>리서치 데이터로 근거 있는 페르소나·저니맵 초안이 필요할 때</p>
+</a>
+<a class="case-card" href="cases/usability-analysis.html">
+  <span class="area">평가</span><h3>사용성 테스트 분석</h3><p>세션 노트에서 이슈 목록과 심각도 우선순위를 만들 때</p>
+</a>
+<a class="case-card" href="cases/voc-mining.html">
+  <span class="area">CX</span><h3>VoC/CX 피드백 분석</h3><p>리뷰·CS 티켓 수백 건에서 개선 기회를 찾을 때</p>
+</a>
+<a class="case-card" href="cases/ux-writing.html">
+  <span class="area">라이팅</span><h3>UX 라이팅</h3><p>마이크로카피 시안을 여러 개 뽑고 톤앤매너로 검수할 때</p>
+</a>
+<a class="case-card" href="cases/ia-review.html">
+  <span class="area">설계</span><h3>IA·내비게이션 검토</h3><p>메뉴 구조의 대안과 라벨 개선안이 필요할 때</p>
+</a>
+<a class="case-card" href="cases/competitor-bench.html">
+  <span class="area">리서치</span><h3>경쟁사 UX 벤치마킹</h3><p>경쟁 서비스 온보딩을 비교표 한 장으로 정리할 때</p>
+</a>
+<a class="case-card" href="cases/mvp-prototype.html">
+  <span class="area">프로토타이핑</span><h3>MVP 프로토타입</h3><p>아이디어를 클릭 가능한 시제품으로 빠르게 검증할 때</p>
+</a>
+<a class="case-card" href="cases/a11y-audit.html">
+  <span class="area">평가</span><h3>접근성 점검</h3><p>화면 HTML에서 접근성 이슈와 개선안을 받을 때</p>
+</a>
+<a class="case-card" href="cases/design-system-doc.html">
+  <span class="area">시스템</span><h3>디자인 시스템 문서화</h3><p>컴포넌트 규칙 메모를 일관된 가이드 문서로 만들 때</p>
+</a></div>
+</div></section>
+
+<section class="block"><div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:22px" id="extra">
+  <a class="module-row" href="mvp-example/index.html" style="align-items:center">
+    <span style="font-size:28px">📱</span>
+    <span><h3>완성 MVP 예시 체험하기</h3>
+    <p>3회차에서 만드는 것과 같은, 클릭되는 시제품(카페 온보딩)을 지금 열어보세요.</p></span>
+  </a>
+  <a class="module-row" href="instructor.html" style="align-items:center">
+    <span style="font-size:28px">🎓</span>
+    <span><h3>운영 가이드 (강사·주최자용)</h3>
+    <p>준비 체크리스트, 인원·TA 구성, 효과 측정 방법.</p></span>
+  </a>
+</div></section>
+<footer><div class="wrap">
+  <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>
+  <div><a href="https://github.com/namojo/ux-edu">GitHub</a> · UX 인에이블먼트 하네스로 제작</div>
+</div></footer>
+<script src="assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CX/UX 팀 AI 실무 활용 교육 — &quot;월요일 아침에 바로 쓰는 AI&quot; — 월요일 아침에 바로 쓰는 AI</title>
+<meta name="description" content="교육 설계서 · CX/UX 팀 AI 실무 활용 교육 — &quot;월요일 아침에 바로 쓰는 AI&quot;">
+<meta property="og:title" content="CX/UX 팀 AI 실무 활용 교육 — &quot;월요일 아침에 바로 쓰는 AI&quot; — 월요일 아침에 바로 쓰는 AI">
+<meta property="og:description" content="교육 설계서 · CX/UX 팀 AI 실무 활용 교육 — &quot;월요일 아침에 바로 쓰는 AI&quot;">
+<meta property="og:image" content="https://namojo.github.io/ux-edu/assets/img/hero.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect x=%2210%22 y=%2210%22 width=%2280%22 height=%2280%22 rx=%2218%22 fill=%22%23FFE455%22/%3E%3Ctext x=%2250%22 y=%2268%22 font-size=%2252%22 text-anchor=%22middle%22 font-family=%22monospace%22 fill=%22%2322242A%22%3E%E2%80%BA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=Gaegu:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topnav"><div class="wrap"><a class="brand" href="index.html"><span class="dot"></span>월요일 아침에 바로 쓰는 AI</a><nav><a href="index.html">홈</a><a href="curriculum.html" aria-current=page>커리큘럼</a><a href="index.html#modules">모듈</a><a href="index.html#cases">사례집</a><a href="instructor.html">운영 가이드</a></nav></div></header>
+
+<div class="wrap page-head">
+  <div class="eyebrow">교육 설계서</div>
+  <h1>CX/UX 팀 AI 실무 활용 교육 — &quot;월요일 아침에 바로 쓰는 AI&quot;</h1>
+  <div class="meta"><span class="badge l1">L1</span><span class="badge l2">L2</span><span class="badge l3">L3</span><span>반나절 × 3회 시리즈</span></div>
+</div>
+<div class="wrap layout">
+  <article class="prose"><h2 id="개요">개요</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>대상</td>
+<td>회사 CX/UX 팀원 — <strong>코딩 경험 없음</strong>, Claude Code 첫 사용</td>
+</tr>
+<tr>
+<td>목표</td>
+<td>AI 지식 습득이 아니라 <strong>자기 실무(리서치 정리·VoC·페르소나·MVP)를 AI로 처리하는 사람</strong>이 되는 것</td>
+</tr>
+<tr>
+<td>형태</td>
+<td>반나절 워크샵 × 3회 시리즈 (회당 약 4시간, 90분 모듈 2개 + 쉬는 시간·정리)</td>
+</tr>
+<tr>
+<td>산출물 원칙</td>
+<td>모든 모듈은 <strong>학습자 실제 업무의 초안</strong>으로 끝난다 (연습용 예제 금지)</td>
+</tr>
+<tr>
+<td>핸즈온 비율</td>
+<td>모듈당 실습 ≥ 50% (도입·시연 ≤30분 / 실습 ≥45분 / 공유·정리 15분)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="전제가정-요구사항-미지정에-따른-기본값">전제(가정) — 요구사항 미지정에 따른 기본값</h3>
+<p>교육 기간·형태가 지정되지 않아 <code>ux-edu-program</code> 스킬의 <strong>기본 3레벨 체계(반나절 × 3회 시리즈)</strong> 로 설계했다. 실제 운영 시 아래 가정을 확정·조정해야 한다.</p>
+<ul>
+<li><strong>일정</strong>: 주 1회 × 3주 연속을 권장(회차 사이에 "자기 업무에 적용" 숙제가 있어 간격이 필요). 하루 몰아서도 가능하나 L3 과제는 별도 시간 필요.</li>
+<li><strong>인원</strong>: 회당 8~12명, 강사 1 + 실습 보조(TA) 1. 비개발자 대상이라 터미널·권한 창에서 막히는 사람을 즉시 붙잡아 줘야 이탈이 없다.</li>
+<li><strong>환경</strong>: 교육 전 각자 노트북에 Claude Code 설치 완료가 <strong>선결 조건</strong>. 미설치자는 M1 도입 30분에서 다 함께 설치(사내 공통 설치 가이드 필요).</li>
+<li><strong>데이터</strong>: L2부터는 학습자가 <strong>자기 프로젝트의 실제 데이터(익명화된 인터뷰·리뷰·VoC)</strong> 를 지참해야 산출물이 실무로 이어진다. 사전 안내 필수.</li>
+</ul>
+<h3 id="실습-재료-연결">실습 재료 연결</h3>
+<ul>
+<li>활용 사례집 10편 — 최종 위치 <code>usecases/{slug}.md</code> (현재 <code>_workspace/02_case_{slug}.md</code>, 곧 이동). 각 사례는 복붙 프롬프트 + 따라 하기 단계 포함.</li>
+<li>완성 MVP 예시 — <code>mvp/onboarding-smoke/</code> (카페 온보딩, 더블클릭 실행).</li>
+<li>하네스 방법론 교보재 — 이 프로젝트의 <code>.claude/agents/</code>, <code>.claude/skills/</code> 구성 자체가 L3 실물 예시.</li>
+</ul>
+<blockquote>
+<p><strong>사례집 미완성 시 대비</strong>: 사례집이 아직 <code>usecases/</code>로 이동되지 않았어도 실습은 진행 가능하다(현재 <code>_workspace/02_case_*.md</code>를 참조). 각 모듈 명세의 "사용 사례"는 이동 후 경로를 기준으로 적었다.</p>
+</blockquote>
+<hr />
+<h2 id="모듈-목록">모듈 목록</h2>
+<table>
+<thead>
+<tr>
+<th>slug</th>
+<th>제목</th>
+<th>레벨</th>
+<th>시간</th>
+<th>학습 목표</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>first-contact</code></td>
+<td>AI에게 내 파일을 맡기는 첫 경험</td>
+<td>L1</td>
+<td>90분</td>
+<td>Claude Code를 열고, 폴더의 파일을 읽혀, 첫 결과를 받아낸다</td>
+</tr>
+<tr>
+<td><code>prompt-and-verify</code></td>
+<td>좋은 요청과 결과 검증 — 함정 피하기</td>
+<td>L1</td>
+<td>90분</td>
+<td>결과를 후속 프롬프트로 다듬고, 환각·개인정보를 스스로 검증한다</td>
+</tr>
+<tr>
+<td><code>voc-in-practice</code></td>
+<td>내 VoC 데이터로 개선 기회 뽑기</td>
+<td>L2</td>
+<td>90분</td>
+<td>자기 서비스의 리뷰/CS 티켓에서 주제별 개선 기회 초안을 만든다</td>
+</tr>
+<tr>
+<td><code>research-to-persona</code></td>
+<td>내 리서치에서 인사이트·페르소나 만들기</td>
+<td>L2</td>
+<td>90분</td>
+<td>자기 인터뷰 데이터를 어피니티 종합→페르소나·저니맵 초안으로 잇는다</td>
+</tr>
+<tr>
+<td><code>mvp-in-practice</code></td>
+<td>내 아이디어를 클릭되는 시제품으로</td>
+<td>L2</td>
+<td>90분</td>
+<td>자기 서비스 아이디어를 사용성 테스트용 HTML MVP 초안으로 만든다</td>
+</tr>
+<tr>
+<td><code>my-harness</code></td>
+<td>반복 업무 하나를 나만의 AI 팀으로</td>
+<td>L3</td>
+<td>90분+과제</td>
+<td>자기 반복 업무 1개를 역할 나눈 에이전트 팀(하네스) 설계로 옮긴다</td>
+</tr>
+</tbody>
+</table>
+<p><strong>회차 배치</strong>: 1회차 = <code>first-contact</code> + <code>prompt-and-verify</code> (L1) / 2회차 = <code>voc-in-practice</code> + <code>research-to-persona</code> (L2) / 3회차 = <code>mvp-in-practice</code> (L2) + <code>my-harness</code> (L3, 과제 안내)</p>
+<hr />
+<h2 id="모듈별-명세">모듈별 명세</h2>
+<h3 id="first-contact-ai에게-내-파일을-맡기는-첫-경험"><code>first-contact</code>: AI에게 내 파일을 맡기는 첫 경험</h3>
+<ul>
+<li><strong>레벨 / 시간</strong>: L1 / 90분 (도입·시연 30분 — 실습 45분 — 공유·정리 15분)</li>
+<li><strong>선수 조건</strong>: 없음. 단, Claude Code 설치가 되어 있어야 함(미설치자는 도입 30분에 다 함께 설치).</li>
+<li><strong>학습 목표</strong>: 터미널을 열고, 작업 폴더로 이동해 <code>claude</code>를 켜고, 폴더 안 파일을 읽혀 첫 결과를 받는 전 과정을 혼자 해낸다. "AI에게 파일을 준다"는 감각을 몸에 익힌다.</li>
+<li><strong>실습 설계</strong>:
+  1. (다 함께) 바탕화면에 작업 폴더 만들기 → Finder 우클릭 "폴더에서 새 터미널 열기" 또는 <code>cd</code> + 드래그앤드롭으로 이동 → <code>claude</code> 실행. 강사 화면 미러링.
+  2. 미리 나눠 준 샘플 텍스트 파일(짧은 리뷰 20건)을 폴더에 넣고 <code>이 파일 읽고 무슨 내용인지 3줄로 요약해줘</code> 입력.
+  3. 권한 확인 창이 뜨면 어떻게 대응하는지 함께 체험(가장 흔한 첫 막힘 지점).
+  4. 결과를 받은 뒤 <code>방금 요약을 표로 다시 보여줘</code> 같은 후속 요청으로 "대화가 이어진다"를 체감.</li>
+<li><strong>사용 사례 / 입력 데이터</strong>: 특정 사례에 종속되지 않는 워밍업. 입력은 강사가 배포하는 공용 샘플(리뷰 20건). 학습자 자기 데이터는 아직 요구하지 않음(첫 성공 경험에 집중).</li>
+<li><strong>제작할 자료</strong>: 실습가이드(화면 단위 절차 + 권한 창·경로 함정 박스), 슬라이드개요(강사 시연용), 핸드아웃(터미널 열기·<code>cd</code>·권한 창 치트시트 1장)</li>
+<li><strong>성공 기준</strong>: 모든 학습자가 자기 노트북에서 <code>claude</code>를 켜고, 파일을 읽혀, 요약 결과를 최소 1회 받아 화면에 띄운다.</li>
+</ul>
+<h3 id="prompt-and-verify-좋은-요청과-결과-검증-함정-피하기"><code>prompt-and-verify</code>: 좋은 요청과 결과 검증 — 함정 피하기</h3>
+<ul>
+<li><strong>레벨 / 시간</strong>: L1 / 90분 (도입·시연 25분 — 실습 50분 — 공유·정리 15분)</li>
+<li><strong>선수 조건</strong>: <code>first-contact</code> 수료(Claude Code 실행·파일 읽히기 가능).</li>
+<li><strong>학습 목표</strong>: (1) 원하는 결과가 나오게 요청을 구성하고, (2) 첫 결과를 후속 프롬프트로 원하는 각도로 좁히며, (3) AI 결과의 두 함정 — 환각(없는 내용 지어내기)과 개인정보 노출 — 을 스스로 점검하는 습관을 만든다.</li>
+<li><strong>실습 설계</strong>:
+  1. 같은 샘플 리뷰로 "막연한 요청 vs 구체적 요청(형식·근거·금지 규칙 명시)"을 각각 돌려 결과 차이를 눈으로 비교.
+  2. "원문에 없는 건 지어내지 마 / 근거를 원문에서 인용해 / 애매하면 '분류 애매'로 빼" 같은 <strong>안전 규칙 문장</strong>을 프롬프트에 붙이는 연습.
+  3. AI가 인용한 문장 몇 개를 실제로 원본 파일에서 <code>Ctrl/Cmd+F</code>로 검색해 진짜 있는지 대조(환각 검증 체험).
+  4. 개인정보(이름·전화번호)가 섞인 샘플을 일부러 주고, 붙여넣기 전 익명화 → 결과에도 남지 않았는지 확인.</li>
+<li><strong>사용 사례 / 입력 데이터</strong>: <a href="cases/voc-mining.html"><code>voc-mining.md</code></a>의 "꼭 사람이 확인하세요"를 검증 실습의 교재로 사용. 입력은 M1과 동일 샘플 + 개인정보 포함 변형본(강사 배포).</li>
+<li><strong>제작할 자료</strong>: 실습가이드(비교 실습 + 검증 절차), 워크시트("내 프롬프트 뜯어보기" — 형식·근거·금지 규칙 3칸 채우기), 핸드아웃(환각·개인정보 검증 체크리스트 1장)</li>
+<li><strong>성공 기준</strong>: 학습자가 안전 규칙을 넣은 프롬프트를 작성하고, AI 인용 1건 이상을 원본에서 실제 대조해 "맞음/틀림"을 판정한다.</li>
+</ul>
+<h3 id="voc-in-practice-내-voc-데이터로-개선-기회-뽑기"><code>voc-in-practice</code>: 내 VoC 데이터로 개선 기회 뽑기</h3>
+<ul>
+<li><strong>레벨 / 시간</strong>: L2 / 90분 (도입·시연 25분 — 실습 50분 — 공유·정리 15분)</li>
+<li><strong>선수 조건</strong>: L1 2개 모듈 수료. <strong>자기 서비스의 실제 리뷰/CS 티켓(익명화)</strong> 지참 — 미지참자는 강사 배포 대체 데이터 사용(단, 산출물이 실무로 안 이어지므로 지참을 강력 권장).</li>
+<li><strong>학습 목표</strong>: 자기 서비스의 VoC를 주제별로 자동 분류하고, 대표 원문·건수·핵심 불편이 담긴 개선 기회 표를 <strong>자기 업무에 가져갈 초안</strong>으로 만든다.</li>
+<li><strong>실습 설계</strong>:
+  1. 지참한 리뷰/티켓을 <code>reviews.txt</code>로 폴더에 정리(엑셀 열 복사 붙여넣기 포함). 별점 열 포함 여부 확인.
+  2. <a href="cases/voc-mining.html"><code>voc-mining.md</code></a>의 2단계 복붙 프롬프트에서 <code>{중괄호}</code>만 자기 서비스로 바꿔 실행.
+  3. 주제별 표가 나오면 후속 프롬프트로 관심 주제 1개를 세부 유형으로 더 파기.
+  4. 결과를 <code>improvement.md</code>로 저장 → M2에서 배운 검증(인용 원문 대조·개인정보 잔존)까지 태우기.</li>
+<li><strong>사용 사례 / 입력 데이터</strong>: 주교재 <a href="cases/voc-mining.html"><code>voc-mining.md</code></a>. 입력은 학습자 자기 VoC(익명화).</li>
+<li><strong>제작할 자료</strong>: 실습가이드(사례 프롬프트를 자기 데이터에 적용하는 절차 + 별점 없는 경우 분기 안내), 워크시트("내 VoC 준비 체크리스트" — 데이터 출처·기간·익명화·별점 유무 기입란)</li>
+<li><strong>성공 기준</strong>: 학습자가 자기 VoC에서 주제별 개선 기회 표(대표 인용·건수 포함)를 파일로 저장하고, 인용 1건을 원본 대조로 검증한다.</li>
+</ul>
+<h3 id="research-to-persona-내-리서치에서-인사이트페르소나-만들기"><code>research-to-persona</code>: 내 리서치에서 인사이트·페르소나 만들기</h3>
+<ul>
+<li><strong>레벨 / 시간</strong>: L2 / 90분 (도입·시연 30분 — 실습 45분 — 공유·정리 15분)</li>
+<li><strong>선수 조건</strong>: L1 2개 모듈 수료 + <code>voc-in-practice</code> 권장(자기 데이터 다루기 흐름에 익숙해진 상태). <strong>자기 인터뷰 요약·설문 응답(익명화)</strong> 지참.</li>
+<li><strong>학습 목표</strong>: 자기 리서치 데이터를 어피니티 방식으로 종합하고, 그 결과를 페르소나 2종 + 저니맵 초안으로 잇는 <strong>두 사례를 연결한 워크플로우</strong>를 경험한다(L2 도달 기준 = 사례 2개 이상 재현).</li>
+<li><strong>실습 설계</strong>:
+  1. 인터뷰를 참가자별 파일(<code>P1.txt</code>…) 또는 한 파일(<code>research.txt</code>)로 정리(익명화 표기).
+  2. <a href="cases/research-synthesis.html"><code>research-synthesis.md</code></a> 프롬프트로 어피니티 그룹 + 핵심 인사이트 초안 생성 → <code>synthesis.md</code> 저장.
+  3. 그 결과를 입력으로 <a href="cases/persona-journey.html"><code>persona-journey.md</code></a> 프롬프트를 이어 실행해 페르소나 2종 + 저니맵 생성("한 사례의 출력이 다음 사례의 입력이 된다" 체감).
+  4. <strong>근거 대조 실습</strong>: 페르소나 각 칸의 <code>(P3)</code> 근거 번호를 원문에서 검색해 스테레오타입 누출(근거 없는 상상)을 잡아내기.</li>
+<li><strong>사용 사례 / 입력 데이터</strong>: 주교재 2편 <a href="cases/research-synthesis.html"><code>research-synthesis.md</code></a> → <a href="cases/persona-journey.html"><code>persona-journey.md</code></a>(연결). 입력은 학습자 자기 인터뷰/설문(익명화).</li>
+<li><strong>제작할 자료</strong>: 실습가이드(두 사례 연결 절차 — synthesis 출력을 persona 입력으로 넘기는 법), 워크시트("페르소나 근거 대조 시트" — 페르소나 항목별 근거 번호·원문 확인 여부 기입란)</li>
+<li><strong>성공 기준</strong>: 학습자가 자기 데이터로 종합본 + 페르소나 2종 + 저니맵을 만들고, 페르소나 1개 이상의 근거 번호를 원문 대조로 검증한다.</li>
+</ul>
+<h3 id="mvp-in-practice-내-아이디어를-클릭되는-시제품으로"><code>mvp-in-practice</code>: 내 아이디어를 클릭되는 시제품으로</h3>
+<ul>
+<li><strong>레벨 / 시간</strong>: L2 / 90분 (도입·시연 30분 — 실습 45분 — 공유·정리 15분)</li>
+<li><strong>선수 조건</strong>: L1 2개 모듈 수료. 검증하고 싶은 <strong>자기 서비스의 화면 흐름 아이디어</strong>(예: 온보딩, 특정 기능 플로우)를 머릿속/메모로 준비.</li>
+<li><strong>학습 목표</strong>: 백엔드·개발 없이, 사용성 테스트에 바로 쓸 수 있는 클릭 가능한 HTML MVP 초안을 자연어 요청만으로 만들어내고, 수정 요청으로 다듬는 법을 익힌다.</li>
+<li><strong>실습 설계</strong>:
+  1. 완성 예시 <code>mvp/onboarding-smoke/index.html</code>을 더블클릭해 먼저 "결과물이 이런 것"을 체험(환영→취향→홈→주문→완료 클릭 완주).
+  2. <a href="cases/mvp-prototype.html"><code>mvp-prototype.md</code></a> 프롬프트로 자기 아이디어의 화면 흐름을 3~4단계로 서술해 MVP 생성.
+  3. 브라우저에서 열어 클릭해 보고, "이 화면에 예상 픽업 시간 추가해줘" 식 자연어 수정 요청으로 다듬기.
+  4. "검증할 수 있는 것 / 없는 것"을 스스로 적어 사용성 테스트 범위를 정의(MVP는 완성품이 아니라 테스트 도구임을 명확히).</li>
+<li><strong>사용 사례 / 입력 데이터</strong>: 주교재 <a href="cases/mvp-prototype.html"><code>mvp-prototype.md</code></a> + 완성 예시 <code>mvp/onboarding-smoke/</code>. 입력은 학습자 자기 서비스 아이디어(데이터 불필요 — 사례 없이도 가능한 유일한 L2 모듈).</li>
+<li><strong>제작할 자료</strong>: 실습가이드(예시 체험→자기 아이디어 생성→수정 절차), 핸드아웃("MVP 수정 요청 문구 모음" — 화면 추가·요소 변경 자연어 예시 치트시트)</li>
+<li><strong>성공 기준</strong>: 학습자가 자기 아이디어의 화면 3개 이상을 클릭으로 오가는 HTML MVP를 만들어 브라우저에서 완주하고, 수정 요청 1건을 반영한다.</li>
+</ul>
+<h3 id="my-harness-반복-업무-하나를-나만의-ai-팀으로"><code>my-harness</code>: 반복 업무 하나를 나만의 AI 팀으로</h3>
+<ul>
+<li><strong>레벨 / 시간</strong>: L3 / 90분 + 과제(1~2주 뒤 산출물 리뷰)</li>
+<li><strong>선수 조건</strong>: L2 모듈 최소 2개 수료(사례 2개 이상을 자기 데이터로 재현해 본 상태). "매번 같은 방식으로 반복하는 내 업무"를 1개 지목할 수 있어야 함.</li>
+<li><strong>학습 목표</strong>: 매 라운드 반복되는 자기 업무 1개를, 역할이 나뉜 에이전트들이 순서대로 일하는 <strong>작은 팀(하네스)</strong> 설계로 옮긴다. "한 프롬프트로 다 끝내기"에서 "역할 분해 + 검증 단계"로 사고를 전환한다.</li>
+<li><strong>실습 설계</strong>:
+  1. (도입) 이 프로젝트의 <code>.claude/agents/</code>·<code>.claude/skills/</code> 구성을 실물로 열어 "역할 나뉜 AI 팀"이 실제로 어떻게 생겼는지 관찰.
+  2. 각 사례 말미 "한 걸음 더"의 역할 분해 예시(정리→분류→검증→리포트)를 참고해, 자기 반복 업무를 <strong>역할 3~5개로 쪼개는 캔버스</strong>를 채운다.
+  3. 그중 "검증 담당"(근거 대조·개인정보 점검)을 반드시 포함시키기 — 사람이 지겨워하지만 꼭 해야 하는 일을 팀에 태우는 것이 하네스의 핵심 이점.
+  4. (과제) 실제로 자기 반복 업무를 다음 라운드에 이 설계대로 한 번 돌려 보고, 결과를 1~2주 뒤 산출물 리뷰로 공유.</li>
+<li><strong>사용 사례 / 입력 데이터</strong>: 모든 사례의 "한 걸음 더" 섹션 + 이 프로젝트 하네스 구성(교보재). 입력은 학습자 자기 반복 업무 명세.</li>
+<li><strong>제작할 자료</strong>: 실습가이드(하네스 구성 관찰 + 역할 분해 절차), 워크시트("반복 업무 → 역할 분해 캔버스" — 업무명·반복 주기·역할별 담당·검증 단계 기입란), 슬라이드개요(하네스 개념·이 프로젝트 실물 예시 강사용)</li>
+<li><strong>성공 기준</strong>: 학습자가 자기 반복 업무 1개에 대해 역할 3~5개(검증 담당 포함)로 분해한 하네스 설계 캔버스를 완성한다. 과제: 실제 1회 실행 후 리뷰 제출.</li>
+</ul>
+<hr />
+<h2 id="효과-측정">효과 측정</h2>
+<ul>
+<li>평가는 시험이 아니라 <strong>산출물 리뷰</strong> — 각 모듈 성공 기준을 학습자가 만든 실물(자기 VoC 표·자기 페르소나·자기 MVP·자기 하네스 캔버스)로 확인.</li>
+<li>프로그램 종료 설문 3문항: ① 이번 주 실무에 쓸 것인가(의향) ② 가장 유용한 사례는(선호) ③ 막힌 지점은(개선 입력). ③은 하네스 진화(evolve)의 입력이 된다.</li>
+</ul></article>
+  <aside class="side"><div class="side-box toc"><h4>목차</h4><a href="#개요">개요</a><a href="#모듈-목록">모듈 목록</a><a href="#모듈별-명세">모듈별 명세</a><a href="#효과-측정">효과 측정</a></div></aside>
+</div>
+<footer><div class="wrap">
+  <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>
+  <div><a href="https://github.com/namojo/ux-edu">GitHub</a> · UX 인에이블먼트 하네스로 제작</div>
+</div></footer>
+<script src="assets/site.js"></script>
+</body>
+</html>
