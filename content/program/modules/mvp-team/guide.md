@@ -41,11 +41,14 @@
 - [ ] revfactory/harness 플러그인이 설치되어 있다(지난 모듈에서 설치 완료)
 - [ ] 오늘 화면으로 만들어 볼 내 서비스 아이디어가 있다 — 없으면 2단계에서 강사와 함께 예시를 변형해서 씁니다
 
-> 💡 **플러그인 설치가 기억 안 나요.** Claude Code 대화창에 `/plugin list`를 입력해 목록에 `harness`가 보이면 설치된 것입니다. 안 보이면 아래 두 줄을 순서대로 붙여넣으세요.
-> ```
-> /plugin marketplace add revfactory/harness
-> /plugin install harness@harness-marketplace
-> ```
+> 💡 **플러그인 설치가 기억 안 나요.** Claude Code 대화창에 `/plugin list`를 입력해 목록에 `harness`가 보이면 설치된 것입니다. 안 보이면 아래 두 줄을 **한 줄씩 순서대로** 붙여넣으세요.
+
+```
+/plugin marketplace add revfactory/harness
+```
+```
+/plugin install harness@harness-marketplace
+```
 
 **용어 먼저 정리**(오늘 계속 쓰는 말이니 여기서 한 번만 설명합니다)
 

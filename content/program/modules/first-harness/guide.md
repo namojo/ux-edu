@@ -19,11 +19,14 @@
 - [ ] Claude Code에게 파일을 하나 읽혀 요약을 받아 본 적이 있다
 - [ ] `/plugin install harness@harness-marketplace`로 하네스 플러그인 설치를 완료했다 (확인 방법: Claude Code 대화창에 `/plugin`을 입력해 설치된 목록에 harness가 있는지 확인. 확실치 않으면 아래 두 줄을 그냥 다시 실행해도 됩니다 — 이미 설치돼 있으면 별문제 없이 넘어갑니다)
 
-> 💡 **설치가 안 되어 있다면?** 아래 두 줄을 순서대로 입력하고 완료 메시지가 뜨는지 확인한 뒤 다음으로 넘어가세요.
-> ```
-> /plugin marketplace add revfactory/harness
-> /plugin install harness@harness-marketplace
-> ```
+> 💡 **설치가 안 되어 있다면?** 아래 두 줄을 **한 줄씩 순서대로** 입력하고, 각각 완료 메시지가 뜨는지 확인한 뒤 다음으로 넘어가세요.
+
+```
+/plugin marketplace add revfactory/harness
+```
+```
+/plugin install harness@harness-marketplace
+```
 
 ---
 

@@ -29,11 +29,14 @@
 - [ ] revfactory/harness 플러그인이 설치되어 있다 (`first-contact`에서 설치 완료했다면 별도 작업 불필요)
 - [ ] 지참한 리뷰/CS 티켓 파일이 준비되어 있다 (엑셀·구글시트·메모장 어디든 괜찮습니다)
 
-> 💡 **설치가 안 되어 있다면**: 대화창에 아래 두 줄을 차례로 입력하세요. (`first-contact`에서 이미 했다면 건너뜁니다)
-> ```
-> /plugin marketplace add revfactory/harness
-> /plugin install harness@harness-marketplace
-> ```
+> 💡 **설치가 안 되어 있다면**: 대화창에 아래 두 줄을 **한 줄씩 차례로** 입력하세요. (`first-contact`에서 이미 했다면 건너뜁니다)
+
+```
+/plugin marketplace add revfactory/harness
+```
+```
+/plugin install harness@harness-marketplace
+```
 
 ---
 

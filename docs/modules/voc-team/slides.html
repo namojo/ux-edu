@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>슬라이드 개요 (강사용) — `first-harness` — AI 하네스로 UX를 바꾸다</title>
+<meta name="description" content="VoC 분석 팀을 만들어 내 리뷰 돌리기 · 강사용 · 슬라이드 개요 (강사용) — `first-harness`">
+<meta property="og:title" content="슬라이드 개요 (강사용) — `first-harness` — AI 하네스로 UX를 바꾸다">
+<meta property="og:description" content="VoC 분석 팀을 만들어 내 리뷰 돌리기 · 강사용 · 슬라이드 개요 (강사용) — `first-harness`">
+<meta property="og:image" content="https://namojo.github.io/ux-edu/assets/img/hero.svg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect x=%2210%22 y=%2210%22 width=%2280%22 height=%2280%22 rx=%2218%22 fill=%22%23FFE455%22/%3E%3Ctext x=%2250%22 y=%2268%22 font-size=%2252%22 text-anchor=%22middle%22 font-family=%22monospace%22 fill=%22%2322242A%22%3E%E2%80%BA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=Gaegu:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+<header class="topnav"><div class="wrap"><a class="brand" href="../../index.html"><span class="dot"></span>UX × AI 하네스</a><nav><a href="../../index.html">홈</a><a href="../../curriculum.html">커리큘럼</a><a href="../../index.html#modules" aria-current=page>모듈</a><a href="../../index.html#cases">사례집</a><a href="../../instructor.html">운영 가이드</a></nav></div></header>
+
+<div class="wrap page-head">
+  <div class="eyebrow">VoC 분석 팀을 만들어 내 리뷰 돌리기 · 강사용</div>
+  <h1>슬라이드 개요 (강사용) — `first-harness`</h1>
+  <div class="meta"></div>
+</div>
+<div class="wrap layout">
+  <article class="prose"><p>도입·시연 25분 분량. 슬라이드 제목 + 말할 요점. 실습 50분·정리 15분은 <code>guide.md</code> 진행으로 대체(별도 슬라이드 불필요).</p>
+<hr />
+<h3 id="슬라이드-1-오늘의-한-문장">슬라이드 1 — 오늘의 한 문장</h3>
+<p><strong>제목</strong>: 오늘, 내 손으로 첫 팀을 만듭니다</p>
+<ul>
+<li>지난 시간(<code>first-contact</code>)엔 Claude Code에게 "이거 해줘"를 한 번씩 시켰다.</li>
+<li>오늘부터는 "이런 일을 하는 팀을 만들어줘"라고 말하면 팀이 만들어진다.</li>
+<li>이 경험이 오늘 하루, 그리고 이 교육 전체의 핵심이다 — "AI 도구를 쓰는 사람"이 아니라 "팀을 설계하는 사람"이 되는 첫걸음.</li>
+<li>오늘 끝에는 여러분 노트북에 실제로 작동하는 팀 하나가 남아 있다.</li>
+</ul>
+<hr />
+<h3 id="슬라이드-2-근거-왜-팀으로-시키면-더-나은가">슬라이드 2 — 근거: 왜 팀으로 시키면 더 나은가</h3>
+<p><strong>제목</strong>: 혼자 시키는 것 vs 팀에게 시키는 것</p>
+<ul>
+<li>A/B 비교 연구 인용(출처: revfactory/claude-code-harness, n=15, <strong>저자 측정·소표본</strong> — 참고용 수치임을 명시하고 시작): 결과물 품질 점수 49.5 → 79.3 (+60%), 결과의 들쭉날쭉함(분산) −32%.</li>
+<li>특히 작업이 복잡할수록(단계가 많을수록) 개선 폭이 커진다는 경향을 짚는다.</li>
+<li>말할 포인트: "이 숫자 자체를 외우라는 게 아니다. '역할을 나누고 검증 단계를 넣으면 결과가 더 안정적으로 좋아진다'는 방향성을 기억하면 된다."</li>
+</ul>
+<hr />
+<h3 id="슬라이드-3-하네스란-무엇인가">슬라이드 3 — 하네스란 무엇인가</h3>
+<p><strong>제목</strong>: 하네스 = 팀을 자동으로 만들어 주는 도구</p>
+<ul>
+<li>정의: Claude Code용 에이전트 팀 아키텍처 팩토리. 자연어로 도메인을 설명하면 전문 에이전트 팀(<code>.claude/agents/</code>)과 팀의 작업 방법(<code>.claude/skills/</code>)을 자동 생성.</li>
+<li>핵심 문장(칠판에 크게): <strong>"코드를 쓰는 게 아니라 팀을 말로 설계하고, 팀이 일한다."</strong></li>
+<li>지난 시간에 이미 설치를 완료했음을 확인하고 넘어간다(미완료자 있으면 이 자리에서 재설치).</li>
+</ul>
+<hr />
+<h3 id="슬라이드-4-하네스가-만드는-구조-미리보기">슬라이드 4 — 하네스가 만드는 구조 미리보기</h3>
+<p><strong>제목</strong>: 버튼을 누르면 이런 폴더가 생깁니다</p>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>내 작업 폴더/
+├── .claude/
+│   ├── agents/   ← 팀원 정의 (예: collector.md, classifier.md, verifier.md, reporter.md)
+│   └── skills/   ← 팀의 작업 방법 + 오케스트레이터(팀장 역할)
+</pre></div></div></div>
+<ul>
+<li>실제로 이 프로젝트의 <code>.claude/agents/</code> 폴더를 화면 공유로 열어 실물을 보여준다(가능하면).</li>
+<li>용어 두 개를 짚는다: 팀원(에이전트) / 오케스트레이터(트리거 문구로 부르는 팀장 역할).</li>
+<li>"구축은 1회, 실행은 반복" — 오늘 만든 팀은 오늘만 쓰고 버리는 게 아니라 앞으로 계속 재사용한다는 것을 강조.</li>
+</ul>
+<hr />
+<h3 id="슬라이드-5-오늘-만들-팀-미리보기-구성-프롬프트-해설">슬라이드 5 — 오늘 만들 팀 미리보기 + 구성 프롬프트 해설</h3>
+<p><strong>제목</strong>: 오늘 만들 팀: 리뷰 분석 팀</p>
+<ul>
+<li><a href="../../cases/voc-mining.html"><code>voc-mining.md</code></a> 팀 구성 프롬프트를 화면에 띄우고, 오늘 쓸 단순화 버전과 나란히 비교 설명 (CS 티켓·설문·분기 비교는 오늘 뺐다고 명시).</li>
+<li>프롬프트 3요소를 짚는다: <strong>무엇을 하는 팀인지 / 입력 / 원하는 산출물.</strong></li>
+<li>강사가 직접 트리거를 입력해 생성 과정을 라이브로 시연 — 화면에 파일이 하나씩 생기는 것을 보여주고, 대기 시간(수 분)이 정상임을 미리 예고해 둔다.</li>
+</ul>
+<hr />
+<h3 id="슬라이드-6-오늘의-핵심-검증-담당이-있는-팀">슬라이드 6 — 오늘의 핵심: 검증 담당이 있는 팀</h3>
+<p><strong>제목</strong>: 이 팀에는 "의심하는 팀원"이 따로 있다</p>
+<ul>
+<li>시연에서 생성된 <code>.claude/agents/</code>를 열어, verifier(검증 담당) 파일을 함께 읽는다.</li>
+<li>Producer-Reviewer 패턴 소개: 만드는 담당과 검증하는 담당을 구조적으로 분리.</li>
+<li>말할 포인트: "AI는 그럴듯한 인용문을 지어낼 수 있다(환각). 사람이 매번 다 확인하기는 어렵다. 그래서 팀 안에 확인 전담을 심어 둔다 — 오늘 이후 모든 실습에서 이 구조를 계속 확인하게 될 것이다."</li>
+</ul>
+<hr />
+<h3 id="슬라이드-7-프롬프트-한-번이냐-팀이냐">슬라이드 7 — "프롬프트 한 번이냐, 팀이냐"</h3>
+<p><strong>제목</strong>: 팀을 만드는 게 항상 정답은 아니다</p>
+<ul>
+<li>오남용 경고: 뭐든지 팀부터 만들려 하지 않도록, 오늘 판단 기준을 심어 둔다.</li>
+<li>판단 기준 3가지 제시: ① 반복성 ② 형식 고정 ③ 검증 필요 — 2개 이상이면 팀, 아니면 프롬프트 한 번.</li>
+<li><a href="../../cases/voc-mining.html"><code>voc-mining.md</code></a>의 "하네스가 과한 경우" 절을 화면에 띄워 함께 읽는다.</li>
+<li>실습에서 학습자가 직접 프롬프트 한 번 vs 팀 결과를 비교해 볼 것임을 예고.</li>
+</ul>
+<hr />
+<h3 id="슬라이드-8-다음-출발점-harness-100">슬라이드 8 — 다음 출발점: harness-100</h3>
+<p><strong>제목</strong>: 다음부터는 처음부터 만들지 않아도 됩니다</p>
+<ul>
+<li><a href="https://github.com/revfactory/harness-100">revfactory/harness-100</a>: 10개 도메인, 100개 팀 하네스 모음(한국어/영어 200패키지).</li>
+<li>오늘은 "직접 만드는 경험"이 목적이라 처음부터 구성했지만, 다음부터는 비슷한 팀을 설치해 고쳐 쓰는 방법도 있다는 것만 짧게 예고 (자세한 실습은 <code>mvp-team</code>·<code>design-my-harness</code>에서).</li>
+<li>실습(50분) 안내로 전환: 지금부터 <code>guide.md</code>를 따라 STEP 2부터 진행.</li>
+</ul></article>
+  <aside class="side"><div class="side-box"><h4>이 모듈의 자료</h4><a href="index.html">📘 실습 가이드</a><a href="worksheet.html">📝 워크시트</a><a href="handout.html">📄 핸드아웃</a><a href="slides.html">🎤 강사용 슬라이드 개요</a></div></aside>
+</div>
+<footer><div class="wrap">
+  <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>
+  <div><a href="https://github.com/namojo/ux-edu">GitHub</a> · UX 인에이블먼트 하네스로 제작</div>
+</div></footer>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

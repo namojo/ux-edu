@@ -87,6 +87,8 @@ def postprocess(body, root):
                 '<span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div>'
                 f'<div class="terminal-body"><pre>{code}</pre></div></div></div>')
     body = re.sub(r'<pre><code[^>]*>(.*?)</code></pre>', to_card, body, flags=re.S)
+    # 방어: 블록쿼트 등에서 펜스가 인라인 code로 붕괴된 경우(개행 포함 인라인 코드) → 줄바꿈 보존 블록 표시
+    body = re.sub(r'<code>([^<]*\n[^<]*)</code>', r'<code class="block">\1</code>', body)
     # ⚠️ 블록쿼트 → warn
     body = re.sub(r'<blockquote>(\s*<p>[^<]{0,12}(?:⚠️|주의:|개인정보 주의))',
                   r'<blockquote class="warn">\1', body)

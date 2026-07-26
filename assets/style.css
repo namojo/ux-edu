@@ -251,6 +251,11 @@ aside.side { position: sticky; top: 84px; align-self: start; font-size: 14px; }
   background: var(--paper-deep); border: 1px solid var(--line);
   border-radius: 5px; padding: 1px 6px;
 }
+/* 개행이 있는 코드(붕괴된 펜스 방어) — 줄바꿈 보존 블록 표시 */
+.prose code.block {
+  display: block; white-space: pre-wrap; word-break: break-word;
+  padding: 10px 14px; margin: 8px 0; border-radius: 8px;
+}
 
 /* 프롬프트 블록 = 친근한 터미널 카드 */
 .prose .prompt-card { margin: 20px 0; }
