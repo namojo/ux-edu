@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
-<header class="topnav"><div class="wrap"><a class="brand" href="../../index.html"><span class="dot"></span>UX × AI 하네스</a><nav><a href="../../index.html">홈</a><a href="../../curriculum.html">커리큘럼</a><a href="../../index.html#modules" aria-current=page>모듈</a><a href="../../index.html#cases">사례집</a><a href="../../instructor.html">운영 가이드</a></nav></div></header>
+<header class="topnav"><div class="wrap"><a class="brand" href="../../index.html"><span class="dot"></span>UX × AI 하네스</a><nav><a href="../../index.html">홈</a><a href="../../curriculum.html">커리큘럼</a><a href="../../index.html#modules" aria-current=page>모듈</a><a href="../../index.html#cases">사례집</a><a href="../../setup.html">설치</a></nav></div></header>
 
 <div class="wrap page-head">
   <div class="eyebrow">모듈 5 · 실습 가이드</div>
@@ -32,7 +32,7 @@
 <tbody>
 <tr>
 <td>레벨 / 시간</td>
-<td>L2 / 90분 (도입·시연 30분 — 실습 45분 — 공유·정리 15분)</td>
+<td>L2 / 90분 (도입·예시 30분 — 실습 45분 — 공유·정리 15분)</td>
 </tr>
 <tr>
 <td>선수 조건</td>
@@ -77,7 +77,7 @@
 <tr>
 <td>1</td>
 <td>15분</td>
-<td>완성 예시 체험 + 오늘 만들 팀 미리보기 (도입·시연)</td>
+<td>완성 예시 체험 + 오늘 만들 팀 미리보기 (도입·예시)</td>
 </tr>
 <tr>
 <td>2</td>
@@ -117,7 +117,7 @@
 <ul>
 <li>[ ] <code>first-contact</code>·<code>first-harness</code> 모듈에서 Claude Code를 켜 봤고, <code>하네스 구성해줘</code>로 팀을 한 번 만들어 봤다</li>
 <li>[ ] revfactory/harness 플러그인이 설치되어 있다(지난 모듈에서 설치 완료)</li>
-<li>[ ] 오늘 화면으로 만들어 볼 내 서비스 아이디어가 있다 — 없으면 2단계에서 강사와 함께 예시를 변형해서 씁니다</li>
+<li>[ ] 오늘 화면으로 만들어 볼 내 서비스 아이디어가 있다 — 없으면 2단계에서 완성 예시를 변형해서 씁니다</li>
 </ul>
 <blockquote>
 <p>💡 <strong>플러그인 설치가 기억 안 나요.</strong> Claude Code 대화창에 <code>/plugin list</code>를 입력해 목록에 <code>harness</code>가 보이면 설치된 것입니다. 안 보이면 <code>first-contact</code> 실습 가이드의 <strong>하네스 설치</strong> 단계를 따라 하세요 — 전체 교육에서 처음 한 번만 하면 됩니다.</p>
@@ -137,7 +137,7 @@
 <h2 id="1단계-완성-예시-먼저-체험하기-15분">1단계 — 완성 예시 먼저 체험하기 (15분)</h2>
 <p>오늘 팀이 무엇을 만들어 주는지, 완성품을 먼저 눌러봅니다.</p>
 <ol>
-<li>강사가 나눠준 폴더(또는 프로젝트) 안에서 <code>mvp/onboarding-smoke/index.html</code> 파일을 찾습니다.</li>
+<li>함께 제공되는 폴더(또는 프로젝트) 안에서 <code>mvp/onboarding-smoke/index.html</code> 파일을 찾습니다.</li>
 <li><strong>더블클릭</strong>합니다 — 설치나 인터넷 연결 없이 기본 브라우저에서 바로 열립니다.</li>
 <li>아래 순서로 클릭하며 끝까지 완주해 보세요.</li>
 </ol>
@@ -219,7 +219,7 @@
    - 화면3(예: 확인): 무엇을 요약해서 보여주나
    - 화면4(예: 완료): 완료 메시지, 다음 행동 버튼
    목표 사용자: {누구}. 톤: {깔끔하고 신뢰감 있게 등}.</code>
-3. 아이디어가 아직 안 떠오르면, 강사와 함께 <code>mvp/onboarding-smoke/</code>가 검증한 온보딩 흐름을 자기 서비스로 바꿔 적어도 됩니다.</p>
+3. 아이디어가 아직 안 떠오르면, <code>mvp/onboarding-smoke/</code>가 검증한 온보딩 흐름을 자기 서비스로 바꿔 적어도 됩니다.</p>
 <h3 id="2-2-폴더에서-claude-code-열기">2-2. 폴더에서 Claude Code 열기</h3>
 <p><code>first-contact</code>에서 했던 것과 같습니다.
 - <strong>macOS</strong>: Spotlight(⌘+Space)에 <code>terminal</code>을 입력해 터미널을 엽니다 → 창에 <code>cd</code>를 입력하고 한 칸 띄운 뒤, 만든 폴더를 터미널 창 안으로 드래그하면 경로가 자동 입력됩니다 → Enter → <code>claude</code> 입력 후 Enter. (Finder 우클릭 → "폴더에서 새로운 터미널 열기" 메뉴가 보인다면 그걸 써도 되지만, 이 메뉴는 기본값으로 꺼져 있는 Mac이 많습니다 — 안 보여도 정상이니 위 Spotlight 방법을 쓰세요.)
@@ -334,7 +334,7 @@
 <hr />
 <h2 id="정리공유-15분">정리·공유 (15분)</h2>
 <ul>
-<li>옆 사람과 서로 <code>index.html</code>을 열어 보여주며 처음부터 끝까지 클릭해 완주시켜 주세요.</li>
+<li>내가 만든 <code>index.html</code>을 처음부터 끝까지 클릭해 완주해 보세요. 그룹 스터디로 진행 중이라면 서로 열어 보여주며 완주시켜 줘도 좋습니다.</li>
 <li>오늘 가져가는 것 체크</li>
 <li>[ ] 화면 3개 이상을 클릭으로 오가는 HTML MVP</li>
 <li>[ ] <code>report/ux-review.md</code> 검수 리포트</li>

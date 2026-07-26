@@ -117,7 +117,7 @@ def postprocess(body, root):
 def nav(root, current):
     items = [("index", "홈", "index.html"), ("curriculum", "커리큘럼", "curriculum.html"),
              ("modules", "모듈", "index.html#modules"), ("cases", "사례집", "index.html#cases"),
-             ("instructor", "운영 가이드", "instructor.html")]
+             ("setup", "설치", "setup.html")]
     links = "".join(
         f'<a href="{root}{href}"{" aria-current=page" if key == current else ""}>{label}</a>'
         for key, label, href in items)
@@ -207,7 +207,6 @@ def build_modules():
         mats = []
         if "worksheet.md" in files: mats.append(('worksheet.html', '📝 워크시트'))
         if "handout.md" in files or "handout.html" in files: mats.append(('handout.html', '📄 핸드아웃'))
-        if "slides-outline.md" in files: mats.append(('slides.html', '🎤 강사용 슬라이드 개요'))
         if "sample-reviews.txt" in files: mats.append(('sample-reviews.txt', '💾 샘플 데이터'))
         matbox = ('<div class="side-box"><h4>이 모듈의 자료</h4>'
                   + f'<a href="index.html" class="on">📘 실습 가이드</a>'
@@ -240,10 +239,6 @@ def build_modules():
                          side_extra=sub_side)
         elif "handout.html" in files:
             shutil.copy(os.path.join(srcdir, "handout.html"), os.path.join(SITE, f"modules/{slug}/handout.html"))
-        if "slides-outline.md" in files:
-            content_page(os.path.join(srcdir, "slides-outline.md"), f"modules/{slug}/slides.html",
-                         root="../../", current="modules", eyebrow=f"{m['title']} · 강사용",
-                         side_extra=sub_side)
         if "sample-reviews.txt" in files:
             shutil.copy(os.path.join(srcdir, "sample-reviews.txt"), os.path.join(SITE, f"modules/{slug}/sample-reviews.txt"))
 
@@ -370,10 +365,10 @@ def build_index():
 </div></section>
 
 <section class="block alt"><div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:22px" id="extra">
-  <a class="module-row" href="instructor.html" style="align-items:center">
-    <span style="font-size:28px">🎓</span>
-    <span><h3>운영 가이드 (강사·주최자용)</h3>
-    <p>준비 체크리스트, 인원·TA 구성, 효과 측정 방법.</p></span>
+  <a class="module-row" href="setup.html" style="align-items:center">
+    <span style="font-size:28px">⚙️</span>
+    <span><h3>하네스 설치 (처음 한 번만)</h3>
+    <p>모든 사례·모듈의 공통 준비물 — 2분이면 끝납니다.</p></span>
   </a>
   <a class="module-row" href="curriculum.html" style="align-items:center">
     <span style="font-size:28px">🧭</span>
@@ -388,16 +383,13 @@ def build_index():
 
 def build_setup():
     content_page(os.path.join(CONTENT, "usecases", "setup.md"), "setup.html",
-                 root="", current="cases", eyebrow="시작하기 · 처음 한 번만",
+                 root="", current="setup", eyebrow="시작하기 · 처음 한 번만",
                  meta_html='<span class="badge l1">약 2분</span><span>설치는 전체 사례집·교육에서 딱 한 번입니다</span>')
 
 def build_top_pages():
     content_page(os.path.join(CONTENT, "program", "curriculum.md"), "curriculum.html",
                  root="", current="curriculum", eyebrow="교육 설계서",
                  meta_html='<span class="badge l1">L1</span><span class="badge l2">L2</span><span class="badge l3">L3</span><span>반나절 × 3회 시리즈</span>')
-    content_page(os.path.join(CONTENT, "program", "README.md"), "instructor.html",
-                 root="", current="instructor", eyebrow="강사·주최자용",
-                 meta_html='<span>운영 준비 · 체크리스트 · 효과 측정</span>')
 
 def main():
     if os.path.exists(SITE):

@@ -11,30 +11,30 @@
 
 ---
 
-## 교육 프로그램 (반나절 워크샵 × 3회, 6개 모듈)
+## 교육 프로그램 (3단계 × 6개 모듈, 자가 학습)
 
-각 모듈 90분(도입 ≤30분 / 실습 ≥45분 / 정리 15분). 상세 설계는 [교육 설계서](content/program/curriculum.md) 참조.
+각 모듈 약 90분, 혼자 화면만 보고 따라가는 자가 학습 기준(그룹 스터디 운영도 가능). 상세 설계는 [교육 설계서](content/program/curriculum.md) 참조.
 
-### 1회차 — L1 · 첫 대화, 첫 하네스
+### 1단계 — L1 · 첫 대화, 첫 하네스
 
 | 모듈 | 학습 목표 | 제공 자료 |
 |------|----------|----------|
-| **01. Claude Code 열고 하네스 설치까지** | Claude Code를 켜 파일을 다루고, `/plugin marketplace add revfactory/harness` → `/plugin install harness@harness-marketplace`로 하네스 플러그인을 설치한다 | [실습 가이드](content/program/modules/first-contact/guide.md) · [핸드아웃](content/program/modules/first-contact/handout.md) · [강사용 슬라이드](content/program/modules/first-contact/slides-outline.md) · [샘플 데이터](content/program/modules/first-contact/sample-reviews.txt) |
-| **02. 하네스 구성해줘 — 내 손으로 만든 첫 팀** | 자연어 한 문단으로 첫 미니 VoC 팀을 구성·실행하고, 팀에 검증 담당이 있는 구조(Producer-Reviewer)를 이해한다. **첫날 안에 "내가 팀을 만들었다"에 도달** | [실습 가이드](content/program/modules/first-harness/guide.md) · [핸드아웃](content/program/modules/first-harness/handout.md) · [강사용 슬라이드](content/program/modules/first-harness/slides-outline.md) |
+| **01. Claude Code 열고 하네스 설치까지** | Claude Code를 켜 파일을 다루고, `/plugin marketplace add revfactory/harness` → `/plugin install harness@harness-marketplace`로 하네스 플러그인을 설치한다 | [실습 가이드](content/program/modules/first-contact/guide.md) · [핸드아웃](content/program/modules/first-contact/handout.md) · [샘플 데이터](content/program/modules/first-contact/sample-reviews.txt) |
+| **02. 하네스 구성해줘 — 내 손으로 만든 첫 팀** | 자연어 한 문단으로 첫 미니 VoC 팀을 구성·실행하고, 팀에 검증 담당이 있는 구조(Producer-Reviewer)를 이해한다. **첫날 안에 "내가 팀을 만들었다"에 도달** | [실습 가이드](content/program/modules/first-harness/guide.md) · [핸드아웃](content/program/modules/first-harness/handout.md) |
 
-### 2회차 — L2 · 내 업무를 팀에게
+### 2단계 — L2 · 내 업무를 팀에게
 
 | 모듈 | 학습 목표 | 제공 자료 |
 |------|----------|----------|
 | **03. VoC 분석 팀을 만들어 내 리뷰 돌리기** | 자기 서비스의 리뷰·CS 티켓·설문으로 VoC 분석 팀(수집→분류→검증→리포트 Pipeline)을 구성·실행하고, 검증 담당의 결과를 사람이 최종 확인한다 | [실습 가이드](content/program/modules/voc-team/guide.md) · [워크시트](content/program/modules/voc-team/worksheet.md) |
 | **04. 리서치 종합 팀 → 페르소나 팀 잇기** | 두 하네스를 연결해 자기 인터뷰 데이터에서 근거(참가자 번호)가 달린 페르소나·저니맵 초안까지 만든다 | [실습 가이드](content/program/modules/research-persona-team/guide.md) · [워크시트](content/program/modules/research-persona-team/worksheet.md) |
 
-### 3회차 — L2+L3 · 시제품, 그리고 팀 설계자
+### 3단계 — L2+L3 · 시제품, 그리고 팀 설계자
 
 | 모듈 | 학습 목표 | 제공 자료 |
 |------|----------|----------|
 | **05. MVP 팀으로 클릭되는 시제품 만들기** | 구현자+검수자 팀을 구성해 자기 아이디어를 클릭 가능한 HTML MVP로 만든다 ([완성 예시](content/mvp-example/) 체험 포함) | [실습 가이드](content/program/modules/mvp-team/guide.md) · [핸드아웃](content/program/modules/mvp-team/handout.md) |
-| **06. 내 반복 업무를 팀 구조로 직접 설계·진화** | "반복 업무 → 역할 분해 캔버스"로 자기 업무를 팀 구조(역할·검증 단계·트리거)로 설계해 구성하고, "하네스 회고" 피드백으로 진화시킨다. [harness-100](https://github.com/revfactory/harness-100)을 출발점 대안으로 소개 | [실습 가이드](content/program/modules/design-my-harness/guide.md) · [워크시트: 역할 분해 캔버스](content/program/modules/design-my-harness/worksheet.md) · [강사용 슬라이드](content/program/modules/design-my-harness/slides-outline.md) |
+| **06. 내 반복 업무를 팀 구조로 직접 설계·진화** | "반복 업무 → 역할 분해 캔버스"로 자기 업무를 팀 구조(역할·검증 단계·트리거)로 설계해 구성하고, "하네스 회고" 피드백으로 진화시킨다. [harness-100](https://github.com/revfactory/harness-100)을 출발점 대안으로 소개 | [실습 가이드](content/program/modules/design-my-harness/guide.md) · [워크시트: 역할 분해 캔버스](content/program/modules/design-my-harness/worksheet.md) |
 
 ## 사례집 — 바로 구성할 수 있는 10개의 팀
 
@@ -71,7 +71,7 @@
 
 ```
 content/
-  program/     교육 설계서 + 모듈 6개 자료 (가이드·워크시트·핸드아웃·슬라이드 개요)
+  program/     교육 설계서 + 모듈 6개 자료 (실습 가이드·워크시트·핸드아웃)
   usecases/    하네스 활용 사례집 10편
   mvp-example/ 완성 MVP 시제품
 assets/        디자인 시스템 (CSS/JS/SVG 일러스트)

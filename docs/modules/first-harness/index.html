@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
-<header class="topnav"><div class="wrap"><a class="brand" href="../../index.html"><span class="dot"></span>UX × AI 하네스</a><nav><a href="../../index.html">홈</a><a href="../../curriculum.html">커리큘럼</a><a href="../../index.html#modules" aria-current=page>모듈</a><a href="../../index.html#cases">사례집</a><a href="../../instructor.html">운영 가이드</a></nav></div></header>
+<header class="topnav"><div class="wrap"><a class="brand" href="../../index.html"><span class="dot"></span>UX × AI 하네스</a><nav><a href="../../index.html">홈</a><a href="../../curriculum.html">커리큘럼</a><a href="../../index.html#modules" aria-current=page>모듈</a><a href="../../index.html#cases">사례집</a><a href="../../setup.html">설치</a></nav></div></header>
 
 <div class="wrap page-head">
   <div class="eyebrow">모듈 2 · 실습 가이드</div>
@@ -36,7 +36,7 @@
 </tr>
 <tr>
 <td>시간 배분</td>
-<td>도입·시연 25분 — <strong>실습 50분</strong> — 공유·정리 15분</td>
+<td>도입·예시 25분 — <strong>실습 50분</strong> — 공유·정리 15분</td>
 </tr>
 <tr>
 <td>선수 조건</td>
@@ -48,7 +48,7 @@
 </tr>
 </tbody>
 </table>
-<p>이 가이드는 강사 없이 화면만 보고도 따라 할 수 있도록 "화면에 무엇이 보이는지" 기준으로 적었습니다. 순서대로 따라오세요.</p>
+<p>이 가이드는 혼자 화면만 보고도 따라 할 수 있도록 "화면에 무엇이 보이는지" 기준으로 적었습니다. 순서대로 따라오세요.</p>
 <hr />
 <h2 id="시작-전-확인-30초-체크">시작 전 확인 (30초 체크)</h2>
 <p>아래 3가지가 안 되어 있으면 오늘 실습을 진행할 수 없습니다. <code>first-contact</code> 모듈을 먼저 완료하세요.</p>
@@ -61,9 +61,9 @@
 <p>💡 <strong>설치가 안 되어 있다면?</strong> 설치가 안 되어 있다면 <code>first-contact</code> 실습 가이드의 <strong>하네스 설치</strong> 단계를 따라 하세요 — 전체 교육에서 처음 한 번만 하면 됩니다. 설치 확인: 대화창에 <code>/plugin</code>을 입력해 목록에 <code>harness</code>가 보이면 준비 완료.</p>
 </blockquote>
 <hr />
-<h2 id="step-1-오늘-무엇이-다른가-5분-강사-시연-함께-보기">STEP 1. 오늘 무엇이 다른가 (5분, 강사 시연 함께 보기)</h2>
+<h2 id="step-1-오늘-무엇이-다른가-5분-먼저-훑어보기">STEP 1. 오늘 무엇이 다른가 (5분, 먼저 훑어보기)</h2>
 <p>지금까지는 Claude Code에게 "이거 해줘"를 한 번씩 시켰습니다. 오늘부터는 다릅니다 — <strong>"이런 일을 하는 팀을 만들어줘"라고 말하면, 여러 명의 담당(에이전트)으로 나뉜 팀이 자동으로 만들어집니다.</strong> 이것이 <strong>하네스</strong>(harness — 에이전트 팀 아키텍처를 자동으로 만들어 주는 도구)입니다.</p>
-<p>강사가 화면으로 보여주는 것:
+<p>다음을 먼저 확인하세요:
 - A/B 비교 근거 데이터: 하네스로 만든 팀이 낸 결과물 품질 점수 <strong>49.5 → 79.3 (+60%)</strong>, 결과의 들쭉날쭉함(분산) <strong>−32%</strong> (저자 측정, n=15 소표본 — 참고용 수치입니다)
 - 하네스가 만들어 내는 폴더 구조 미리보기:</p>
 <div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>내 작업 폴더/
@@ -113,7 +113,7 @@
 <code>verifier</code>, <code>reviewer</code>, <code>qa</code>, <code>validator</code>처럼 이름이 다르게 나올 수도 있고, 아예 별도 파일이 아니라 다른 팀원 역할 설명 안에 검증 업무가 녹아 있을 수도 있습니다. 이럴 땐 순서대로 해보세요.
 1. <code>.claude/agents/</code> 안의 파일을 하나씩 열어, 맨 위 역할 설명에서 "검증", "확인", "대조", "사실 확인" 같은 말이 있는지 찾습니다.
 2. 그래도 안 보이면 <code>.claude/skills/</code> 폴더를 열어 검증 관련 스킬이 있는지 봅니다(팀원이 아니라 스킬 안에 검증 단계가 들어 있는 구조일 수 있습니다).
-3. 그래도 못 찾겠으면 강사(TA)를 불러 함께 확인합니다.
+3. 그래도 못 찾겠으면 Claude Code 대화창에 "우리 팀에 검증 담당이 있는지 확인해줘"라고 물어보세요. 그래도 확실하지 않으면 사내 헬프 채널에 문의하세요.
 오늘 확인해야 하는 것은 "파일 하나를 콕 집는 것"이 아니라 <strong>이 팀 안에 검증 역할이 존재한다는 것 자체</strong>입니다.</p>
 <p>💡 <strong>오늘 가장 중요하게 짚을 것</strong>: 이 팀에는 결과를 만드는 팀원만 있는 게 아니라, <strong>결과를 의심하고 확인하는 역할(검증 담당)이 따로 있습니다.</strong> 이것을 <strong>Producer-Reviewer 패턴</strong>(생성 담당-검증 담당을 분리하는 팀 구조)이라고 부릅니다. AI는 그럴듯한 인용문을 지어내거나(환각) 실수를 눈치채지 못할 수 있는데, 검증 담당을 팀에 따로 두면 이 위험을 구조적으로 줄일 수 있습니다. 오늘부터 이후 모든 실습에서 "이 팀에 검증 담당이 있는가"를 계속 확인하게 될 것입니다.</p>
 <p>💡 <strong>팀원 이름이나 개수가 예시와 달라도 정상입니다</strong>
@@ -153,10 +153,10 @@
 3. <strong>검증 필요</strong>: 인용·수치·개인정보처럼 사람이 매번 확인해야 하는 위험이 있는가</p>
 <p>자세한 기준과 사례는 <a href="../../cases/voc-mining.html"><code>voc-mining.md</code></a>의 <strong>"하네스가 과한 경우"</strong> 절을 참고하세요 — "이번 한 번만 훑어보면 되는 상황이면 팀을 만들 필요가 없다"고 명확히 설명하고 있습니다.</p>
 </blockquote>
-<p>강사가 이어서 <strong>harness-100</strong>(<a href="https://github.com/revfactory/harness-100">revfactory/harness-100</a>, 미리 만들어진 100개 팀 하네스 모음)을 짧게 소개합니다 — 앞으로는 매번 처음부터 만들지 않고, 비슷한 팀을 설치해 고쳐 쓰는 방법도 있습니다. 이 내용은 <code>mvp-team</code>·<code>design-my-harness</code> 모듈에서 다시 다룹니다.</p>
+<p><strong>harness-100</strong>(<a href="https://github.com/revfactory/harness-100">revfactory/harness-100</a>, 미리 만들어진 100개 팀 하네스 모음)도 짧게 살펴보세요 — 앞으로는 매번 처음부터 만들지 않고, 비슷한 팀을 설치해 고쳐 쓰는 방법도 있습니다. 이 내용은 <code>mvp-team</code>·<code>design-my-harness</code> 모듈에서 다시 다룹니다.</p>
 <hr />
 <h2 id="공유정리-15분">공유·정리 (15분)</h2>
-<p>옆 사람과 화면을 맞대고 서로의 <code>.claude/agents/</code> 폴더에서 검증 담당 이름을 하나씩 짚어 소개해 보세요.</p>
+<p>내 <code>.claude/agents/</code> 폴더를 다시 열어, 검증 담당 이름과 역할을 한 줄로 스스로 요약해 보세요. 그룹 스터디로 진행 중이라면 서로의 폴더를 보여주며 소개해도 좋습니다.</p>
 <p><strong>오늘의 성공 기준 (아래 4가지를 모두 했다면 완료입니다)</strong></p>
 <ul>
 <li>[ ] <code>하네스 구성해줘</code>로 팀을 1개 만들었다</li>
@@ -164,8 +164,8 @@
 <li>[ ] 오케스트레이터 트리거 문구로 팀을 실행해 첫 결과물(리포트 파일)을 화면에 띄웠다</li>
 <li>[ ] 같은 데이터에 프롬프트 한 번을 던져 보고 팀의 결과와 비교했다</li>
 </ul>
-<p>다음 시간(<code>voc-team</code>)부터는 오늘 만든 것과 같은 구조의 팀을, <strong>여러분이 직접 가져온 실제 리뷰/CS 데이터</strong>로 만들어 돌립니다. 다음 회차 전까지 자기 서비스의 리뷰나 CS 티켓을 익명화해서 준비해 오세요.</p><div class="pager"><a href="../first-contact/index.html"><span class="dir">← 이전 모듈</span><b>Claude Code 열고 하네스 설치까지</b></a><a class="next" href="../voc-team/index.html"><span class="dir">다음 모듈 →</span><b>VoC 분석 팀을 만들어 내 리뷰 돌리기</b></a></div></article>
-  <aside class="side"><div class="side-box"><h4>이 모듈의 자료</h4><a href="index.html" class="on">📘 실습 가이드</a><a href="handout.html">📄 핸드아웃</a><a href="slides.html">🎤 강사용 슬라이드 개요</a><a href="sample-reviews.txt">💾 샘플 데이터</a></div><div class="side-box toc"><h4>목차</h4><a href="#시작-전-확인-30초-체크">시작 전 확인 (30초 체크)</a><a href="#step-1-오늘-무엇이-다른가-5분-강사-시연-함께-보기">STEP 1. 오늘 무엇이 다른가 (5분, 강사 시연 함께 보기)</a><a href="#step-2-오늘-쓸-데이터-준비-2분">STEP 2. 오늘 쓸 데이터 준비 (2분)</a><a href="#step-3-하네스-구성해줘-팀-만들기-10분">STEP 3. &quot;하네스 구성해줘&quot; — 팀 만들기 (10분)</a><a href="#step-4-만들어진-팀-확인하기-검증-담당-찾기-8분">STEP 4. 만들어진 팀 확인하기 — 검증 담당 찾기 (8분)</a><a href="#step-5-팀-실행해서-첫-결과물-받기-12분">STEP 5. 팀 실행해서 첫 결과물 받기 (12분)</a><a href="#step-6-프롬프트-한-번이냐-팀이냐-판단해-보기-10분">STEP 6. &quot;프롬프트 한 번이냐, 팀이냐&quot; 판단해 보기 (10분)</a><a href="#공유정리-15분">공유·정리 (15분)</a></div></aside>
+<p>다음 모듈(<code>voc-team</code>)부터는 오늘 만든 것과 같은 구조의 팀을, <strong>여러분이 직접 가져온 실제 리뷰/CS 데이터</strong>로 만들어 돌립니다. 다음 모듈을 시작하기 전에 자기 서비스의 리뷰나 CS 티켓을 익명화해서 준비하세요.</p><div class="pager"><a href="../first-contact/index.html"><span class="dir">← 이전 모듈</span><b>Claude Code 열고 하네스 설치까지</b></a><a class="next" href="../voc-team/index.html"><span class="dir">다음 모듈 →</span><b>VoC 분석 팀을 만들어 내 리뷰 돌리기</b></a></div></article>
+  <aside class="side"><div class="side-box"><h4>이 모듈의 자료</h4><a href="index.html" class="on">📘 실습 가이드</a><a href="handout.html">📄 핸드아웃</a><a href="sample-reviews.txt">💾 샘플 데이터</a></div><div class="side-box toc"><h4>목차</h4><a href="#시작-전-확인-30초-체크">시작 전 확인 (30초 체크)</a><a href="#step-1-오늘-무엇이-다른가-5분-먼저-훑어보기">STEP 1. 오늘 무엇이 다른가 (5분, 먼저 훑어보기)</a><a href="#step-2-오늘-쓸-데이터-준비-2분">STEP 2. 오늘 쓸 데이터 준비 (2분)</a><a href="#step-3-하네스-구성해줘-팀-만들기-10분">STEP 3. &quot;하네스 구성해줘&quot; — 팀 만들기 (10분)</a><a href="#step-4-만들어진-팀-확인하기-검증-담당-찾기-8분">STEP 4. 만들어진 팀 확인하기 — 검증 담당 찾기 (8분)</a><a href="#step-5-팀-실행해서-첫-결과물-받기-12분">STEP 5. 팀 실행해서 첫 결과물 받기 (12분)</a><a href="#step-6-프롬프트-한-번이냐-팀이냐-판단해-보기-10분">STEP 6. &quot;프롬프트 한 번이냐, 팀이냐&quot; 판단해 보기 (10분)</a><a href="#공유정리-15분">공유·정리 (15분)</a></div></aside>
 </div>
 <footer><div class="wrap">
   <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>
