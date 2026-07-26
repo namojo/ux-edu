@@ -3,15 +3,16 @@
   // 1) 히어로 타이핑 데모 — 교육의 약속을 3초로 보여준다
   var demo = document.getElementById("typing-demo");
   if (demo) {
-    var promptText = "reviews.txt 읽고 자주 나오는 불만을 표로 정리해줘";
+    var promptText = "하네스 구성해줘: 앱 리뷰를 분석하는 VoC 팀이 필요해";
     var replyLines = [
-      "reviews.txt (리뷰 120건)를 읽었습니다.",
+      "VoC 분석 팀을 구성했습니다.",
       "",
-      "| 순위 | 주제           | 건수 |",
-      "|------|----------------|------|",
-      "| 1    | 결제·쿠폰 오류 | 34건 |",
-      "| 2    | 배송 지연      | 27건 |",
-      "| 3    | 로그인 불편    | 19건 |",
+      "  collector  리뷰 수집·정리",
+      "  analyst    주제 분류",
+      "  verifier   인용·개인정보 검증",
+      "  reporter   분기 리포트 작성",
+      "",
+      "실행하려면: \"VoC 분석 실행해줘\"",
     ];
     var inEl = demo.querySelector(".in");
     var outEl = demo.querySelector(".out");

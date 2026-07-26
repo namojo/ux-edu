@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>첫 하네스 치트시트 — `first-harness` — AI 하네스로 UX를 바꾸다</title>
+<meta name="description" content="하네스 구성해줘 — 내 손으로 만든 첫 팀 · 핸드아웃 · 첫 하네스 치트시트 — `first-harness`">
+<meta property="og:title" content="첫 하네스 치트시트 — `first-harness` — AI 하네스로 UX를 바꾸다">
+<meta property="og:description" content="하네스 구성해줘 — 내 손으로 만든 첫 팀 · 핸드아웃 · 첫 하네스 치트시트 — `first-harness`">
+<meta property="og:image" content="https://namojo.github.io/ux-edu/assets/img/hero.svg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect x=%2210%22 y=%2210%22 width=%2280%22 height=%2280%22 rx=%2218%22 fill=%22%23FFE455%22/%3E%3Ctext x=%2250%22 y=%2268%22 font-size=%2252%22 text-anchor=%22middle%22 font-family=%22monospace%22 fill=%22%2322242A%22%3E%E2%80%BA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=Gaegu:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+<header class="topnav"><div class="wrap"><a class="brand" href="../../index.html"><span class="dot"></span>UX × AI 하네스</a><nav><a href="../../index.html">홈</a><a href="../../curriculum.html">커리큘럼</a><a href="../../index.html#modules" aria-current=page>모듈</a><a href="../../index.html#cases">사례집</a><a href="../../instructor.html">운영 가이드</a></nav></div></header>
+
+<div class="wrap page-head">
+  <div class="eyebrow">하네스 구성해줘 — 내 손으로 만든 첫 팀 · 핸드아웃</div>
+  <h1>첫 하네스 치트시트 — `first-harness`</h1>
+  <div class="meta"><button class="copy-btn" onclick="window.print()" type="button">🖨 인쇄하기</button></div>
+</div>
+<div class="wrap layout">
+  <article class="prose"><p>한 장으로 보는 오늘의 명령어·판단 기준. 인쇄해 책상에 두고 참고하세요.</p>
+<hr />
+<h2 id="1-설치-명령-이미-했다면-건너뛰기-first-contact에서-완료">1. 설치 명령 (이미 했다면 건너뛰기 — <code>first-contact</code>에서 완료)</h2>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>/plugin marketplace add revfactory/harness
+/plugin install harness@harness-marketplace
+</pre></div></div></div>
+<hr />
+<h2 id="2-트리거-문구-바이브코딩-진입점">2. 트리거 문구 (바이브코딩 진입점)</h2>
+<table>
+<thead>
+<tr>
+<th>하고 싶은 것</th>
+<th>입력 문구</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>새 팀 만들기</td>
+<td><strong>"하네스 구성해줘"</strong> + 무엇을 하는 팀인지 + 입력 + 원하는 산출물</td>
+</tr>
+<tr>
+<td>만든 팀 실행하기</td>
+<td>하네스가 구성 마지막에 알려준 <strong>오케스트레이터 트리거 문구</strong> 그대로 (세션마다 문구를 새로 확인)</td>
+</tr>
+<tr>
+<td>팀 개선하기(진화)</td>
+<td><strong>"하네스 회고:"</strong> + 아쉬운 점 + 어떻게 고쳤으면 하는지</td>
+</tr>
+</tbody>
+</table>
+<p><strong>좋은 구성 프롬프트의 형태</strong> — 무엇을 하는 팀인지 + 입력 + 원하는 산출물, 이 세 가지가 들어가야 합니다.</p>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>하네스 구성해줘: {무엇을 분석/처리하는 팀}이 필요해.
+{입력 파일 형태}을 입력하면,
+(1) ~하고 (2) ~하고 (3) ~하는
+팀으로 만들어줘. 결과는 {원하는 산출물 형식}으로 저장해줘.
+</pre></div></div></div>
+<p>오늘 실습에 쓴 실제 문구(참고용):</p>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>하네스 구성해줘: 고객 리뷰를 분석하는 팀이 필요해.
+리뷰 텍스트 파일을 입력하면,
+(1) 리뷰를 모아 정리하고
+(2) 불만/칭찬 주제별로 분류하고
+(3) 리포트에 넣을 대표 인용문이 원문에 실제로 있는지 검증하고
+(4) 주제별 건수와 대표 인용을 정리한 리포트를 만들어주는
+팀으로 만들어줘. 최종 결과는 마크다운 파일로 저장해줘.
+</pre></div></div></div>
+<hr />
+<h2 id="3-하네스가-만드는-것">3. 하네스가 만드는 것</h2>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>내 작업 폴더/
+├── .claude/
+│   ├── agents/   ← 팀원 정의 파일 (예: collector.md, verifier.md, reporter.md)
+│   └── skills/   ← 팀의 작업 방법 + 오케스트레이터(팀장 역할)
+</pre></div></div></div>
+<p><strong>구축은 1회, 실행은 반복</strong> — 팀은 한 번만 만들고, 그다음부터는 트리거 문구로 몇 번이든 돌립니다.</p>
+<hr />
+<h2 id="4-팀-아키텍처-6패턴-한-줄-요약">4. 팀 아키텍처 6패턴 (한 줄 요약)</h2>
+<table>
+<thead>
+<tr>
+<th>패턴</th>
+<th>한 줄 요약</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pipeline</td>
+<td>수집→분석→리포트를 한 줄로 순서대로 흘려보낸다</td>
+</tr>
+<tr>
+<td>Fan-out/Fan-in</td>
+<td>여러 관점으로 동시에 나눠 분석한 뒤 하나로 합친다</td>
+</tr>
+<tr>
+<td>Expert Pool</td>
+<td>필요할 때마다 맞는 전문 담당을 골라 부른다</td>
+</tr>
+<tr>
+<td>Producer-Reviewer</td>
+<td>만드는 담당과 검증하는 담당을 나눈다 (오늘 실습 팀이 이 구조)</td>
+</tr>
+<tr>
+<td>Supervisor</td>
+<td>상황에 따라 일을 동적으로 나눠 준다</td>
+</tr>
+<tr>
+<td>Hierarchical</td>
+<td>위에서 아래로 계층적으로 위임한다</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>UX 실무에서 가장 자주 쓰는 것: <strong>Fan-out/Fan-in</strong>(다관점 분석), <strong>Producer-Reviewer</strong>(초안-검수), <strong>Pipeline</strong>(수집→분석→리포트).</p>
+</blockquote>
+<hr />
+<h2 id="5-프롬프트냐-팀이냐-판단-기준">5. "프롬프트냐 팀이냐" 판단 기준</h2>
+<p>아래 3가지 중 <strong>2가지 이상</strong>에 해당하면 하네스(팀)를 만드는 편이 이득입니다. 1가지 이하면 프롬프트 한 번으로 끝내세요.</p>
+<table>
+<thead>
+<tr>
+<th>판단 항목</th>
+<th>질문</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 반복성</td>
+<td>이번 한 번이 아니라 매주/매달/매분기 되풀이되는 일인가?</td>
+</tr>
+<tr>
+<td>② 형식 고정</td>
+<td>매번 같은 틀(표·항목)로 정리해야 하는가?</td>
+</tr>
+<tr>
+<td>③ 검증 필요</td>
+<td>인용·수치·개인정보처럼 사람이 매번 확인해야 할 위험이 있는가?</td>
+</tr>
+</tbody>
+</table>
+<p>자세한 사례는 <a href="../../cases/voc-mining.html"><code>voc-mining.md</code></a>의 "하네스가 과한 경우" 절 참고.</p>
+<hr />
+<h2 id="6-오늘-처음-만난-용어">6. 오늘 처음 만난 용어</h2>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>뜻</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>하네스</td>
+<td>자연어 설명만으로 에이전트 팀을 자동으로 만들어 주는 도구(revfactory/harness)</td>
+</tr>
+<tr>
+<td>팀원(에이전트)</td>
+<td><code>.claude/agents/</code>에 파일 하나로 저장되는, 역할을 맡은 AI</td>
+</tr>
+<tr>
+<td>오케스트레이터</td>
+<td>팀원들에게 순서대로 일을 시키는 팀장 역할의 스킬</td>
+</tr>
+<tr>
+<td>검증 담당 (Producer-Reviewer)</td>
+<td>다른 팀원이 만든 결과를 의심하고 확인하는 역할</td>
+</tr>
+<tr>
+<td>세션</td>
+<td>하나의 대화창(터미널에서 <code>claude</code> 실행 후 <code>/clear</code>나 재실행 전까지)</td>
+</tr>
+<tr>
+<td>하네스 회고</td>
+<td>실행 결과가 아쉬울 때 팀에게 말로 피드백해 팀을 진화시키는 것</td>
+</tr>
+<tr>
+<td>마크다운</td>
+<td>제목·표·목록을 기호 몇 개(<code>#</code>, <code>-</code>, <code>|</code> 등)로 표현하는 가벼운 문서 형식. 워드처럼 열리고 사내 위키에 붙여 넣기 좋다</td>
+</tr>
+</tbody>
+</table></article>
+  <aside class="side"><div class="side-box"><h4>이 모듈의 자료</h4><a href="index.html">📘 실습 가이드</a><a href="handout.html">📄 핸드아웃</a><a href="slides.html">🎤 강사용 슬라이드 개요</a><a href="sample-reviews.txt">💾 샘플 데이터</a></div><div class="side-box toc"><h4>목차</h4><a href="#1-설치-명령-이미-했다면-건너뛰기-first-contact에서-완료">1. 설치 명령 (이미 했다면 건너뛰기 — first-contact에서 완료)</a><a href="#2-트리거-문구-바이브코딩-진입점">2. 트리거 문구 (바이브코딩 진입점)</a><a href="#3-하네스가-만드는-것">3. 하네스가 만드는 것</a><a href="#4-팀-아키텍처-6패턴-한-줄-요약">4. 팀 아키텍처 6패턴 (한 줄 요약)</a><a href="#5-프롬프트냐-팀이냐-판단-기준">5. &quot;프롬프트냐 팀이냐&quot; 판단 기준</a><a href="#6-오늘-처음-만난-용어">6. 오늘 처음 만난 용어</a></div></aside>
+</div>
+<footer><div class="wrap">
+  <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>
+  <div><a href="https://github.com/namojo/ux-edu">GitHub</a> · UX 인에이블먼트 하네스로 제작</div>
+</div></footer>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

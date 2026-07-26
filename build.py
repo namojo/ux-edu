@@ -11,32 +11,32 @@ SITE = os.path.join(ROOT, "docs")  # GitHub Pages: main 브랜치 /docs 서빙
 # ---------------- 메타데이터 ----------------
 SESSIONS = [
     {"no": "1회차", "level": "L1", "badge": "l1", "img": "session-l1.svg",
-     "title": "AI와 첫 대화", "modules": ["first-contact", "prompt-and-verify"],
-     "desc": "터미널을 처음 열고, 파일을 읽히고, 결과를 검증하는 법까지. 코딩 없이 한국어 문장만으로.",
-     "take": "가져가는 것 — 첫 성공 경험 + 환각·개인정보 검증 습관"},
+     "title": "첫 대화, 첫 하네스", "modules": ["first-contact", "first-harness"],
+     "desc": "Claude Code와 첫 대화를 나누고, 하네스를 설치해 그날 바로 첫 에이전트 팀을 구성해 본다.",
+     "take": "가져가는 것 — 내 손으로 구성한 첫 하네스 팀"},
     {"no": "2회차", "level": "L2", "badge": "l2", "img": "session-l2.svg",
-     "title": "내 업무에 붙이기", "modules": ["voc-in-practice", "research-to-persona"],
-     "desc": "자기 서비스의 진짜 데이터(VoC·인터뷰)를 가져와 실무 산출물의 초안을 만든다.",
-     "take": "가져가는 것 — 내 서비스 VoC 개선 기회 + 페르소나·저니맵 초안"},
+     "title": "내 업무를 팀에게", "modules": ["voc-team", "research-persona-team"],
+     "desc": "자기 서비스의 진짜 데이터(VoC·인터뷰)로 분석 팀을 구성·실행하고, 검증 담당의 결과를 확인한다.",
+     "take": "가져가는 것 — 내 데이터로 돌린 VoC 팀 + 페르소나 파이프라인"},
     {"no": "3회차", "level": "L2+L3", "badge": "l3", "img": "session-l3.svg",
-     "title": "시제품과 나만의 하네스", "modules": ["mvp-in-practice", "my-harness"],
-     "desc": "아이디어를 클릭되는 시제품으로 만들고, 반복 업무를 AI 팀(하네스)으로 설계한다.",
-     "take": "가져가는 것 — 클릭되는 MVP + 반복 업무의 하네스 설계 캔버스"},
+     "title": "시제품, 그리고 팀 설계자", "modules": ["mvp-team", "design-my-harness"],
+     "desc": "MVP 팀으로 시제품을 만들고, 자기 반복 업무를 역할 분해해 하네스로 직접 설계·진화시킨다.",
+     "take": "가져가는 것 — 클릭되는 MVP + 실행되는 나만의 하네스"},
 ]
 
 MODULES = {
-    "first-contact":     {"title": "AI에게 내 파일을 맡기는 첫 경험", "level": "L1", "badge": "l1", "dur": "90분",
-                          "desc": "터미널을 열고, 폴더의 파일을 읽혀, 첫 결과를 받아낸다."},
-    "prompt-and-verify": {"title": "좋은 요청과 결과 검증 — 함정 피하기", "level": "L1", "badge": "l1", "dur": "90분",
-                          "desc": "후속 프롬프트로 결과를 다듬고, 환각·개인정보를 스스로 검증한다."},
-    "voc-in-practice":   {"title": "내 VoC 데이터로 개선 기회 뽑기", "level": "L2", "badge": "l2", "dur": "90분",
-                          "desc": "자기 서비스의 리뷰·CS 티켓에서 주제별 개선 기회 초안을 만든다."},
-    "research-to-persona": {"title": "내 리서치에서 인사이트·페르소나 만들기", "level": "L2", "badge": "l2", "dur": "90분",
-                          "desc": "인터뷰 데이터를 어피니티 종합 → 페르소나·저니맵 초안으로 잇는다."},
-    "mvp-in-practice":   {"title": "내 아이디어를 클릭되는 시제품으로", "level": "L2", "badge": "l2", "dur": "90분",
-                          "desc": "아이디어를 사용성 테스트용 HTML MVP 초안으로 만든다."},
-    "my-harness":        {"title": "반복 업무 하나를 나만의 AI 팀으로", "level": "L3", "badge": "l3", "dur": "90분+과제",
-                          "desc": "반복 업무 1개를 역할 나눈 에이전트 팀(하네스) 설계로 옮긴다."},
+    "first-contact":     {"title": "Claude Code 열고 하네스 설치까지", "level": "L1", "badge": "l1", "dur": "90분",
+                          "desc": "Claude Code를 켜 파일을 다루고, revfactory/harness 플러그인을 설치한다."},
+    "first-harness":     {"title": "하네스 구성해줘 — 내 손으로 만든 첫 팀", "level": "L1", "badge": "l1", "dur": "90분",
+                          "desc": "자연어로 첫 하네스를 구성·실행하고, 팀에 검증 담당이 있는 구조를 이해한다."},
+    "voc-team":          {"title": "VoC 분석 팀을 만들어 내 리뷰 돌리기", "level": "L2", "badge": "l2", "dur": "90분",
+                          "desc": "자기 VoC 데이터로 분석 팀을 구성·실행하고 검증 결과를 사람이 확인한다."},
+    "research-persona-team": {"title": "리서치 종합 팀 → 페르소나 팀 잇기", "level": "L2", "badge": "l2", "dur": "90분",
+                          "desc": "두 하네스를 연결해 자기 인터뷰에서 페르소나·저니맵 초안까지 만든다."},
+    "mvp-team":          {"title": "MVP 팀으로 클릭되는 시제품 만들기", "level": "L2", "badge": "l2", "dur": "90분",
+                          "desc": "구현·검수 팀을 구성해 자기 아이디어를 클릭 가능한 HTML MVP로 만든다."},
+    "design-my-harness": {"title": "내 반복 업무를 팀 구조로 직접 설계·진화", "level": "L3", "badge": "l3", "dur": "90분+과제",
+                          "desc": "반복 업무를 역할 분해·검증 단계로 직접 설계해 구성하고, 실행 결과로 진화시킨다."},
 }
 MODULE_ORDER = list(MODULES.keys())
 
@@ -44,16 +44,16 @@ MATERIAL_LABEL = {"guide": "실습 가이드", "worksheet": "워크시트", "han
                   "slides-outline": "강사용 슬라이드 개요", "sample-reviews": "샘플 데이터"}
 
 CASES = {
-    "research-synthesis": ("사용자 리서치 종합", "리서치", "인터뷰 녹취 더미에서 어피니티 맵·인사이트를 뽑을 때"),
-    "persona-journey":    ("페르소나 & 저니맵", "리서치", "리서치 데이터로 근거 있는 페르소나·저니맵 초안이 필요할 때"),
-    "usability-analysis": ("사용성 테스트 분석", "평가", "세션 노트에서 이슈 목록과 심각도 우선순위를 만들 때"),
-    "voc-mining":         ("VoC/CX 피드백 분석", "CX", "리뷰·CS 티켓 수백 건에서 개선 기회를 찾을 때"),
-    "ux-writing":         ("UX 라이팅", "라이팅", "마이크로카피 시안을 여러 개 뽑고 톤앤매너로 검수할 때"),
-    "ia-review":          ("IA·내비게이션 검토", "설계", "메뉴 구조의 대안과 라벨 개선안이 필요할 때"),
-    "competitor-bench":   ("경쟁사 UX 벤치마킹", "리서치", "경쟁 서비스 온보딩을 비교표 한 장으로 정리할 때"),
-    "mvp-prototype":      ("MVP 프로토타입", "프로토타이핑", "아이디어를 클릭 가능한 시제품으로 빠르게 검증할 때"),
-    "a11y-audit":         ("접근성 점검", "평가", "화면 HTML에서 접근성 이슈와 개선안을 받을 때"),
-    "design-system-doc":  ("디자인 시스템 문서화", "시스템", "컴포넌트 규칙 메모를 일관된 가이드 문서로 만들 때"),
+    "research-synthesis": ("리서치 종합 팀", "리서치", "분기마다 인터뷰 녹취 더미를 인사이트로 종합할 때"),
+    "persona-journey":    ("페르소나 팀", "리서치", "근거 검증 담당을 둔 팀으로 페르소나·저니맵을 만들 때"),
+    "usability-analysis": ("사용성 테스트 분석 팀", "평가", "라운드마다 세션 노트를 이슈·심각도 리포트로 만들 때"),
+    "voc-mining":         ("VoC 분석 팀", "CX", "분기마다 리뷰·CS 티켓에서 개선 기회를 뽑을 때"),
+    "ux-writing":         ("카피 팀", "라이팅", "시안 생성과 톤 검수를 분리한 팀으로 돌릴 때"),
+    "ia-review":          ("IA 검토 팀", "설계", "개편마다 진단→대안→평가를 반복할 때"),
+    "competitor-bench":   ("벤치마킹 팀", "리서치", "경쟁 서비스 여럿을 병렬 조사해 비교표로 만들 때"),
+    "mvp-prototype":      ("MVP 프로토타입 팀", "프로토타이핑", "구현·검수 팀을 부려 시제품을 반복 검증할 때"),
+    "a11y-audit":         ("접근성 팀", "평가", "릴리스마다 화면 접근성을 점검할 때"),
+    "design-system-doc":  ("문서화 팀", "시스템", "수십 개 컴포넌트에 같은 문서 형식을 적용할 때"),
 }
 CASE_ORDER = list(CASES.keys())
 
@@ -327,15 +327,15 @@ def build_index():
 
 <section class="block" id="modules"><div class="wrap">
   <h2 class="sec">6개 모듈</h2>
-  <p class="sec-sub">각 90분. 실습 가이드는 화면에 보이는 그대로 따라 할 수 있게 쓰여 있고,
-  막히기 쉬운 곳마다 "이렇게 나오면 정상입니다" 안내가 있습니다.</p>
+  <p class="sec-sub">각 90분, 핸즈온 50% 이상. 첫날 안에 첫 하네스를 구성하고, 마지막 모듈에서는
+  자기 반복 업무의 팀을 직접 설계합니다. 막히기 쉬운 곳마다 "이렇게 나오면 정상입니다" 안내가 있습니다.</p>
   <div class="modules">{module_rows}</div>
 </div></section>
 
 <section class="block alt" id="cases"><div class="wrap">
-  <h2 class="sec">활용 사례집 — 10가지 실무 레시피</h2>
-  <p class="sec-sub">교육이 끝난 뒤에도 책상에 두고 쓰는 참조 자산. 모든 사례에
-  복사해 쓰는 프롬프트와 <b>"꼭 사람이 확인하세요"</b> 체크가 들어 있습니다.</p>
+  <h2 class="sec">사례집 — 바로 구성할 수 있는 10개의 팀</h2>
+  <p class="sec-sub">모든 사례가 같은 뼈대를 따릅니다 — 하네스 설치 → <b>"하네스 구성해줘"</b>(팀 구성 프롬프트)
+  → 팀 실행 → 피드백으로 팀 진화. 복사해 쓰는 구성 프롬프트와 "꼭 사람이 확인하세요" 체크 포함.</p>
   <div class="cases">{case_cards}</div>
 </div></section>
 
@@ -350,7 +350,7 @@ def build_index():
     <a class="case-card" href="modules/first-contact/handout.html">
       <span class="area">교육 자료</span><h3>📄 1회차 핸드아웃 실물</h3>
       <p>책상에 두고 보는 치트시트 — 터미널 여는 법부터 권한 창 대응까지 한 장.</p></a>
-    <a class="case-card" href="modules/my-harness/worksheet.html">
+    <a class="case-card" href="modules/design-my-harness/worksheet.html">
       <span class="area">워크시트</span><h3>📝 하네스 설계 캔버스</h3>
       <p>3회차에서 자기 반복 업무를 AI 팀으로 분해할 때 쓰는 실제 양식.</p></a>
     <a class="case-card" href="modules/first-contact/sample-reviews.txt">

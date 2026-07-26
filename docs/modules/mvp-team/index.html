@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MVP 팀으로 클릭되는 시제품 만들기 — 실습 가이드 — AI 하네스로 UX를 바꾸다</title>
+<meta name="description" content="모듈 5 · 실습 가이드 · MVP 팀으로 클릭되는 시제품 만들기 — 실습 가이드">
+<meta property="og:title" content="MVP 팀으로 클릭되는 시제품 만들기 — 실습 가이드 — AI 하네스로 UX를 바꾸다">
+<meta property="og:description" content="모듈 5 · 실습 가이드 · MVP 팀으로 클릭되는 시제품 만들기 — 실습 가이드">
+<meta property="og:image" content="https://namojo.github.io/ux-edu/assets/img/hero.svg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect x=%2210%22 y=%2210%22 width=%2280%22 height=%2280%22 rx=%2218%22 fill=%22%23FFE455%22/%3E%3Ctext x=%2250%22 y=%2268%22 font-size=%2252%22 text-anchor=%22middle%22 font-family=%22monospace%22 fill=%22%2322242A%22%3E%E2%80%BA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=Gaegu:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+<header class="topnav"><div class="wrap"><a class="brand" href="../../index.html"><span class="dot"></span>UX × AI 하네스</a><nav><a href="../../index.html">홈</a><a href="../../curriculum.html">커리큘럼</a><a href="../../index.html#modules" aria-current=page>모듈</a><a href="../../index.html#cases">사례집</a><a href="../../instructor.html">운영 가이드</a></nav></div></header>
+
+<div class="wrap page-head">
+  <div class="eyebrow">모듈 5 · 실습 가이드</div>
+  <h1>MVP 팀으로 클릭되는 시제품 만들기 — 실습 가이드</h1>
+  <div class="meta"><span class="badge l2">L2</span><span>⏱ 90분</span><span>모듈 5 / 6</span></div>
+</div>
+<div class="wrap layout">
+  <article class="prose"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>레벨 / 시간</td>
+<td>L2 / 90분 (도입·시연 30분 — 실습 45분 — 공유·정리 15분)</td>
+</tr>
+<tr>
+<td>선수 조건</td>
+<td><code>first-contact</code>·<code>first-harness</code>(L1 2개) 수료 — Claude Code 실행, <code>하네스 구성해줘</code> 경험 있음</td>
+</tr>
+<tr>
+<td>준비물</td>
+<td>검증하고 싶은 <strong>자기 서비스의 화면 흐름 아이디어</strong>(메모 형태로 충분, 미리 안 써 왔어도 이 가이드 2단계에서 씀)</td>
+</tr>
+<tr>
+<td>이 모듈이 아닌 것</td>
+<td>진짜 개발이 아닙니다. 오늘 만드는 건 <strong>사용성 테스트에 쓰는 클릭 가능한 가짜 화면</strong>입니다. 완성품이 아니라 테스트 도구입니다.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>이 가이드는 화면에 보이는 그대로 따라가면 됩니다. 회색 박스(💡)는 실습 중 자주 막히는 지점과 해결법입니다.</p>
+</blockquote>
+<hr />
+<h2 id="오늘의-목표">오늘의 목표</h2>
+<ul>
+<li>클릭 가능한 화면 3개 이상을 오가는 나만의 <strong>HTML MVP</strong>를 팀에게 만들게 한다</li>
+<li>브라우저에서 처음부터 끝까지 눌러서 완주한다</li>
+<li>자연어 수정 요청 1건을 반영한다</li>
+<li>"이번만 고칠 일"과 "팀에 심을 일(하네스 회고)"을 구분해 본다</li>
+</ul>
+<h2 id="진행-순서-한눈에">진행 순서 한눈에</h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>시간</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>5분</td>
+<td>준비 확인</td>
+</tr>
+<tr>
+<td>1</td>
+<td>15분</td>
+<td>완성 예시 체험 + 오늘 만들 팀 미리보기 (도입·시연)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>15분</td>
+<td>내 아이디어 정리 + 팀 구성 (바이브코딩)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>10분</td>
+<td>팀 실행 → HTML MVP 받기</td>
+</tr>
+<tr>
+<td>4</td>
+<td>10분</td>
+<td>자연어로 화면 다듬기</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5분</td>
+<td>검증 범위 정의</td>
+</tr>
+<tr>
+<td>6</td>
+<td>5분</td>
+<td>수정 vs 진화(하네스 회고) 구분</td>
+</tr>
+<tr>
+<td>—</td>
+<td>15분</td>
+<td>공유·정리</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="0단계-준비-확인-5분">0단계 — 준비 확인 (5분)</h2>
+<p>아래를 확인하세요.</p>
+<ul>
+<li>[ ] <code>first-contact</code>·<code>first-harness</code> 모듈에서 Claude Code를 켜 봤고, <code>하네스 구성해줘</code>로 팀을 한 번 만들어 봤다</li>
+<li>[ ] revfactory/harness 플러그인이 설치되어 있다(지난 모듈에서 설치 완료)</li>
+<li>[ ] 오늘 화면으로 만들어 볼 내 서비스 아이디어가 있다 — 없으면 2단계에서 강사와 함께 예시를 변형해서 씁니다</li>
+</ul>
+<blockquote>
+<p>💡 <strong>플러그인 설치가 기억 안 나요.</strong> Claude Code 대화창에 <code>/plugin list</code>를 입력해 목록에 <code>harness</code>가 보이면 설치된 것입니다. 안 보이면 아래 두 줄을 순서대로 붙여넣으세요.
+<code>/plugin marketplace add revfactory/harness
+/plugin install harness@harness-marketplace</code></p>
+</blockquote>
+<p><strong>용어 먼저 정리</strong>(오늘 계속 쓰는 말이니 여기서 한 번만 설명합니다)</p>
+<ul>
+<li><strong>하네스(harness)</strong>: 자연어로 설명하면 전문 역할을 나눠 맡는 AI 팀을 만들어 주는 도구</li>
+<li><strong>에이전트(agent)</strong>: 하나의 역할을 맡아 일하는 AI 팀원. 여러 에이전트가 모이면 "팀"</li>
+<li><strong>프로토타입(prototype)</strong>: 실제 개발 전에, 아이디어를 눌러보고 검증하려고 빠르게 만든 가짜 화면</li>
+<li><strong>MVP(Minimum Viable Product)</strong>: 핵심 흐름만 담은 최소 형태의 시제품</li>
+<li><strong>HTML</strong>: 웹 브라우저(크롬 등)에서 열리는 화면 파일 형식. 더블클릭하면 화면이 뜸</li>
+<li><strong>바이브코딩(vibe coding)</strong>: 코드를 직접 쓰지 않고, 하고 싶은 일을 말로 설명하면 AI가 만들어 주는 방식</li>
+<li><strong>트리거</strong>: 만들어진 팀을 실행시키는 정해진 문구</li>
+<li><strong>하네스 회고</strong>: 팀 자체(에이전트 정의)를 고쳐 달라고 말로 피드백하는 것 — "팀을 진화시킨다"고 부릅니다</li>
+</ul>
+<hr />
+<h2 id="1단계-완성-예시-먼저-체험하기-15분">1단계 — 완성 예시 먼저 체험하기 (15분)</h2>
+<p>오늘 팀이 무엇을 만들어 주는지, 완성품을 먼저 눌러봅니다.</p>
+<ol>
+<li>강사가 나눠준 폴더(또는 프로젝트) 안에서 <code>mvp/onboarding-smoke/index.html</code> 파일을 찾습니다.</li>
+<li><strong>더블클릭</strong>합니다 — 설치나 인터넷 연결 없이 기본 브라우저에서 바로 열립니다.</li>
+<li>아래 순서로 클릭하며 끝까지 완주해 보세요.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>순서</th>
+<th>화면</th>
+<th>무엇을 하나</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>환영 화면</td>
+<td><code>시작하기</code> 버튼 클릭</td>
+</tr>
+<tr>
+<td>2</td>
+<td>선호 음료 선택</td>
+<td>취향 칩 여러 개 선택 → <code>내 취향 저장하기</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>홈</td>
+<td>취향에 맞춘 추천이 상단에 뜨는 것 확인 → 음료 카드 탭</td>
+</tr>
+<tr>
+<td>4</td>
+<td>주문 완료</td>
+<td>주문 확인·복지 포인트 할인·대기번호 확인 → <code>홈으로 돌아가기</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>더블클릭해도 안 열려요.</strong> 파일이 브라우저가 아닌 다른 프로그램과 연결돼 있을 수 있습니다. 파일 위에서 마우스 오른쪽 클릭 → "다음으로 열기" → Chrome(또는 다른 브라우저)을 선택하세요.</p>
+</blockquote>
+<p>이 화면들은 실제 로그인·결제·서버가 전혀 없습니다. 그런데도 흐름을 검증하는 데는 충분합니다 — 오늘 여러분도 이런 결과물을 팀에게 만들게 합니다.</p>
+<h3 id="오늘-만들-팀-미리보기">오늘 만들 팀 미리보기</h3>
+<p><a href="../../cases/mvp-prototype.html"><code>mvp-prototype.md</code></a>가 정의한 팀 구성입니다. <code>하네스 구성해줘</code>를 실행하면 이런 팀원들이 만들어집니다.</p>
+<table>
+<thead>
+<tr>
+<th>팀원</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>화면 기획자 (planner)</td>
+<td>아이디어 메모를 화면별 목록·구성요소·이동 규칙으로 정리</td>
+</tr>
+<tr>
+<td>프로토타입 구현자 (builder)</td>
+<td>설계 명세를 보고 클릭 가능한 HTML 화면을 실제로 만듦</td>
+</tr>
+<tr>
+<td>UX 검수자 (reviewer)</td>
+<td>사용성·일관성·접근성·흐름 완결성 관점에서 이슈 목록을 냄</td>
+</tr>
+<tr>
+<td>수정 반영 (builder 재실행)</td>
+<td>검수 이슈를 구현자가 다시 반영해 고치는 단계 — "검수→수정"을 2회 반복</td>
+</tr>
+</tbody>
+</table>
+<p><strong>검수자가 구현자와 별개로 존재하는 이유</strong>: 만든 사람이 스스로 검수하면 놓치는 것을, 검수 전담이 잡아냅니다(Producer-Reviewer 패턴). 이 구조가 오늘 팀에도 그대로 들어갑니다.</p>
+<hr />
+<h2 id="2단계-내-아이디어-정리-팀-구성-15분">2단계 — 내 아이디어 정리 + 팀 구성 (15분)</h2>
+<h3 id="2-1-작업-폴더와-아이디어-메모-만들기">2-1. 작업 폴더와 아이디어 메모 만들기</h3>
+<ol>
+<li>바탕화면에 작업 폴더를 하나 만듭니다. 예: <code>내서비스-프로토타입</code></li>
+<li>그 폴더 안에 <code>아이디어.md</code> 파일을 만들고, 내 서비스의 화면 흐름을 <strong>3~4단계</strong>로 적습니다. 거창할 필요 없이 글로 적으면 됩니다.</li>
+</ol>
+<p>작성 예시(빈살롱 카페 온보딩 사례를 참고한 형태입니다):
+   <code>{내 서비스명} MVP
+   - 화면1(예: 홈): 무엇이 보이나, 어떤 버튼이 있나
+   - 화면2(예: 상세/선택): 무엇을 고르나, 다음 버튼은
+   - 화면3(예: 확인): 무엇을 요약해서 보여주나
+   - 화면4(예: 완료): 완료 메시지, 다음 행동 버튼
+   목표 사용자: {누구}. 톤: {깔끔하고 신뢰감 있게 등}.</code>
+3. 아이디어가 아직 안 떠오르면, 강사와 함께 <code>mvp/onboarding-smoke/</code>가 검증한 온보딩 흐름을 자기 서비스로 바꿔 적어도 됩니다.</p>
+<h3 id="2-2-폴더에서-claude-code-열기">2-2. 폴더에서 Claude Code 열기</h3>
+<p><code>first-contact</code>에서 했던 것과 같습니다.
+- <strong>macOS</strong>: Spotlight(⌘+Space)에 <code>terminal</code>을 입력해 터미널을 엽니다 → 창에 <code>cd</code>를 입력하고 한 칸 띄운 뒤, 만든 폴더를 터미널 창 안으로 드래그하면 경로가 자동 입력됩니다 → Enter → <code>claude</code> 입력 후 Enter. (Finder 우클릭 → "폴더에서 새로운 터미널 열기" 메뉴가 보인다면 그걸 써도 되지만, 이 메뉴는 기본값으로 꺼져 있는 Mac이 많습니다 — 안 보여도 정상이니 위 Spotlight 방법을 쓰세요.)
+- <strong>Windows</strong>: 폴더 안 빈 공간에서 우클릭 → "터미널에서 열기"(안 보이면 Shift+우클릭) → <code>claude</code> 입력 후 Enter</p>
+<h3 id="2-3-팀-구성-프롬프트-붙여넣기">2-3. 팀 구성 프롬프트 붙여넣기</h3>
+<p>아래를 <strong>그대로 복사해 붙여넣습니다.</strong> (이 프롬프트는 도메인이 고정돼 있지 않아 수정 없이 그대로 씁니다 — 여러분의 아이디어는 방금 만든 <code>아이디어.md</code> 파일에 이미 담겨 있습니다.)</p>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>하네스 구성해줘: UX 아이디어를 클릭 가능한 HTML MVP 프로토타입으로 만드는 프로토타입 팀이 필요해.
+아이디어 메모 파일을 입력하면 (1) 화면 기획자가 화면별 설계 명세로 정리하고,
+(2) 구현자가 클릭 가능한 HTML 프로토타입을 만들고,
+(3) UX 검수자가 사용성·일관성·접근성·흐름 완결성 관점에서 이슈 목록을 내고,
+(4) 그 이슈를 구현자가 반영해 수정하는 &quot;검수→수정&quot; 루프를 2회 도는 팀으로.
+결과물은 브라우저에서 바로 열리는 HTML 파일들과, 검수 이슈·수정 내역 리포트로 저장해줘.
+나는 코드를 못 짜니까, 내가 하는 일은 아이디어를 주고 검수 방향을 정하는 것까지야.
+</pre></div></div></div>
+<blockquote>
+<p>💡 <strong>권한 확인 창이 뜹니다.</strong> Claude Code가 폴더 안에 파일(<code>.claude/agents/</code>, <code>.claude/skills/</code>)을 새로 만들기 전에 허락을 구합니다. "이 세션에서 항상 허용" 또는 1회 허용을 선택하면 됩니다. 이건 정상적인 안전장치이지 오류가 아닙니다.</p>
+<p>💡 <strong>몇 분간 아무 반응이 없어요.</strong> 팀 구성은 여러 에이전트 정의 파일을 한꺼번에 쓰는 작업이라 수 분이 걸릴 수 있습니다. 화면에 진행 표시가 있다면 그대로 기다리세요. <code>first-harness</code>에서 이미 한 번 겪은 대기 시간과 같습니다.</p>
+</blockquote>
+<h3 id="2-4-팀이-만들어졌는지-확인">2-4. 팀이 만들어졌는지 확인</h3>
+<p>작업이 끝나면 하네스가 "이런 팀을 만들었습니다"라며 팀원 목록과 실행 방법을 요약해 보여줍니다. 그 요약이 1단계의 팀 미리보기 표(기획자·구현자·검수자)와 같은 구성인지 눈으로 대조하세요. 폴더 탐색기로 <code>.claude/agents/</code> 를 열어 직접 파일을 봐도 됩니다.</p>
+<blockquote>
+<p>💡 <strong>제 팀 파일 이름이 예시랑 조금 달라요.</strong> 정상입니다. 세션마다 에이전트 파일 이름·문구가 조금씩 다르게 생성될 수 있습니다. 중요한 건 "기획→구현→검수→수정" 4가지 역할이 다 있는지입니다.</p>
+</blockquote>
+<hr />
+<h2 id="3단계-팀-실행-10분">3단계 — 팀 실행 (10분)</h2>
+<ol>
+<li><strong>2단계에서 만든 같은 폴더</strong>에서 새 대화(새 세션)를 시작합니다 — 방금 팀을 만든 대화에 이어 쓰지 않습니다. Claude Code를 껐다 켜거나, 같은 폴더에서 새 대화를 시작하면 됩니다. (구축은 1회, 실행은 매번 새 세션에서 반복하는 구조입니다.)</li>
+<li>트리거 문구(오케스트레이터를 실행시키는 정해진 문구)를 입력합니다.</li>
+</ol>
+<blockquote>
+<p>💡 <strong>트리거 문구는 세션마다 다르게 생성됩니다.</strong> 아래는 대표 예시일 뿐, 정답 문구가 아닙니다. <strong>2-4에서 하네스가 요약으로 보여준 "실행 방법"에 적힌 문구를 그대로 쓰세요.</strong> 아래 예시 문구를 쳤는데 팀이 반응하지 않는다면, 문구가 달라서일 수 있습니다 — 2-4 요약을 다시 확인하세요. 하네스가 보여준 실행 문구에 입력 파일명(<code>아이디어.md</code>)이 빠져 있으면, 폴더 안에 다른 <code>.md</code> 파일이 섞여 있을 때 팀이 엉뚱한 파일을 입력으로 삼을 수 있으니 문구 끝에 "입력은 아이디어.md 파일이야"를 덧붙이세요.</p>
+</blockquote>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>프로토타입 만들어줘. 입력은 아이디어.md 파일이야.
+</pre></div></div></div>
+<ol start="3">
+<li>팀이 기획 → 구현 → 검수 → 수정 순서로 자동으로 돕니다. 완료되면 폴더 안에 대략 이런 구조가 생깁니다(폴더·파일 이름은 세션마다 다를 수 있습니다).</li>
+</ol>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>내서비스-프로토타입/
+├── prototype/
+│   ├── index.html      ← 첫 화면 (더블클릭하면 브라우저에 뜸)
+│   ├── ...              (화면별 파일)
+└── report/
+    └── ux-review.md    ← 검수 이슈 + 수정 내역 리포트
+</pre></div></div></div>
+<ol start="4">
+<li><code>index.html</code>을 더블클릭해 1단계처럼 처음부터 끝까지 클릭해서 완주해 보세요.</li>
+</ol>
+<blockquote>
+<p>💡 <strong>"작동하는 것처럼 보인다"와 "정말 연결됐다"는 다릅니다.</strong> 검수자가 통과시켰어도 반드시 여러분이 직접 첫 화면부터 끝까지 눌러보세요. 버튼이 있다고 해서 실제로 다음 화면으로 연결됐다고 확신할 수 없습니다(AI가 착각하는 지점).</p>
+<p><strong>AI가 채운 예시 내용(이름·가격·후기 등)은 진짜가 아닙니다.</strong> 그럴듯하게 지어낸 값이니 사용성 테스트 전에는 실제 데이터로 바꾸거나 "예시 데이터"임을 표시하세요.</p>
+<p><strong>검수자의 접근성 통과는 시작일 뿐, 완결이 아닙니다.</strong> 대체 텍스트 유무 정도는 잘 잡지만, 실제 스크린리더로 읽었을 때 자연스러운지, 색 대비가 충분한지, 키보드만으로 조작 가능한지는 사람이 최종 확인해야 합니다.</p>
+<p><strong>브랜드 톤·미묘한 뉘앙스는 AI가 놓칩니다.</strong> "깔끔하고 신뢰감 있게"라고 적어도 AI가 해석한 톤이 여러분의 의도와 다를 수 있습니다. 결과를 보고 4단계에서 방향을 말로 다시 잡아 주세요.</p>
+</blockquote>
+<hr />
+<h2 id="4단계-자연어로-화면-다듬기-10분">4단계 — 자연어로 화면 다듬기 (10분)</h2>
+<p>방금 받은 MVP를 브라우저에서 보면서, 마음에 안 드는 부분을 <strong>자연어로</strong> 요청해 고칩니다. 같은 Claude Code 대화창(3단계 실행한 세션)에 이어서 입력하면 됩니다.</p>
+<p>예시:</p>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>주문 완료 화면에 예상 픽업 시간(예: 5분 뒤)을 표시해줘
+</pre></div></div></div>
+<p>여러분의 아이디어에 맞는 수정 요청 문구는 <strong>핸드아웃("MVP 수정 요청 문구 모음")</strong> 을 참고하세요. 요청 후 <code>index.html</code>(또는 수정한 화면 파일)을 브라우저에서 새로고침하면 반영된 결과를 바로 볼 수 있습니다.</p>
+<blockquote>
+<p>💡 <strong>새로고침해도 그대로예요.</strong> 다른 파일을 보고 있을 수 있습니다. Claude Code가 알려준 파일 경로(예: <code>prototype/done.html</code>)를 다시 확인하고 그 파일을 새로고침하세요.</p>
+</blockquote>
+<hr />
+<h2 id="5단계-검증-범위-정의-5분">5단계 — 검증 범위 정의 (5분)</h2>
+<p>MVP는 "무엇이든 다 보여주는 화면"이 아닙니다. 아래 표를 직접 채워, 오늘 만든 MVP로 <strong>검증할 수 있는 것 / 없는 것</strong>을 구분해 보세요. (<code>mvp/onboarding-smoke/README.md</code>의 방식과 같습니다.)</p>
+<p><strong>검증할 수 있는 것</strong> (예: 화면 순서가 자연스러운가, 특정 버튼의 위치가 직관적인가)</p>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>-
+-
+-
+</pre></div></div></div>
+<p><strong>검증할 수 없는 것</strong> (예: 실제 로그인/결제, 실제 데이터, 서버 연동, 새로고침 시 상태 유지)</p>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>-
+-
+-
+</pre></div></div></div>
+<p>이 구분을 명확히 해 둬야, 다음 주 사용성 테스트에서 참가자에게 "이 부분은 가짜입니다"를 미리 안내할 수 있습니다.</p>
+<hr />
+<h2 id="6단계-수정-vs-진화하네스-회고-구분-5분">6단계 — 수정 vs 진화(하네스 회고) 구분 (5분)</h2>
+<p>4단계처럼 <strong>한 번만 고치면 되는 것</strong>은 자연어 수정 요청으로 끝냅니다. 하지만 <strong>다음에 또 다른 아이디어로 팀을 돌릴 때도 매번 반복될 요구</strong>라면, 요청을 팀 자체에 심어 두는 것이 낫습니다 — 이것이 <code>하네스 회고</code>입니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>언제 쓰나</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>자연어 수정 요청 (4단계)</td>
+<td>이번 프로토타입 딱 한 번만 고치면 되는 것</td>
+<td>"주문 완료 화면에 예상 픽업 시간 추가해줘"</td>
+</tr>
+<tr>
+<td>하네스 회고 (팀 진화)</td>
+<td>다음 프로젝트에서도 매번 반복해서 요구하게 될 것</td>
+<td>아래 참고</td>
+</tr>
+</tbody>
+</table>
+<p>예시:</p>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>하네스 회고: 주문 완료 화면에 예상 픽업 시간을 기본 포함하도록 MVP 팀을 개선해줘.
+</pre></div></div></div>
+<div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>하네스 회고: 검수자가 시각 디자인 지적은 잘하는데 &quot;흐름이 도중에 막히는지&quot;는 자주 놓쳐.
+검수 항목에 &quot;모든 버튼이 실제로 다음 화면으로 연결되는지&quot; 확인을 반드시 넣도록 검수자를 개선해줘.
+</pre></div></div></div>
+<p>내가 방금 4단계에서 한 수정 요청 중 하나를 골라, "이건 이번만 고칠 일인가, 팀에 심을 일인가"를 스스로 판단해 보고, 팀에 심을 일이라고 판단되면 <code>하네스 회고: ...</code>로 한 번 실행해 보세요. 다음 실행부터 반영됩니다.</p>
+<blockquote>
+<p>💡 <strong>지금 당장 티가 안 나요.</strong> 하네스 회고는 팀의 정의(에이전트/스킬 파일)를 고치는 것이라, 효과는 <strong>다음 실행</strong>부터 보입니다. 지금 화면이 바로 안 바뀌어도 정상입니다.</p>
+</blockquote>
+<hr />
+<h2 id="정리공유-15분">정리·공유 (15분)</h2>
+<ul>
+<li>옆 사람과 서로 <code>index.html</code>을 열어 보여주며 처음부터 끝까지 클릭해 완주시켜 주세요.</li>
+<li>오늘 가져가는 것 체크</li>
+<li>[ ] 화면 3개 이상을 클릭으로 오가는 HTML MVP</li>
+<li>[ ] <code>report/ux-review.md</code> 검수 리포트</li>
+<li>[ ] 반영한 수정 요청 1건</li>
+<li>[ ] "검증할 수 있는 것/없는 것" 메모</li>
+<li>[ ] (선택) 실행한 <code>하네스 회고</code> 1건</li>
+</ul>
+<p><strong>다음 이어지는 것</strong>: 이번에 겪은 "이번만 고칠 일 vs 팀에 심을 일" 판단은 다음 모듈 <code>design-my-harness</code>에서 자기 반복 업무를 직접 설계할 때 다시 씁니다.</p><div class="pager"><a href="../research-persona-team/index.html"><span class="dir">← 이전 모듈</span><b>리서치 종합 팀 → 페르소나 팀 잇기</b></a><a class="next" href="../design-my-harness/index.html"><span class="dir">다음 모듈 →</span><b>내 반복 업무를 팀 구조로 직접 설계·진화</b></a></div></article>
+  <aside class="side"><div class="side-box"><h4>이 모듈의 자료</h4><a href="index.html" class="on">📘 실습 가이드</a><a href="handout.html">📄 핸드아웃</a></div><div class="side-box toc"><h4>목차</h4><a href="#오늘의-목표">오늘의 목표</a><a href="#진행-순서-한눈에">진행 순서 한눈에</a><a href="#0단계-준비-확인-5분">0단계 — 준비 확인 (5분)</a><a href="#1단계-완성-예시-먼저-체험하기-15분">1단계 — 완성 예시 먼저 체험하기 (15분)</a><a href="#2단계-내-아이디어-정리-팀-구성-15분">2단계 — 내 아이디어 정리 + 팀 구성 (15분)</a><a href="#3단계-팀-실행-10분">3단계 — 팀 실행 (10분)</a><a href="#4단계-자연어로-화면-다듬기-10분">4단계 — 자연어로 화면 다듬기 (10분)</a><a href="#5단계-검증-범위-정의-5분">5단계 — 검증 범위 정의 (5분)</a><a href="#6단계-수정-vs-진화하네스-회고-구분-5분">6단계 — 수정 vs 진화(하네스 회고) 구분 (5분)</a><a href="#정리공유-15분">정리·공유 (15분)</a></div></aside>
+</div>
+<footer><div class="wrap">
+  <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>
+  <div><a href="https://github.com/namojo/ux-edu">GitHub</a> · UX 인에이블먼트 하네스로 제작</div>
+</div></footer>
+<script src="../../assets/site.js"></script>
+</body>
+</html>
