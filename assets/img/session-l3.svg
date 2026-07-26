@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="지휘자처럼 세 AI 에이전트를 지휘하는 사람 일러스트">
+  <defs>
+    <filter id="soft3" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#22242A" flood-opacity="0.12"/></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="#FBFAF6"/>
+  <circle cx="180" cy="140" r="52" fill="#FFE455" opacity="0.6"/>
+  <rect x="1400" y="100" width="80" height="80" rx="8" fill="#FFB4A2" transform="rotate(10 1440 140)" opacity="0.8"/>
+
+  <!-- 지휘자 -->
+  <g>
+    <rect x="700" y="430" width="200" height="44" rx="10" fill="#2D3142"/>
+    <rect x="740" y="474" width="120" height="20" rx="6" fill="#262A39"/>
+    <circle cx="800" cy="230" r="58" fill="#FFB4A2"/>
+    <path d="M742 230 a58 58 0 0 1 116 0 v-26 a58 36 0 0 0 -116 0 z" fill="#22242A"/>
+    <circle cx="782" cy="238" r="6" fill="#22242A"/>
+    <circle cx="822" cy="238" r="6" fill="#22242A"/>
+    <path d="M786 264 q14 10 30 2" fill="none" stroke="#22242A" stroke-width="5" stroke-linecap="round"/>
+    <path d="M800 292 q-64 22 -58 138 h116 q8 -116 -58 -138" fill="#F0803C"/>
+    <path d="M756 320 L640 240 M844 320 L964 236" stroke="#F0803C" stroke-width="34" stroke-linecap="round"/>
+    <path d="M628 232 l-26 -20 M976 228 l28 -18" stroke="#22242A" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <!-- 지휘 곡선 -->
+  <g fill="none" stroke-linecap="round" stroke-width="10" stroke-dasharray="1 18">
+    <path d="M610 240 C 420 300, 330 420, 300 540" stroke="#FFE455"/>
+    <path d="M800 300 C 800 400, 800 460, 800 530" stroke="#FFB4A2"/>
+    <path d="M990 240 C 1180 300, 1270 420, 1300 540" stroke="#A8D8FF"/>
+  </g>
+
+  <!-- 에이전트 1: 수집 (여러 팔) -->
+  <g filter="url(#soft3)"><rect x="180" y="560" width="240" height="200" rx="20" fill="#2D3142"/></g>
+  <g>
+    <rect x="206" y="584" width="14" height="14" rx="4" fill="#FFE455"/>
+    <circle cx="270" cy="650" r="10" fill="#FFE455"/><circle cx="330" cy="650" r="10" fill="#FFE455"/>
+    <path d="M275 695 q25 16 50 0" fill="none" stroke="#FFE455" stroke-width="8" stroke-linecap="round"/>
+    <path d="M180 620 q-60 -30 -80 -80 M180 680 q-70 0 -110 -30 M420 620 q60 -30 80 -80 M420 680 q70 0 110 -30" fill="none" stroke="#2D3142" stroke-width="16" stroke-linecap="round"/>
+    <rect x="60" y="500 " width="70" height="52" rx="8" fill="#FFFFFF" stroke="#E4E1D5" stroke-width="3" transform="rotate(-14 95 526)"/>
+    <rect x="480" y="500" width="70" height="52" rx="8" fill="#FFFFFF" stroke="#E4E1D5" stroke-width="3" transform="rotate(12 515 526)"/>
+    <rect x="40" y="620" width="64" height="48" rx="8" fill="#FFE455" transform="rotate(8 72 644)"/>
+    <rect x="500" y="620" width="64" height="48" rx="8" fill="#A8D8FF" transform="rotate(-8 532 644)"/>
+  </g>
+
+  <!-- 에이전트 2: 분류 (그리드 정렬) -->
+  <g filter="url(#soft3)"><rect x="680" y="560" width="240" height="200" rx="20" fill="#2D3142"/></g>
+  <g>
+    <rect x="706" y="584" width="14" height="14" rx="4" fill="#FFB4A2"/>
+    <circle cx="770" cy="640" r="10" fill="#FFB4A2"/><circle cx="830" cy="640" r="10" fill="#FFB4A2"/>
+    <path d="M775 682 q25 16 50 0" fill="none" stroke="#FFB4A2" stroke-width="8" stroke-linecap="round"/>
+    <g transform="translate(716 800)">
+      <rect x="0" y="0" width="48" height="36" rx="6" fill="#FFE455"/><rect x="60" y="0" width="48" height="36" rx="6" fill="#FFB4A2"/><rect x="120" y="0" width="48" height="36" rx="6" fill="#A8D8FF"/>
+      <rect x="0" y="48" width="48" height="36" rx="6" fill="#A8D8FF"/><rect x="60" y="48" width="48" height="36" rx="6" fill="#FFE455"/><rect x="120" y="48" width="48" height="36" rx="6" fill="#FFB4A2"/>
+    </g>
+  </g>
+
+  <!-- 에이전트 3: 검증 (돋보기 + 승인 도장) -->
+  <g filter="url(#soft3)"><rect x="1180" y="560" width="240" height="200" rx="20" fill="#2D3142"/></g>
+  <g>
+    <rect x="1206" y="584" width="14" height="14" rx="4" fill="#A8D8FF"/>
+    <circle cx="1270" cy="640" r="10" fill="#A8D8FF"/><circle cx="1330" cy="640" r="10" fill="#A8D8FF"/>
+    <path d="M1275 682 q25 16 50 0" fill="none" stroke="#A8D8FF" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="1460" cy="600" r="44" fill="none" stroke="#2D3142" stroke-width="14"/>
+    <path d="M1492 632 l40 40" stroke="#2D3142" stroke-width="16" stroke-linecap="round"/>
+    <rect x="1250" y="800" width="120" height="86" rx="10" fill="#FFFFFF" stroke="#E4E1D5" stroke-width="3"/>
+    <circle cx="1310" cy="843" r="26" fill="#FFE455"/>
+    <path d="M1296 843 l10 10 20 -22" fill="none" stroke="#22242A" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <ellipse cx="800" cy="940" rx="560" ry="24" fill="#22242A" opacity="0.07"/>
+</svg>

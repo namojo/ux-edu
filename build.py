@@ -10,15 +10,15 @@ SITE = os.path.join(ROOT, "docs")  # GitHub Pages: main 브랜치 /docs 서빙
 
 # ---------------- 메타데이터 ----------------
 SESSIONS = [
-    {"no": "1회차", "level": "L1", "badge": "l1", "img": "session-l1.png",
+    {"no": "1회차", "level": "L1", "badge": "l1", "img": "session-l1.svg",
      "title": "AI와 첫 대화", "modules": ["first-contact", "prompt-and-verify"],
      "desc": "터미널을 처음 열고, 파일을 읽히고, 결과를 검증하는 법까지. 코딩 없이 한국어 문장만으로.",
      "take": "가져가는 것 — 첫 성공 경험 + 환각·개인정보 검증 습관"},
-    {"no": "2회차", "level": "L2", "badge": "l2", "img": "session-l2.png",
+    {"no": "2회차", "level": "L2", "badge": "l2", "img": "session-l2.svg",
      "title": "내 업무에 붙이기", "modules": ["voc-in-practice", "research-to-persona"],
      "desc": "자기 서비스의 진짜 데이터(VoC·인터뷰)를 가져와 실무 산출물의 초안을 만든다.",
      "take": "가져가는 것 — 내 서비스 VoC 개선 기회 + 페르소나·저니맵 초안"},
-    {"no": "3회차", "level": "L2+L3", "badge": "l3", "img": "session-l3.png",
+    {"no": "3회차", "level": "L2+L3", "badge": "l3", "img": "session-l3.svg",
      "title": "시제품과 나만의 하네스", "modules": ["mvp-in-practice", "my-harness"],
      "desc": "아이디어를 클릭되는 시제품으로 만들고, 반복 업무를 AI 팀(하네스)으로 설계한다.",
      "take": "가져가는 것 — 클릭되는 MVP + 반복 업무의 하네스 설계 캔버스"},
@@ -119,11 +119,11 @@ def nav(root, current):
         f'<a href="{root}{href}"{" aria-current=page" if key == current else ""}>{label}</a>'
         for key, label, href in items)
     return (f'<header class="topnav"><div class="wrap">'
-            f'<a class="brand" href="{root}index.html"><span class="dot"></span>월요일 아침에 바로 쓰는 AI</a>'
+            f'<a class="brand" href="{root}index.html"><span class="dot"></span>UX × AI 하네스</a>'
             f'<nav>{links}</nav></div></header>')
 
 def shell(*, root, current, title, desc, body, og_img=None):
-    og = og_img or f"{SITE_URL}/assets/img/hero.png"
+    og = og_img or f"{SITE_URL}/assets/img/hero.svg"
     return f"""<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -192,7 +192,7 @@ def content_page(md_path, out_path, *, root, current, eyebrow, meta_html="", sid
   <article class="prose">{body_html}{pager}</article>
   {aside}
 </div>"""
-    write(out_path, shell(root=root, current=current, title=f"{title} — 월요일 아침에 바로 쓰는 AI",
+    write(out_path, shell(root=root, current=current, title=f"{title} — AI 하네스로 UX를 바꾸다",
                           desc=(eyebrow + " · " + (title or "")), body=page))
 
 def build_modules():
@@ -297,12 +297,13 @@ def build_index():
     body = f"""
 <section class="hero"><div class="wrap hero-grid">
   <div>
-    <div class="eyebrow">CX/UX 팀 사내 교육 · 반나절 워크샵 × 3회</div>
-    <h1>코딩은 몰라도 됩니다.<br><span class="hl">한국어 문장</span>이면 충분해요.</h1>
-    <p class="lead">인터뷰 녹취, 앱 리뷰, 페르소나, 시제품까지 — UX 실무자의 반복 작업을
-    AI에게 맡기는 법을 실습으로 배웁니다. 모든 세션은 <strong>여러분의 실제 업무 산출물</strong>로 끝납니다.</p>
+    <div class="eyebrow">CX/UX 팀 교육 프로그램 · 워크샵 시리즈</div>
+    <h1>AI 하네스로,<br><span class="hl">UX가 일하는 방식</span>을 바꿉니다.</h1>
+    <p class="lead">인터뷰 녹취 정리부터 클릭되는 시제품까지 — 반복 작업은 역할이 나뉜
+    AI 에이전트 팀(하네스)에게 맡기고, UX 전문가는 <strong>판단과 발견</strong>에 집중합니다.
+    이 교육은 도구 사용법이 아니라 일하는 방식의 전환을 다룹니다. 코딩은 필요 없습니다.</p>
     <div>
-      <a class="btn btn-primary" href="modules/first-contact/index.html">첫 모듈 시작하기</a>
+      <a class="btn btn-primary" href="modules/first-contact/index.html">지금 시작하기</a>
       <a class="btn btn-ghost" href="curriculum.html">커리큘럼 보기</a>
     </div>
   </div>
@@ -317,9 +318,10 @@ def build_index():
 </div></section>
 
 <section class="block alt" id="sessions"><div class="wrap">
-  <h2 class="sec">3번의 반나절, 3단계 성장</h2>
-  <p class="sec-sub">첫 대화(L1)에서 시작해, 내 업무 데이터(L2)를 거쳐, 나만의 AI 팀 설계(L3)까지.
-  모든 모듈은 핸즈온 50% 이상으로 설계되어 있습니다.</p>
+  <h2 class="sec">전환 로드맵 — 도구에서, 팀으로</h2>
+  <p class="sec-sub">AI에게 말을 거는 것(L1)에서 출발해, 자기 실무 데이터를 다루고(L2),
+  마지막에는 반복 업무를 AI 팀으로 설계(L3)하는 데까지 갑니다. 목적지는 도구 사용이 아니라
+  <strong>업무 구조의 재설계</strong>입니다.</p>
   <div class="sessions">{session_cards}</div>
 </div></section>
 
@@ -337,21 +339,47 @@ def build_index():
   <div class="cases">{case_cards}</div>
 </div></section>
 
-<section class="block"><div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:22px" id="extra">
-  <a class="module-row" href="mvp-example/index.html" style="align-items:center">
-    <span style="font-size:28px">📱</span>
-    <span><h3>완성 MVP 예시 체험하기</h3>
-    <p>3회차에서 만드는 것과 같은, 클릭되는 시제품(카페 온보딩)을 지금 열어보세요.</p></span>
-  </a>
+<section class="block" id="deliverables"><div class="wrap">
+  <h2 class="sec">실제 산출물 — 말이 아니라 결과로</h2>
+  <p class="sec-sub">이 프로그램이 약속하는 것을 미리 확인하세요. 아래는 전부 이 하네스가
+  실제로 만들어 낸 것들입니다 — 여러분이 교육에서 만들게 될 것과 같은 종류입니다.</p>
+  <div class="cases">
+    <a class="case-card" href="mvp-example/index.html">
+      <span class="area">MVP 시제품</span><h3>📱 클릭되는 카페 온보딩 앱</h3>
+      <p>코드 한 줄 없이 프롬프트로 만든 4화면 시제품. 지금 바로 클릭해 보세요.</p></a>
+    <a class="case-card" href="modules/first-contact/handout.html">
+      <span class="area">교육 자료</span><h3>📄 1회차 핸드아웃 실물</h3>
+      <p>책상에 두고 보는 치트시트 — 터미널 여는 법부터 권한 창 대응까지 한 장.</p></a>
+    <a class="case-card" href="modules/my-harness/worksheet.html">
+      <span class="area">워크시트</span><h3>📝 하네스 설계 캔버스</h3>
+      <p>3회차에서 자기 반복 업무를 AI 팀으로 분해할 때 쓰는 실제 양식.</p></a>
+    <a class="case-card" href="modules/first-contact/sample-reviews.txt">
+      <span class="area">실습 데이터</span><h3>💾 1회차 샘플 데이터</h3>
+      <p>첫 실습에서 AI에게 읽히는 리뷰 20건 — 다운로드해 그대로 따라 할 수 있습니다.</p></a>
+    <a class="case-card" href="cases/voc-mining.html">
+      <span class="area">사례 실물</span><h3>🔍 VoC 분석 사례 전문</h3>
+      <p>프롬프트 원문과 기대 결과, 검증 체크까지 — 사례집의 대표 사례.</p></a>
+    <a class="case-card" href="https://github.com/namojo/ux-edu/tree/main/content">
+      <span class="area">GitHub</span><h3>🗂 콘텐츠 원본 저장소</h3>
+      <p>모든 교육 자료의 마크다운 원본과 빌드 과정을 공개합니다.</p></a>
+  </div>
+</div></section>
+
+<section class="block alt"><div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:22px" id="extra">
   <a class="module-row" href="instructor.html" style="align-items:center">
     <span style="font-size:28px">🎓</span>
     <span><h3>운영 가이드 (강사·주최자용)</h3>
     <p>준비 체크리스트, 인원·TA 구성, 효과 측정 방법.</p></span>
   </a>
+  <a class="module-row" href="curriculum.html" style="align-items:center">
+    <span style="font-size:28px">🧭</span>
+    <span><h3>교육 설계서 전문</h3>
+    <p>레벨 체계, 모듈별 학습 목표·시간 배분·성공 기준.</p></span>
+  </a>
 </div></section>"""
     write("index.html", shell(root="", current="index",
-        title="월요일 아침에 바로 쓰는 AI — CX/UX 팀 교육",
-        desc="코딩 경험이 없는 CX/UX 실무자를 위한 Claude Code 실무 활용 워크샵 시리즈. 사례집 10편과 6개 실습 모듈.",
+        title="AI 하네스로 UX를 바꾸다 — CX/UX 팀 교육",
+        desc="반복 작업은 AI 에이전트 팀(하네스)에게, UX 전문가는 판단과 발견에. CX/UX 실무자를 위한 워크샵 시리즈 — 사례집 10편, 6개 모듈, 실제 산출물 공개.",
         body=body))
 
 def build_top_pages():
