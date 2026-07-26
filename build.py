@@ -97,6 +97,7 @@ def postprocess(body, root):
         r'(<h2 id="[^"]*">꼭 사람이 확인하세요</h2>)(.*?)(?=<h2 |<div class="pager"|$)',
         r'<div class="human-check">\1\2</div>', body, flags=re.S)
     # 내부 링크 매핑
+    body = re.sub(r'href="(?:\.\./)*(?:usecases/)?setup\.md"', rf'href="{root}setup.html"', body)
     body = re.sub(r'href="(?:\.\./)*usecases/([a-z0-9-]+)\.md"', rf'href="{root}cases/\1.html"', body)
     body = re.sub(r'href="\.\./mvp/onboarding-smoke/?[^"]*"', rf'href="{root}mvp-example/index.html"', body)
     body = re.sub(r'href="mvp/onboarding-smoke/?[^"]*"', rf'href="{root}mvp-example/index.html"', body)
@@ -337,7 +338,8 @@ def build_index():
 <section class="block alt" id="cases"><div class="wrap">
   <h2 class="sec">사례집 — 바로 구성할 수 있는 10개의 팀</h2>
   <p class="sec-sub">모든 사례가 같은 뼈대를 따릅니다 — 하네스 설치 → <b>"하네스 구성해줘"</b>(팀 구성 프롬프트)
-  → 팀 실행 → 피드백으로 팀 진화. 복사해 쓰는 구성 프롬프트와 "꼭 사람이 확인하세요" 체크 포함.</p>
+  → 팀 실행 → 피드백으로 팀 진화. 복사해 쓰는 구성 프롬프트와 "꼭 사람이 확인하세요" 체크 포함.
+  처음이라면 <a href="setup.html"><b>하네스 설치 (처음 한 번만, 2분)</b></a>부터.</p>
   <div class="cases">{case_cards}</div>
 </div></section>
 
@@ -384,6 +386,11 @@ def build_index():
         desc="반복 작업은 AI 에이전트 팀(하네스)에게, UX 전문가는 판단과 발견에. CX/UX 실무자를 위한 워크샵 시리즈 — 사례집 10편, 6개 모듈, 실제 산출물 공개.",
         body=body))
 
+def build_setup():
+    content_page(os.path.join(CONTENT, "usecases", "setup.md"), "setup.html",
+                 root="", current="cases", eyebrow="시작하기 · 처음 한 번만",
+                 meta_html='<span class="badge l1">약 2분</span><span>설치는 전체 사례집·교육에서 딱 한 번입니다</span>')
+
 def build_top_pages():
     content_page(os.path.join(CONTENT, "program", "curriculum.md"), "curriculum.html",
                  root="", current="curriculum", eyebrow="교육 설계서",
@@ -399,6 +406,7 @@ def main():
     shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(SITE, "assets"))
     shutil.copytree(os.path.join(CONTENT, "mvp-example"), os.path.join(SITE, "mvp-example"))
     build_index()
+    build_setup()
     build_top_pages()
     build_modules()
     build_cases()

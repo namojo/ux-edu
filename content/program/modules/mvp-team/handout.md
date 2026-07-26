@@ -8,8 +8,7 @@
 
 | 시점 | 문구 |
 |------|------|
-| 하네스 설치 1/2 (처음 한 번만) | `/plugin marketplace add revfactory/harness` |
-| 하네스 설치 2/2 — 위 완료 후 입력 | `/plugin install harness@harness-marketplace` |
+| 하네스 설치 (처음 한 번만) | `first-contact`에서 이미 완료 — 미설치 시 first-contact 가이드의 하네스 설치 단계 참조 (`/plugin`으로 확인) |
 | 팀 구성 (바이브코딩) | `guide.md` 2단계의 "하네스 구성해줘: ..." 전체 문단 그대로 사용 |
 | 팀 실행 (트리거) | `guide.md` 3단계 참고 — 2-4에서 하네스가 보여준 실행 방법 문구를 그대로 사용(예시: `프로토타입 만들어줘. 입력은 아이디어.md 파일이야.` — 세션마다 다를 수 있음) |
 

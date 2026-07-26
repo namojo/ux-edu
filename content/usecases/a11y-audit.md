@@ -32,16 +32,11 @@
 
 ## 따라 하기
 
-### 0단계: 하네스 설치 (처음 한 번만)
+### 0단계: 하네스 설치 확인 (처음 한 번만)
 
-Claude Code 대화창에 아래 두 줄을 차례로 붙여넣습니다. (이미 설치했다면 건너뛰세요.)
+이 사례는 revfactory/harness가 설치되어 있어야 합니다. **설치는 전체 사례집을 통틀어 처음 한 번만 하면 됩니다** — 아직이라면 [하네스 설치 안내](setup.md)를 따라 하세요 (약 2분).
 
-```
-/plugin marketplace add revfactory/harness
-/plugin install harness@harness-marketplace
-```
-
-> revfactory/harness는 "하네스 구성해줘"라고 말하면 AI 팀(에이전트들)과 그 팀의 작업 방법(스킬)을 자동으로 만들어 주는 확장입니다. 코드를 직접 쓰지 않고, **팀을 말로 설계하면 팀이 일합니다.** 이걸 바이브코딩이라고 부릅니다.
+- 설치 확인: Claude Code 대화창에 `/plugin`을 입력해 목록에 `harness`가 보이면 준비 완료. 이미 설치했다면 바로 1단계로 넘어갑니다.
 
 ### 1단계: 준비
 

@@ -4,12 +4,10 @@
 
 ---
 
-## 1. 설치 명령 (이미 했다면 건너뛰기 — `first-contact`에서 완료)
+## 1. 설치 확인 (설치는 `first-contact`에서 이미 완료 — 전체 교육에서 한 번만)
 
-```
-/plugin marketplace add revfactory/harness
-/plugin install harness@harness-marketplace
-```
+- 확인: 대화창에 `/plugin` 입력 → 목록에 `harness`가 보이면 준비 완료
+- 안 보이면: `first-contact` 가이드의 **하네스 설치** 단계 참조 (또는 TA 호출)
 
 ---
 

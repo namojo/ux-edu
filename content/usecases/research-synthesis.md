@@ -29,16 +29,11 @@
 
 ## 따라 하기
 
-### 0단계: 하네스 설치 (처음 한 번만)
+### 0단계: 하네스 설치 확인 (처음 한 번만)
 
-Claude Code(터미널에서 대화하듯 쓰는 AI 코딩 도구. 터미널은 명령어를 입력하는 검은 창) 대화창에 아래를 입력합니다:
+이 사례는 revfactory/harness가 설치되어 있어야 합니다. **설치는 전체 사례집을 통틀어 처음 한 번만 하면 됩니다** — 아직이라면 [하네스 설치 안내](setup.md)를 따라 하세요 (약 2분).
 
-```
-/plugin marketplace add revfactory/harness
-/plugin install harness@harness-marketplace
-```
-
-이미 설치했다면 이 단계는 건너뜁니다. (설치가 막히면 개발 경험이 있는 동료의 손을 빌리는 보조 경로가 있습니다 — 저장소를 `git clone`(깃 저장소를 통째로 내려받는 명령)으로 받은 뒤 `cp -r skills/harness ~/.claude/skills/harness` 로 복사하는 방식입니다. 초심자는 이 경로에 매달리지 말고, 위 `/plugin` 방식이 될 때까지 도움을 받으세요.)
+- 설치 확인: Claude Code 대화창에 `/plugin`을 입력해 목록에 `harness`가 보이면 준비 완료. 이미 설치했다면 바로 1단계로 넘어갑니다.
 
 ### 1단계: 준비
 

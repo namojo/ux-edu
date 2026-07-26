@@ -29,16 +29,11 @@
 
 ## 따라 하기
 
-### 0단계: 하네스 설치 (처음 한 번만)
+### 0단계: 하네스 설치 확인 (처음 한 번만)
 
-Claude Code(폴더 안 파일을 읽고 쓰는 AI 도구) 대화창에 아래 두 줄을 차례로 붙여넣습니다:
+이 사례는 revfactory/harness가 설치되어 있어야 합니다. **설치는 전체 사례집을 통틀어 처음 한 번만 하면 됩니다** — 아직이라면 [하네스 설치 안내](setup.md)를 따라 하세요 (약 2분).
 
-```
-/plugin marketplace add revfactory/harness
-/plugin install harness@harness-marketplace
-```
-
-이미 harness를 설치해 다른 사례를 해봤다면 이 단계는 건너뜁니다. (`/plugin`은 Claude Code에 기능을 추가하는 확장을 관리하는 명령입니다.) 플러그인 설치는 폴더와 무관하게 처음 한 번만 하면 되고, 어느 Claude Code 세션에서 해도 전체에 적용됩니다. Claude Code를 아직 켜지 않았다면 1단계 4번의 방법으로 먼저 켠 뒤 이 두 줄을 입력해도 됩니다.
+- 설치 확인: Claude Code 대화창에 `/plugin`을 입력해 목록에 `harness`가 보이면 준비 완료. 이미 설치했다면 바로 1단계로 넘어갑니다.
 
 ### 1단계: 준비
 
