@@ -158,10 +158,16 @@ def postprocess(body, root):
     body = body.replace('href="slides-outline.html"', 'href="slides.html"')
     body = re.sub(r'href="([a-z0-9-]+)\.md"',
                   lambda m: f'href="{m.group(1)}.html"' if m.group(1) in CASES else m.group(0), body)
-    # 코드 스팬으로 적힌 사례 경로도 클릭 가능하게
-    body = re.sub(r'<code>(?:usecases/)?([a-z0-9-]+)\.md</code>',
-                  lambda m: (f'<a href="{root}cases/{m.group(1)}.html"><code>{m.group(1)}.md</code></a>'
+    # 코드 스팬으로 적힌 사례 경로 → 사례 제목 링크로.
+    # `usecases/` 접두사가 붙은 것만 처리한다 — 접두사 없는 `persona-journey.md` 등은
+    # 실습에서 학습자가 만드는 결과 파일이므로 사례집으로 연결하면 안 된다.
+    body = re.sub(r'<code>usecases/([a-z0-9-]+)\.md</code>',
+                  lambda m: (f'<a href="{root}cases/{m.group(1)}.html">{CASES[m.group(1)][0]}</a>'
                              if m.group(1) in CASES else m.group(0)), body)
+    # 안전망 — 링크 텍스트가 파일명으로 남아 있으면 사람이 읽는 사례 제목으로 교체
+    body = re.sub(r'(<a href="[^"]*cases/([a-z0-9-]+)\.html">)(?:<code>)?(?:[\w./-]*/)?\2\.md(?:</code>)?</a>',
+                  lambda m: (f'{m.group(1)}{CASES[m.group(2)][0]}</a>'
+                             if m.group(2) in CASES else m.group(0)), body)
     return body
 
 # ---------------- 페이지 셸 ----------------
