@@ -118,7 +118,8 @@ def files_box(items, *, repo_dir, title="원본 파일 받기"):
         f'<span class="dl" aria-hidden="true">⬇</span></a>'
         for it in items)
     return (f'<div class="side-box files"><h4>{title}</h4>{rows}'
-            f'<a class="ghlink" href="{GH_TREE}/{repo_dir}">GitHub 원본 폴더 ↗</a></div>')
+            f'<a class="ghlink" href="{GH_TREE}/{repo_dir}" target="_blank" rel="noopener">'
+            f'GitHub 원본 폴더 ↗</a></div>')
 
 # ---------------- 마크다운 렌더 ----------------
 def md_render(text):
@@ -197,7 +198,7 @@ def shell(*, root, current, title, desc, body, og_img=None):
 {body}
 <footer><div class="wrap">
   <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>
-  <div><a href="{root}downloads.html">자료 받기</a> · <a href="{GH_REPO}">GitHub 원본 저장소</a> · UX 인에이블먼트 하네스로 제작</div>
+  <div><a href="{root}downloads.html">자료 받기</a> · <a href="{GH_REPO}" target="_blank" rel="noopener">GitHub 원본 저장소 ↗</a> · UX 인에이블먼트 하네스로 제작</div>
 </div></footer>
 <script src="{root}assets/site.js"></script>
 </body>
@@ -480,7 +481,7 @@ def build_downloads():
         <em>{it['repo']} · {it['size']}</em></span>
       <span class="acts">
         <a class="dlbtn" href="{it['site']}" download>⬇ 원본 받기</a>
-        <a class="ghbtn" href="{GH_BLOB}/{it['repo']}">GitHub ↗</a>
+        <a class="ghbtn" href="{GH_BLOB}/{it['repo']}" target="_blank" rel="noopener">GitHub ↗</a>
       </span>
     </div>"""
         sections += f"""
@@ -495,7 +496,7 @@ def build_downloads():
   <div class="eyebrow">자료실 · 사이트 ↔ 저장소 연결</div>
   <h1>실습 파일 다운로드</h1>
   <div class="meta"><span class="badge l1">{total}개 파일</span>
-    <span>이 사이트에서 받는 파일은 <a href="{GH_REPO}">github.com/namojo/ux-edu</a>의 원본과 같은 파일입니다</span></div>
+    <span>이 사이트에서 받는 파일은 <a href="{GH_REPO}" target="_blank" rel="noopener">github.com/namojo/ux-edu ↗</a>의 원본과 같은 파일입니다</span></div>
 </div>
 <div class="wrap layout single wide">
   <article class="prose">
@@ -506,7 +507,7 @@ def build_downloads():
         압축을 풀면 <code>content/</code> 아래에 아래 표와 똑같은 구조로 들어 있습니다.</p>
         <div class="btns">
           <a class="btn btn-primary" href="{GH_ZIP}">⬇ 전체 ZIP 내려받기</a>
-          <a class="btn btn-ghost" href="{GH_TREE}/content">GitHub에서 둘러보기 ↗</a>
+          <a class="btn btn-ghost" href="{GH_TREE}/content" target="_blank" rel="noopener">GitHub에서 둘러보기 ↗</a>
         </div>
       </div>
       <div class="prompt-card"><div class="terminal">
