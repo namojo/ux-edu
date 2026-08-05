@@ -4,6 +4,7 @@
 자기 업무의 에이전트 팀을 **말로 구성하고(바이브코딩), 실행하고, 진화시키는** 사람이 되도록 만드는 교육 프로그램입니다.
 
 **🌐 교육 사이트: https://namojo.github.io/ux-edu/**
+**⬇ 실습 파일 자료실: https://namojo.github.io/ux-edu/downloads.html** — 이 저장소의 교육 파일을 사이트에서 그대로 내려받습니다.
 
 핵심 도구는 revfactory/harness입니다 — Claude Code 대화창에 `하네스 구성해줘: {원하는 팀 설명}`을 입력하면
 전문 에이전트 팀(`.claude/agents/`)과 작업 방법(`.claude/skills/`)이 자동 생성되고, 오케스트레이터 트리거 한 문장으로
@@ -60,6 +61,19 @@
 - **[1회차 핸드아웃](https://namojo.github.io/ux-edu/modules/first-contact/handout.html)** — 설치 명령·첫 실행 함정 치트시트
 - **[역할 분해 캔버스](https://namojo.github.io/ux-edu/modules/design-my-harness/worksheet.html)** — 반복 업무 → 팀 구조 설계 워크시트
 
+## 실습 파일 받기 — 사이트와 저장소는 같은 파일입니다
+
+교육 사이트의 각 페이지에는 **그 페이지의 원본 파일을 그대로 내려받는 버튼**이 붙어 있습니다.
+사이트에서 받는 파일 = 이 저장소 `content/` 아래의 파일로, 셋 중 어디를 거쳐도 내용이 같습니다.
+
+| 받는 방법 | 이런 경우에 |
+|---|---|
+| [**자료실**](https://namojo.github.io/ux-edu/downloads.html) — 27개 파일 한 화면 | 필요한 파일만 골라 받을 때 (파일마다 `⬇ 원본 받기` · `GitHub ↗`) |
+| 각 모듈·사례 페이지 사이드바 `원본 파일 받기` | 자료를 읽던 중 바로 받을 때 |
+| [**전체 ZIP**](https://github.com/namojo/ux-edu/archive/refs/heads/main.zip) 또는 `git clone` | 교육 자료 전체를 한 번에 받을 때 |
+
+내려받은 `.md`·`.txt` 파일은 작업 폴더에 두고 Claude Code에 `guide.md 읽어줘`처럼 말하면 바로 실습에 쓸 수 있습니다.
+
 ## 제작 과정 (이 저장소 자체가 하네스 산출물입니다)
 
 이 교육 자료 전체가 revfactory/harness 방법론 기반의 **UX 인에이블먼트 하네스**로 생산되었습니다:
@@ -77,6 +91,8 @@ content/
 assets/        디자인 시스템 (CSS/JS/SVG 일러스트)
 build.py       정적 사이트 빌더
 docs/          빌드 결과 — GitHub Pages 서빙 (main /docs)
+               렌더된 .html 옆에 content/의 원본 .md·.txt를 같은 파일명으로 함께 배포하므로
+               사이트 방문자가 저장소를 거치지 않고도 원본 파일을 바로 내려받을 수 있습니다.
 ```
 
 ```bash

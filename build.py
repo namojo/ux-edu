@@ -70,6 +70,56 @@ FAVICON = ('<link rel="icon" href="data:image/svg+xml,'
 
 SITE_URL = "https://namojo.github.io/ux-edu"
 
+# ---------------- 저장소 연결 (사이트 ↔ github.com/namojo/ux-edu) ----------------
+GH_REPO = "https://github.com/namojo/ux-edu"
+GH_TREE = f"{GH_REPO}/tree/main"
+GH_BLOB = f"{GH_REPO}/blob/main"
+GH_ZIP = f"{GH_REPO}/archive/refs/heads/main.zip"
+
+# 사이트에 원본 그대로 함께 배포하는 실습 파일 목록 — 자료실(downloads.html)에서 사용
+DOWNLOADS = []
+
+
+def human_size(n):
+    return f"{n / 1024:.0f} KB" if n >= 1024 else f"{n} B"
+
+
+def publish_source(src, out_rel, *, label, repo_rel, group, page, sort):
+    """원본 파일을 사이트에 그대로 복사하고 다운로드 메타를 등록한다.
+
+    사이트에서 받는 파일과 저장소의 파일이 같은 것임을 보장하기 위해
+    렌더된 HTML 옆에 원본을 동일한 파일명으로 배치한다(same-origin → download 속성 동작).
+    """
+    dst = os.path.join(SITE, out_rel)
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    shutil.copy(src, dst)
+    item = {
+        "label": label,                                   # 사람이 읽는 자료 이름
+        "file": os.path.basename(out_rel),                # 파일명 (저장소와 동일)
+        "site": out_rel,                                  # 사이트 내 경로 (루트 기준)
+        "repo": repo_rel,                                 # 저장소 내 경로
+        "size": human_size(os.path.getsize(src)),
+        "ext": os.path.splitext(out_rel)[1].lstrip(".").upper(),
+        "group": group,                                   # 자료실 묶음 이름
+        "page": page,                                     # 렌더된 페이지 (루트 기준)
+        "sort": sort,
+    }
+    DOWNLOADS.append(item)
+    return item
+
+
+def files_box(items, *, repo_dir, title="원본 파일 받기"):
+    """사이드바 다운로드 박스 — 링크는 페이지와 같은 폴더의 원본 파일을 가리킨다."""
+    rows = "".join(
+        f'<a class="file" href="{it["file"]}" download>'
+        f'<span class="ext">{it["ext"]}</span>'
+        f'<span class="fname">{html.escape(it["label"])}'
+        f'<em>{it["file"]} · {it["size"]}</em></span>'
+        f'<span class="dl" aria-hidden="true">⬇</span></a>'
+        for it in items)
+    return (f'<div class="side-box files"><h4>{title}</h4>{rows}'
+            f'<a class="ghlink" href="{GH_TREE}/{repo_dir}">GitHub 원본 폴더 ↗</a></div>')
+
 # ---------------- 마크다운 렌더 ----------------
 def md_render(text):
     mdp = markdown.Markdown(extensions=[
@@ -117,7 +167,7 @@ def postprocess(body, root):
 def nav(root, current):
     items = [("index", "홈", "index.html"), ("curriculum", "커리큘럼", "curriculum.html"),
              ("modules", "모듈", "index.html#modules"), ("cases", "사례집", "index.html#cases"),
-             ("setup", "설치", "setup.html")]
+             ("setup", "설치", "setup.html"), ("downloads", "자료 받기", "downloads.html")]
     links = "".join(
         f'<a href="{root}{href}"{" aria-current=page" if key == current else ""}>{label}</a>'
         for key, label, href in items)
@@ -147,7 +197,7 @@ def shell(*, root, current, title, desc, body, og_img=None):
 {body}
 <footer><div class="wrap">
   <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>
-  <div><a href="https://github.com/namojo/ux-edu">GitHub</a> · UX 인에이블먼트 하네스로 제작</div>
+  <div><a href="{root}downloads.html">자료 받기</a> · <a href="{GH_REPO}">GitHub 원본 저장소</a> · UX 인에이블먼트 하네스로 제작</div>
 </div></footer>
 <script src="{root}assets/site.js"></script>
 </body>
@@ -203,7 +253,7 @@ def build_modules():
         m = MODULES[slug]
         srcdir = os.path.join(CONTENT, "program", "modules", slug)
         files = set(os.listdir(srcdir))
-        # 자료 사이드박스
+        # 자료 사이드박스 (사이트에서 읽기)
         mats = []
         if "worksheet.md" in files: mats.append(('worksheet.html', '📝 워크시트'))
         if "handout.md" in files or "handout.html" in files: mats.append(('handout.html', '📄 핸드아웃'))
@@ -211,6 +261,16 @@ def build_modules():
         matbox = ('<div class="side-box"><h4>이 모듈의 자료</h4>'
                   + f'<a href="index.html" class="on">📘 실습 가이드</a>'
                   + "".join(f'<a href="{h}">{t}</a>' for h, t in mats) + "</div>")
+        # 원본 파일 사이드박스 (저장소 파일 그대로 내려받기)
+        dl_items = [
+            publish_source(os.path.join(srcdir, fn), f"modules/{slug}/{fn}",
+                           label=label, repo_rel=f"content/program/modules/{slug}/{fn}",
+                           group=f'{idx+1:02d}. {m["title"]}', page=f"modules/{slug}/index.html",
+                           sort=100 + idx)
+            for fn, label in (("guide.md", "실습 가이드"), ("worksheet.md", "워크시트"),
+                              ("handout.md", "핸드아웃"), ("sample-reviews.txt", "실습 샘플 데이터"))
+            if fn in files]
+        dlbox = files_box(dl_items, repo_dir=f"content/program/modules/{slug}")
         # 이전/다음
         pager_items = []
         if idx > 0:
@@ -224,9 +284,9 @@ def build_modules():
                 f'<span>⏱ {m["dur"]}</span><span>모듈 {idx+1} / {len(MODULE_ORDER)}</span>')
         content_page(os.path.join(srcdir, "guide.md"), f"modules/{slug}/index.html",
                      root="../../", current="modules", eyebrow=f"모듈 {idx+1} · 실습 가이드",
-                     meta_html=meta, side_extra=matbox, pager=pager)
+                     meta_html=meta, side_extra=matbox + dlbox, pager=pager)
         # 부속 자료 페이지
-        sub_side = matbox.replace('href="index.html" class="on"', 'href="index.html"')
+        sub_side = matbox.replace('href="index.html" class="on"', 'href="index.html"') + dlbox
         if "worksheet.md" in files:
             content_page(os.path.join(srcdir, "worksheet.md"), f"modules/{slug}/worksheet.html",
                          root="../../", current="modules", eyebrow=f"{m['title']} · 워크시트",
@@ -239,8 +299,7 @@ def build_modules():
                          side_extra=sub_side)
         elif "handout.html" in files:
             shutil.copy(os.path.join(srcdir, "handout.html"), os.path.join(SITE, f"modules/{slug}/handout.html"))
-        if "sample-reviews.txt" in files:
-            shutil.copy(os.path.join(srcdir, "sample-reviews.txt"), os.path.join(SITE, f"modules/{slug}/sample-reviews.txt"))
+        # sample-reviews.txt 등 원본 파일은 publish_source 에서 이미 복사됨
 
 def build_cases():
     for idx, slug in enumerate(CASE_ORDER):
@@ -253,9 +312,14 @@ def build_cases():
             n = CASE_ORDER[idx+1]
             prev_nxt.append(f'<a class="next" href="{n}.html"><span class="dir">다음 사례 →</span><b>{CASES[n][0]}</b></a>')
         pager = f'<div class="pager">{"".join(prev_nxt)}</div>'
+        dl = publish_source(os.path.join(CONTENT, "usecases", f"{slug}.md"), f"cases/{slug}.md",
+                            label=f"{title} 사례 원문", repo_rel=f"content/usecases/{slug}.md",
+                            group="활용 사례집 10편", page=f"cases/{slug}.html", sort=200 + idx)
         content_page(os.path.join(CONTENT, "usecases", f"{slug}.md"), f"cases/{slug}.html",
                      root="../", current="cases", eyebrow=f"활용 사례 · {area}",
-                     meta_html=f'<span class="badge l2">따라 하기</span><span>{desc}</span>', pager=pager)
+                     meta_html=f'<span class="badge l2">따라 하기</span><span>{desc}</span>',
+                     side_extra=files_box([dl], repo_dir="content/usecases",
+                                          title="이 사례의 원본 파일"), pager=pager)
 
 def build_index():
     session_cards = ""
@@ -352,15 +416,15 @@ def build_index():
     <a class="case-card" href="modules/design-my-harness/worksheet.html">
       <span class="area">워크시트</span><h3>📝 하네스 설계 캔버스</h3>
       <p>3회차에서 자기 반복 업무를 AI 팀으로 분해할 때 쓰는 실제 양식.</p></a>
-    <a class="case-card" href="modules/first-contact/sample-reviews.txt">
+    <a class="case-card" href="modules/first-contact/sample-reviews.txt" download>
       <span class="area">실습 데이터</span><h3>💾 1회차 샘플 데이터</h3>
       <p>첫 실습에서 AI에게 읽히는 리뷰 20건 — 다운로드해 그대로 따라 할 수 있습니다.</p></a>
     <a class="case-card" href="cases/voc-mining.html">
       <span class="area">사례 실물</span><h3>🔍 VoC 분석 사례 전문</h3>
       <p>프롬프트 원문과 기대 결과, 검증 체크까지 — 사례집의 대표 사례.</p></a>
-    <a class="case-card" href="https://github.com/namojo/ux-edu/tree/main/content">
-      <span class="area">GitHub</span><h3>🗂 콘텐츠 원본 저장소</h3>
-      <p>모든 교육 자료의 마크다운 원본과 빌드 과정을 공개합니다.</p></a>
+    <a class="case-card" href="downloads.html">
+      <span class="area">자료실</span><h3>⬇ 실습 파일 전부 받기</h3>
+      <p>모듈·사례·샘플 데이터 원본을 한곳에서 — 저장소({GH_REPO.split('//')[1]}) 파일과 1:1로 연결됩니다.</p></a>
   </div>
 </div></section>
 
@@ -382,14 +446,95 @@ def build_index():
         body=body))
 
 def build_setup():
+    dl = publish_source(os.path.join(CONTENT, "usecases", "setup.md"), "setup.md",
+                        label="하네스 설치 안내", repo_rel="content/usecases/setup.md",
+                        group="공통 자료", page="setup.html", sort=10)
     content_page(os.path.join(CONTENT, "usecases", "setup.md"), "setup.html",
                  root="", current="setup", eyebrow="시작하기 · 처음 한 번만",
-                 meta_html='<span class="badge l1">약 2분</span><span>설치는 전체 사례집·교육에서 딱 한 번입니다</span>')
+                 meta_html='<span class="badge l1">약 2분</span><span>설치는 전체 사례집·교육에서 딱 한 번입니다</span>',
+                 side_extra=files_box([dl], repo_dir="content/usecases", title="이 문서의 원본 파일"))
 
 def build_top_pages():
+    dl = publish_source(os.path.join(CONTENT, "program", "curriculum.md"), "curriculum.md",
+                        label="교육 설계서", repo_rel="content/program/curriculum.md",
+                        group="공통 자료", page="curriculum.html", sort=11)
     content_page(os.path.join(CONTENT, "program", "curriculum.md"), "curriculum.html",
                  root="", current="curriculum", eyebrow="교육 설계서",
-                 meta_html='<span class="badge l1">L1</span><span class="badge l2">L2</span><span class="badge l3">L3</span><span>반나절 × 3회 시리즈</span>')
+                 meta_html='<span class="badge l1">L1</span><span class="badge l2">L2</span><span class="badge l3">L3</span><span>반나절 × 3회 시리즈</span>',
+                 side_extra=files_box([dl], repo_dir="content/program", title="이 문서의 원본 파일"))
+
+def build_downloads():
+    """자료실 — 사이트의 모든 실습 파일을 저장소 원본과 1:1로 연결해 한곳에서 내려받는다."""
+    groups = {}
+    for it in sorted(DOWNLOADS, key=lambda x: (x["sort"], x["file"])):
+        groups.setdefault(it["group"], []).append(it)
+
+    sections = ""
+    for group, items in groups.items():
+        rows = ""
+        for it in items:
+            rows += f"""
+    <div class="dl-row">
+      <span class="ext">{it['ext']}</span>
+      <span class="fname"><a href="{it['page']}">{html.escape(it['label'])}</a>
+        <em>{it['repo']} · {it['size']}</em></span>
+      <span class="acts">
+        <a class="dlbtn" href="{it['site']}" download>⬇ 원본 받기</a>
+        <a class="ghbtn" href="{GH_BLOB}/{it['repo']}">GitHub ↗</a>
+      </span>
+    </div>"""
+        sections += f"""
+<div class="dl-group">
+  <h3>{html.escape(group)}</h3>
+  {rows}
+</div>"""
+
+    total = len(DOWNLOADS)
+    body = f"""
+<div class="wrap page-head">
+  <div class="eyebrow">자료실 · 사이트 ↔ 저장소 연결</div>
+  <h1>실습 파일 다운로드</h1>
+  <div class="meta"><span class="badge l1">{total}개 파일</span>
+    <span>이 사이트에서 받는 파일은 <a href="{GH_REPO}">github.com/namojo/ux-edu</a>의 원본과 같은 파일입니다</span></div>
+</div>
+<div class="wrap layout single wide">
+  <article class="prose">
+    <div class="dl-hero">
+      <div>
+        <h2 style="margin-top:0;border:none;padding-top:0">한 번에 전부 받기</h2>
+        <p>교육 자료 전체(모듈 6개 · 사례 10편 · 샘플 데이터 · MVP 예시)를 한 파일로 받습니다.
+        압축을 풀면 <code>content/</code> 아래에 아래 표와 똑같은 구조로 들어 있습니다.</p>
+        <div class="btns">
+          <a class="btn btn-primary" href="{GH_ZIP}">⬇ 전체 ZIP 내려받기</a>
+          <a class="btn btn-ghost" href="{GH_TREE}/content">GitHub에서 둘러보기 ↗</a>
+        </div>
+      </div>
+      <div class="prompt-card"><div class="terminal">
+        <div class="terminal-bar"><i></i><i></i><i></i>
+        <span>터미널에서 받기</span><button class="copy-btn" type="button">복사</button></div>
+        <div class="terminal-body"><pre>git clone {GH_REPO}.git</pre></div>
+      </div></div>
+    </div>
+
+    <h2 id="파일-목록">파일 목록</h2>
+    <p>자료 이름을 누르면 사이트에서 읽고, <b>원본 받기</b>는 파일을 그대로 내려받습니다.
+    <b>GitHub</b>는 저장소의 해당 파일로 이동합니다 — 세 곳의 내용은 항상 같습니다.</p>
+    {sections}
+
+    <h2 id="파일-형식-안내">받은 파일, 어떻게 쓰나요</h2>
+    <ul>
+      <li><b>.md (마크다운)</b> — 메모장·VS Code로 열립니다. Claude Code 대화창에 파일을 끌어다 놓거나
+      <code>guide.md 읽어줘</code>처럼 말하면 AI가 바로 내용을 읽습니다.</li>
+      <li><b>.txt (샘플 데이터)</b> — 실습에서 AI에게 읽히는 연습용 데이터입니다.
+      작업 폴더에 넣고 <code>sample-reviews.txt 읽고 요약해줘</code>로 사용하세요.</li>
+      <li><b>워크시트</b> — 브라우저에서 열어 <b>🖨 인쇄하기</b>로 종이에 뽑아 쓰는 것도 됩니다.</li>
+    </ul>
+  </article>
+</div>"""
+    write("downloads.html", shell(root="", current="downloads",
+        title="실습 파일 다운로드 — AI 하네스로 UX를 바꾸다",
+        desc="교육 사이트의 모든 실습 파일을 github.com/namojo/ux-edu 저장소 원본과 연결해 한곳에서 내려받습니다.",
+        body=body))
 
 def main():
     if os.path.exists(SITE):
@@ -397,13 +542,20 @@ def main():
     os.makedirs(SITE)
     shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(SITE, "assets"))
     shutil.copytree(os.path.join(CONTENT, "mvp-example"), os.path.join(SITE, "mvp-example"))
+    # GitHub Pages(Jekyll)가 함께 배포한 .md 원본을 가공하지 않도록
+    with open(os.path.join(SITE, ".nojekyll"), "w", encoding="utf-8") as f:
+        f.write("")
     build_index()
     build_setup()
     build_top_pages()
     build_modules()
     build_cases()
+    publish_source(os.path.join(CONTENT, "mvp-example", "index.html"), "mvp-example/index.html",
+                   label="클릭되는 MVP 시제품 (완성 예시)", repo_rel="content/mvp-example/index.html",
+                   group="완성 예시", page="mvp-example/index.html", sort=300)
+    build_downloads()
     n = sum(len(fs) for _, _, fs in os.walk(SITE))
-    print(f"OK — site/ 아래 {n}개 파일 생성")
+    print(f"OK — docs/ 아래 {n}개 파일 생성 (다운로드 연결 {len(DOWNLOADS)}개)")
 
 if __name__ == "__main__":
     main()
