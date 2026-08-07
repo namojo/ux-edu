@@ -54,6 +54,7 @@
 <li>[ ] "매번 같은 방식으로 반복하는 내 업무" 1개 — 예: 매주 CS 티켓 정리, 매월 경쟁사 스크린샷 비교, 매 스프린트 사용성 테스트 메모 정리 등. <strong>떠오르지 않으면 1단계 도입 내용을 다시 훑어보며 예시 업무를 참고해 찾아보세요.</strong></li>
 <li>[ ] 워크시트(<code>worksheet.md</code>) 출력본 또는 화면</li>
 <li>[ ] (있으면) 그 업무에 쓰는 실제 데이터 파일 1건 — 오늘은 데이터 정확도보다 <strong>역할 분해 자체가 목표</strong>라서 없어도 진행 가능</li>
+<li>[ ] 데이터가 없다면: 함께 제공되는 표본 데이터 <code>sample-usability-notes.txt</code>(사용성 테스트 세션 노트 6건)를 내려받아 두세요. "매 스프린트 사용성 테스트 메모를 이슈 목록으로 정리한다"는 반복 업무를 가정한 파일로, 수집 → 분류 → 검증 → 리포트 흐름을 그대로 돌려볼 수 있습니다. 앞 모듈의 대체 데이터(<code>sample-reviews-appstore.txt</code>, <code>sample-interview-p1.txt</code> 등)를 그대로 재사용해도 괜찮습니다.</li>
 </ul>
 <hr />
 <h2 id="1단계-하네스-구조-관찰하기-도입예시-약-30분">1단계 — 하네스 구조 관찰하기 (도입·예시, 약 30분)</h2>
@@ -149,7 +150,7 @@
 3. 그래도 반응이 없거나 오류가 나면 에러 메시지를 그대로 복사해 Claude Code에 붙여넣고 "이 에러 어떻게 해결해?"라고 물어보세요. 해결이 안 되면 사내 헬프 채널에 문의하세요.</p>
 </blockquote>
 <h3 id="3-3-실행">3-3. 실행</h3>
-<p>새 세션을 엽니다. <strong><code>/clear</code>를 우선 권장</strong>합니다 — 같은 폴더에 머무르므로 안전합니다. <code>claude</code>를 재실행하는 방법을 쓴다면, <strong>반드시 하네스를 만든 그 프로젝트 폴더에서 켜야 합니다</strong>(다른 폴더에서 켜면 방금 만든 팀이 보이지 않습니다). 새 세션에서 방금 받아 적은 트리거 문구를 입력합니다. 자기 데이터가 있으면 함께 넣고, 없으면 함께 제공되는 표본 데이터로 진행합니다. <strong>자기 데이터를 쓸 경우</strong>: 데이터 파일을 작업 폴더(하네스가 생성된 프로젝트 폴더)에 넣은 뒤, 트리거 문구 뒤에 "{파일명}으로 실행해줘"처럼 파일명을 함께 말해 주세요. (예: "VoC 분석 실행해줘, reviews.txt로")</p>
+<p>새 세션을 엽니다. <strong><code>/clear</code>를 우선 권장</strong>합니다 — 같은 폴더에 머무르므로 안전합니다. <code>claude</code>를 재실행하는 방법을 쓴다면, <strong>반드시 하네스를 만든 그 프로젝트 폴더에서 켜야 합니다</strong>(다른 폴더에서 켜면 방금 만든 팀이 보이지 않습니다). 새 세션에서 방금 받아 적은 트리거 문구를 입력합니다. 자기 데이터가 있으면 함께 넣고, 없으면 함께 제공되는 표본 데이터 <code>sample-usability-notes.txt</code>로 진행합니다. <strong>어느 쪽이든</strong>: 데이터 파일을 작업 폴더(하네스가 생성된 프로젝트 폴더)에 먼저 넣은 뒤, 트리거 문구 뒤에 "{파일명}으로 실행해줘"처럼 파일명을 함께 말해 주세요. (예: "VoC 분석 실행해줘, reviews.txt로" / "세션 노트 정리 실행해줘, sample-usability-notes.txt로")</p>
 <blockquote>
 <p>💡 <strong>이렇게 나오면 정상입니다</strong>: 세션마다 결과의 문장 표현이나 분류 개수가 조금씩 달라질 수 있습니다. 매번 완전히 똑같은 결과가 나오지 않는 것이 정상입니다 — 팀 구조(역할·검증 단계)가 매번 같은 방식으로 동작하는지가 중요하지, 결과 문구가 토씨 하나까지 같을 필요는 없습니다.</p>
 </blockquote>
@@ -186,7 +187,7 @@
 <blockquote>
 <p>이 과제는 "완벽한 팀을 한 번에 만드는 것"이 목표가 아닙니다. <strong>키워 가는 자산으로 하네스를 계속 손보는 습관</strong>이 목표입니다.</p>
 </blockquote><div class="pager"><a href="../mvp-team/index.html"><span class="dir">← 이전 모듈</span><b>MVP 팀으로 클릭되는 시제품 만들기</b></a></div></article>
-  <aside class="side"><div class="side-box"><h4>이 모듈의 자료</h4><a href="index.html" class="on">📘 실습 가이드</a><a href="worksheet.html">📝 워크시트</a></div><div class="side-box files"><h4>원본 파일 받기</h4><a class="file" href="guide.md" download><span class="ext">MD</span><span class="fname">실습 가이드<em>guide.md · 15 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="file" href="worksheet.md" download><span class="ext">MD</span><span class="fname">워크시트<em>worksheet.md · 4 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="ghlink" href="https://github.com/namojo/ux-edu/tree/main/content/program/modules/design-my-harness" target="_blank" rel="noopener">GitHub 원본 폴더 ↗</a></div><div class="side-box toc"><h4>목차</h4><a href="#준비물-체크-시작-전">준비물 체크 (시작 전)</a><a href="#1단계-하네스-구조-관찰하기-도입예시-약-30분">1단계 — 하네스 구조 관찰하기 (도입·예시, 약 30분)</a><a href="#2단계-반복-업무-역할-분해-캔버스-작성-실습-약-15분">2단계 — 반복 업무 → 역할 분해 캔버스 작성 (실습, 약 15분)</a><a href="#3단계-캔버스를-구성-프롬프트로-옮기고-실행-실습-약-20분">3단계 — 캔버스를 구성 프롬프트로 옮기고 실행 (실습, 약 20분)</a><a href="#4단계-하네스-회고-진화-연습-실습-약-10분">4단계 — 하네스 회고: 진화 연습 (실습, 약 10분)</a><a href="#5단계-공유정리-15분">5단계 — 공유·정리 (15분)</a><a href="#과제-12주-뒤-산출물-리뷰">과제 (1~2주 뒤 산출물 리뷰)</a></div></aside>
+  <aside class="side"><div class="side-box"><h4>이 모듈의 자료</h4><a href="index.html" class="on">📘 실습 가이드</a><a href="worksheet.html">📝 워크시트</a><a href="sample-usability-notes.txt">💾 세션 노트 6건</a></div><div class="side-box files"><h4>원본 파일 받기</h4><a class="file" href="guide.md" download><span class="ext">MD</span><span class="fname">실습 가이드<em>guide.md · 16 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="file" href="worksheet.md" download><span class="ext">MD</span><span class="fname">워크시트<em>worksheet.md · 4 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="file" href="sample-usability-notes.txt" download><span class="ext">TXT</span><span class="fname">표본 데이터 — 사용성 테스트 세션 노트 6건<em>sample-usability-notes.txt · 4 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="ghlink" href="https://github.com/namojo/ux-edu/tree/main/content/program/modules/design-my-harness" target="_blank" rel="noopener">GitHub 원본 폴더 ↗</a></div><div class="side-box toc"><h4>목차</h4><a href="#준비물-체크-시작-전">준비물 체크 (시작 전)</a><a href="#1단계-하네스-구조-관찰하기-도입예시-약-30분">1단계 — 하네스 구조 관찰하기 (도입·예시, 약 30분)</a><a href="#2단계-반복-업무-역할-분해-캔버스-작성-실습-약-15분">2단계 — 반복 업무 → 역할 분해 캔버스 작성 (실습, 약 15분)</a><a href="#3단계-캔버스를-구성-프롬프트로-옮기고-실행-실습-약-20분">3단계 — 캔버스를 구성 프롬프트로 옮기고 실행 (실습, 약 20분)</a><a href="#4단계-하네스-회고-진화-연습-실습-약-10분">4단계 — 하네스 회고: 진화 연습 (실습, 약 10분)</a><a href="#5단계-공유정리-15분">5단계 — 공유·정리 (15분)</a><a href="#과제-12주-뒤-산출물-리뷰">과제 (1~2주 뒤 산출물 리뷰)</a></div></aside>
 </div>
 <footer><div class="wrap">
   <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>

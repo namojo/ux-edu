@@ -43,6 +43,36 @@ MODULE_ORDER = list(MODULES.keys())
 MATERIAL_LABEL = {"guide": "실습 가이드", "worksheet": "워크시트", "handout": "핸드아웃",
                   "slides-outline": "강사용 슬라이드 개요", "sample-reviews": "샘플 데이터"}
 
+# 실습 데이터 파일(`sample-*`)은 모듈 폴더에서 자동으로 수집한다 — 파일을 추가하면 사이트·자료실에 함께 노출된다.
+# 값은 (자료실에 쓰는 긴 이름, 사이드바에 쓰는 짧은 이름).
+SAMPLE_LABEL = {
+    "sample-reviews.txt":            ("실습 데이터 — 배달앱 리뷰 20건", "리뷰 20건"),
+    "sample-reviews-appstore.txt":   ("실습 데이터 — 앱스토어 리뷰 60건 (별점 있음)", "앱 리뷰 60건"),
+    "sample-tickets-cs.txt":         ("실습 데이터 — 고객센터 문의 티켓 25건 (별점 없음)", "CS 티켓 25건"),
+    "sample-prev-quarter-report.md": ("실습 데이터 — 전 분기 VoC 리포트 예시", "전 분기 리포트"),
+    "sample-idea.md":                ("실습 데이터 — 아이디어 메모 예시 (사내 회의실 예약)", "아이디어 메모 예시"),
+    "sample-idea-onboarding.md":     ("참고 — 완성 MVP 예시를 만든 아이디어 메모", "완성 예시의 입력 메모"),
+    "sample-usability-notes.txt":    ("표본 데이터 — 사용성 테스트 세션 노트 6건", "세션 노트 6건"),
+}
+
+
+def sample_labels(fn):
+    """실습 데이터 파일명 → (자료실 이름, 사이드바 이름)."""
+    if fn in SAMPLE_LABEL:
+        return SAMPLE_LABEL[fn]
+    m = re.match(r"sample-interview-p(\d+)\.txt$", fn)
+    if m:
+        return (f"실습 데이터 — 인터뷰 녹취 발췌 P{m.group(1)}", f"인터뷰 P{m.group(1)}")
+    stem = os.path.splitext(fn)[0].replace("sample-", "").replace("-", " ")
+    return (f"실습 데이터 — {stem}", stem)
+
+
+def sample_files(files):
+    """모듈 폴더의 실습 데이터 파일 목록. 실습에서 쓰는 순서(SAMPLE_LABEL 정의 순 → 인터뷰 번호 순)."""
+    order = list(SAMPLE_LABEL)
+    return sorted((f for f in files if f.startswith("sample-")),
+                  key=lambda f: (order.index(f), f) if f in order else (len(order), f))
+
 CASES = {
     "research-synthesis": ("리서치 종합 팀", "리서치", "분기마다 인터뷰 녹취 더미를 인사이트로 종합할 때"),
     "persona-journey":    ("페르소나 팀", "리서치", "근거 검증 담당을 둔 팀으로 페르소나·저니맵을 만들 때"),
@@ -152,6 +182,8 @@ def postprocess(body, root):
     body = re.sub(r'href="(?:\.\./)*usecases/([a-z0-9-]+)\.md"', rf'href="{root}cases/\1.html"', body)
     body = re.sub(r'href="\.\./mvp/onboarding-smoke/?[^"]*"', rf'href="{root}mvp-example/index.html"', body)
     body = re.sub(r'href="mvp/onboarding-smoke/?[^"]*"', rf'href="{root}mvp-example/index.html"', body)
+    # 완성 MVP 예시 — 저장소 기준 상대 경로(content/mvp-example/)를 사이트 경로로
+    body = re.sub(r'href="(?:\.\./)*mvp-example/(?:index\.html)?"', rf'href="{root}mvp-example/index.html"', body)
     body = re.sub(r'href="modules/([a-z0-9-]+)/?"', rf'href="{root}modules/\1/index.html"', body)
     body = re.sub(r'href="curriculum\.md"', rf'href="{root}curriculum.html"', body)
     body = re.sub(r'href="(worksheet|handout|guide|slides-outline)\.md"', r'href="\1.html"', body)
@@ -261,21 +293,27 @@ def build_modules():
         srcdir = os.path.join(CONTENT, "program", "modules", slug)
         files = set(os.listdir(srcdir))
         # 자료 사이드박스 (사이트에서 읽기)
+        samples = sample_files(files)
         mats = []
         if "worksheet.md" in files: mats.append(('worksheet.html', '📝 워크시트'))
         if "handout.md" in files or "handout.html" in files: mats.append(('handout.html', '📄 핸드아웃'))
-        if "sample-reviews.txt" in files: mats.append(('sample-reviews.txt', '💾 샘플 데이터'))
+        if len(samples) == 1:
+            mats.append((samples[0], f'💾 {sample_labels(samples[0])[1]}'))
+        elif samples:
+            for fn in samples:
+                mats.append((fn, f'💾 {sample_labels(fn)[1]}'))
         matbox = ('<div class="side-box"><h4>이 모듈의 자료</h4>'
                   + f'<a href="index.html" class="on">📘 실습 가이드</a>'
                   + "".join(f'<a href="{h}">{t}</a>' for h, t in mats) + "</div>")
         # 원본 파일 사이드박스 (저장소 파일 그대로 내려받기)
+        doc_items = [("guide.md", "실습 가이드"), ("worksheet.md", "워크시트"), ("handout.md", "핸드아웃")]
+        # sort: 모듈 순서(정수부) + 모듈 안에서의 자료 순서(소수부) — 가이드·워크시트 다음에 실습 데이터
         dl_items = [
             publish_source(os.path.join(srcdir, fn), f"modules/{slug}/{fn}",
                            label=label, repo_rel=f"content/program/modules/{slug}/{fn}",
                            group=f'{idx+1:02d}. {m["title"]}', page=f"modules/{slug}/index.html",
-                           sort=100 + idx)
-            for fn, label in (("guide.md", "실습 가이드"), ("worksheet.md", "워크시트"),
-                              ("handout.md", "핸드아웃"), ("sample-reviews.txt", "실습 샘플 데이터"))
+                           sort=100 + idx + j / 100)
+            for j, (fn, label) in enumerate(doc_items + [(s, sample_labels(s)[0]) for s in samples])
             if fn in files]
         dlbox = files_box(dl_items, repo_dir=f"content/program/modules/{slug}")
         # 이전/다음
@@ -426,6 +464,9 @@ def build_index():
     <a class="case-card" href="modules/first-contact/sample-reviews.txt" download>
       <span class="area">실습 데이터</span><h3>💾 1회차 샘플 데이터</h3>
       <p>첫 실습에서 AI에게 읽히는 리뷰 20건 — 다운로드해 그대로 따라 할 수 있습니다.</p></a>
+    <a class="case-card" href="downloads.html#실습-데이터-미지참자용">
+      <span class="area">실습 데이터</span><h3>💾 2·3회차 대체 데이터</h3>
+      <p>자기 데이터가 없어도 끝까지 실습 — 리뷰 60건·CS 티켓 25건·인터뷰 6건·아이디어 메모·세션 노트.</p></a>
     <a class="case-card" href="cases/voc-mining.html">
       <span class="area">사례 실물</span><h3>🔍 VoC 분석 사례 전문</h3>
       <p>프롬프트 원문과 기대 결과, 검증 체크까지 — 사례집의 대표 사례.</p></a>
@@ -496,6 +537,27 @@ def build_downloads():
   {rows}
 </div>"""
 
+    # 실습 데이터 안내 — 자기 데이터를 못 가져온 학습자를 위한 대체 데이터 묶음
+    by_module = {}
+    for it in sorted(DOWNLOADS, key=lambda x: (x["sort"], x["file"])):
+        if it["file"].startswith("sample-"):
+            by_module.setdefault(it["group"], []).append(it)
+    sample_rows = ""
+    for group, items in by_module.items():
+        links = " · ".join(
+            f'<a href="{it["site"]}" download>{html.escape(it["label"].split("—")[-1].strip())}</a>'
+            f' <code>{it["file"]}</code>' for it in items)
+        sample_rows += f'<tr><td><b>{html.escape(group)}</b></td><td>{links}</td></tr>'
+    sample_table = (
+        '<h2 id="실습-데이터-미지참자용">실습 데이터 — 자기 데이터가 없어도 됩니다</h2>'
+        '<p>L1 두 모듈은 아래 공용 샘플(리뷰 20건)로 진행합니다. '
+        'L2 이후 모듈은 <b>자기 서비스의 실제 데이터</b>로 하는 것이 원칙입니다(그래야 산출물이 실무로 이어집니다). '
+        '못 가져왔더라도 실습이 멈추지 않도록, 모듈마다 같은 흐름을 끝까지 돌릴 수 있는 대체 데이터를 함께 배포합니다. '
+        '아래 파일은 <b>전부 가상으로 만든 교육용 데이터</b>이며 실제 고객·참가자 데이터가 아닙니다.</p>'
+        f'<table><thead><tr><th>모듈</th><th>파일</th></tr></thead><tbody>{sample_rows}</tbody></table>'
+        '<p>내려받은 파일은 <b>작업 폴더에 그대로 넣고</b>, 각 모듈 가이드의 실행 문구에 파일명을 적어 주면 됩니다. '
+        '파일명을 바꾸지 않아도 동작합니다.</p>')
+
     total = len(DOWNLOADS)
     body = f"""
 <div class="wrap page-head">
@@ -523,6 +585,8 @@ def build_downloads():
       </div></div>
     </div>
 
+    {sample_table}
+
     <h2 id="파일-목록">파일 목록</h2>
     <p>자료 이름을 누르면 사이트에서 읽고, <b>원본 받기</b>는 파일을 그대로 내려받습니다.
     <b>GitHub</b>는 저장소의 해당 파일로 이동합니다 — 세 곳의 내용은 항상 같습니다.</p>
@@ -532,8 +596,9 @@ def build_downloads():
     <ul>
       <li><b>.md (마크다운)</b> — 메모장·VS Code로 열립니다. Claude Code 대화창에 파일을 끌어다 놓거나
       <code>guide.md 읽어줘</code>처럼 말하면 AI가 바로 내용을 읽습니다.</li>
-      <li><b>.txt (샘플 데이터)</b> — 실습에서 AI에게 읽히는 연습용 데이터입니다.
-      작업 폴더에 넣고 <code>sample-reviews.txt 읽고 요약해줘</code>로 사용하세요.</li>
+      <li><b>.txt (실습 데이터)</b> — 실습에서 AI에게 읽히는 연습용 데이터입니다.
+      작업 폴더에 넣고 <code>sample-reviews.txt 읽고 요약해줘</code>처럼 파일명을 말하면 됩니다.
+      L2 이후 모듈의 대체 데이터는 <a href="#실습-데이터-미지참자용">위 표</a>에서 모듈별로 확인하세요.</li>
       <li><b>워크시트</b> — 브라우저에서 열어 <b>🖨 인쇄하기</b>로 종이에 뽑아 쓰는 것도 됩니다.</li>
     </ul>
   </article>

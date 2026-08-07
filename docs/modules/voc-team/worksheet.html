@@ -33,7 +33,7 @@
 <li>[ ] 설문 자유응답</li>
 <li>[ ] 소셜/커뮤니티 댓글</li>
 <li>[ ] 기타: <strong><em>_</em></strong><strong><em>_</em></strong>__</li>
-<li>[ ] 함께 제공되는 대체 데이터 사용 (자기 데이터 미지참)</li>
+<li>[ ] 함께 제공되는 대체 데이터 사용 (자기 데이터 미지참) → <code>sample-reviews-appstore.txt</code>(앱 리뷰 60건, 별점 있음) + <code>sample-tickets-cs.txt</code>(CS 티켓 25건, 별점 없음) + <code>sample-prev-quarter-report.md</code>(전 분기 리포트)</li>
 </ul>
 <p>파일명(들): <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>______</p>
 <hr />
@@ -43,6 +43,9 @@
 <li>대략 건수: <strong><em>_</em></strong><strong><em>_</em></strong>__ 건</li>
 <li>비교할 이전 리포트가 있는가?  [ ] 있음 (파일명: <strong><em>_</em></strong><strong><em>_</em></strong>)   [ ] 없음 — 오늘 결과가 첫 기준선</li>
 </ul>
+<blockquote>
+<p>대체 데이터를 쓴다면: 기간 <code>2026-04-01 ~ 2026-06-30</code> / 건수 <code>85건</code>(리뷰 60 + CS 25) / 이전 리포트 <code>있음 — sample-prev-quarter-report.md</code>로 적으면 됩니다.</p>
+</blockquote>
 <hr />
 <h2 id="3-익명화-처리">3. 익명화 처리</h2>
 <ul>
@@ -54,12 +57,14 @@
 </ul>
 <blockquote>
 <p>개인정보가 남아있는 상태로 실습을 진행하지 마세요. 확실치 않으면 사내 개인정보 처리 가이드라인을 먼저 확인하거나, 사내 헬프 채널에 문의하세요.</p>
+<p>이 항목은 <strong>자기 데이터</strong>를 쓸 때의 기준입니다. 대체 데이터를 쓴다면 이 표는 "해당 없음"으로 두세요 — 대체 데이터에는 검증 담당의 마스킹 동작을 확인하기 위한 <strong>가상</strong> 개인정보가 일부 일부러 들어 있고, 그걸 걸러내는 것이 4단계 실습 내용입니다.</p>
 </blockquote>
 <hr />
 <h2 id="4-별점평점-유무">4. 별점(평점) 유무</h2>
 <ul>
 <li>[ ] 별점 열이 있다 → 2단계 프롬프트에 "별점도 함께 참고해서 감정을 판정해줘" 문장을 넣는다</li>
 <li>[ ] 별점 열이 없다 → 2단계 프롬프트에 "별점 데이터는 없어서 텍스트 내용으로만 감정을 판정해줘" 문장을 넣는다</li>
+<li>[ ] 파일마다 다르다(대체 데이터가 이 경우) → 어떤 파일에 별점이 있는지 프롬프트에 명시한다. 예: "앱 리뷰에는 별점이 있으니 함께 참고하고, CS 티켓은 별점이 없으니 텍스트 내용으로만 판정해줘"</li>
 </ul>
 <hr />
 <h2 id="5-채널-구성-메모-선택">5. 채널 구성 메모 (선택)</h2>
@@ -101,7 +106,7 @@
 <li>전 분기 비교 문장 (위 2번 참고, 없으면 이 줄은 비워두고 프롬프트에서 뺀다): <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>______</li>
 </ul>
 <p>이 시트를 다 채웠다면 가이드 2단계로 넘어가 하네스 구성 프롬프트를 완성하세요.</p></article>
-  <aside class="side"><div class="side-box"><h4>이 모듈의 자료</h4><a href="index.html">📘 실습 가이드</a><a href="worksheet.html">📝 워크시트 (현재)</a></div><div class="side-box files"><h4>원본 파일 받기</h4><a class="file" href="guide.md" download><span class="ext">MD</span><span class="fname">실습 가이드<em>guide.md · 13 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="file" href="worksheet.md" download><span class="ext">MD</span><span class="fname">워크시트<em>worksheet.md · 3 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="ghlink" href="https://github.com/namojo/ux-edu/tree/main/content/program/modules/voc-team" target="_blank" rel="noopener">GitHub 원본 폴더 ↗</a></div><div class="side-box toc"><h4>목차</h4><a href="#1-데이터-출처">1. 데이터 출처</a><a href="#2-데이터-기간">2. 데이터 기간</a><a href="#3-익명화-처리">3. 익명화 처리</a><a href="#4-별점평점-유무">4. 별점(평점) 유무</a><a href="#5-채널-구성-메모-선택">5. 채널 구성 메모 (선택)</a><a href="#6-2단계-프롬프트에-넣을-내-정보-미리-적어보기">6. 2단계 프롬프트에 넣을 내 정보 미리 적어보기</a></div></aside>
+  <aside class="side"><div class="side-box"><h4>이 모듈의 자료</h4><a href="index.html">📘 실습 가이드</a><a href="worksheet.html">📝 워크시트 (현재)</a><a href="sample-reviews-appstore.txt">💾 앱 리뷰 60건</a><a href="sample-tickets-cs.txt">💾 CS 티켓 25건</a><a href="sample-prev-quarter-report.md">💾 전 분기 리포트</a></div><div class="side-box files"><h4>원본 파일 받기</h4><a class="file" href="guide.md" download><span class="ext">MD</span><span class="fname">실습 가이드<em>guide.md · 16 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="file" href="worksheet.md" download><span class="ext">MD</span><span class="fname">워크시트<em>worksheet.md · 4 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="file" href="sample-reviews-appstore.txt" download><span class="ext">TXT</span><span class="fname">실습 데이터 — 앱스토어 리뷰 60건 (별점 있음)<em>sample-reviews-appstore.txt · 9 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="file" href="sample-tickets-cs.txt" download><span class="ext">TXT</span><span class="fname">실습 데이터 — 고객센터 문의 티켓 25건 (별점 없음)<em>sample-tickets-cs.txt · 5 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="file" href="sample-prev-quarter-report.md" download><span class="ext">MD</span><span class="fname">실습 데이터 — 전 분기 VoC 리포트 예시<em>sample-prev-quarter-report.md · 4 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="ghlink" href="https://github.com/namojo/ux-edu/tree/main/content/program/modules/voc-team" target="_blank" rel="noopener">GitHub 원본 폴더 ↗</a></div><div class="side-box toc"><h4>목차</h4><a href="#1-데이터-출처">1. 데이터 출처</a><a href="#2-데이터-기간">2. 데이터 기간</a><a href="#3-익명화-처리">3. 익명화 처리</a><a href="#4-별점평점-유무">4. 별점(평점) 유무</a><a href="#5-채널-구성-메모-선택">5. 채널 구성 메모 (선택)</a><a href="#6-2단계-프롬프트에-넣을-내-정보-미리-적어보기">6. 2단계 프롬프트에 넣을 내 정보 미리 적어보기</a></div></aside>
 </div>
 <footer><div class="wrap">
   <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>

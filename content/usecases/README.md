@@ -31,8 +31,8 @@
 
 - **revfactory/harness**: https://github.com/revfactory/harness — 설치·트리거는 각 사례 0단계에 동일하게 안내
 - **harness-100**: https://github.com/revfactory/harness-100 — 10개 도메인 100개 기성 팀 하네스 (출발점으로 활용)
-- **완성 MVP 예시**: `../mvp/onboarding-smoke/` — MVP 팀이 만드는 것과 같은 종류의 산출물
-- **교육 프로그램**: `../education/` — 이 사례집을 실습 교재로 쓰는 3레벨 워크샵 시리즈
+- **완성 MVP 예시**: [`../mvp-example/`](../mvp-example/index.html) — MVP 팀이 만드는 것과 같은 종류의 산출물
+- **교육 프로그램**: [`../program/`](../program/README.md) — 이 사례집을 실습 교재로 쓰는 3레벨 워크샵 시리즈(모듈별 실습 데이터 포함)
 
 ## 알려진 개선점
 

@@ -40,7 +40,7 @@
 </tr>
 <tr>
 <td>준비물</td>
-<td>검증하고 싶은 <strong>자기 서비스의 화면 흐름 아이디어</strong>(메모 형태로 충분, 미리 안 써 왔어도 이 가이드 2단계에서 씀)</td>
+<td>검증하고 싶은 <strong>자기 서비스의 화면 흐름 아이디어</strong>(메모 형태로 충분, 미리 안 써 왔어도 이 가이드 2단계에서 씀). 아이디어가 아예 없다면 함께 제공되는 <code>sample-idea.md</code>(사내 회의실 예약 예시)를 그대로 씁니다</td>
 </tr>
 <tr>
 <td>이 모듈이 아닌 것</td>
@@ -117,7 +117,7 @@
 <ul>
 <li>[ ] <code>first-contact</code>·<code>first-harness</code> 모듈에서 Claude Code를 켜 봤고, <code>하네스 구성해줘</code>로 팀을 한 번 만들어 봤다</li>
 <li>[ ] revfactory/harness 플러그인이 설치되어 있다(지난 모듈에서 설치 완료)</li>
-<li>[ ] 오늘 화면으로 만들어 볼 내 서비스 아이디어가 있다 — 없으면 2단계에서 완성 예시를 변형해서 씁니다</li>
+<li>[ ] 오늘 화면으로 만들어 볼 내 서비스 아이디어가 있다 — 없으면 함께 제공되는 <code>sample-idea.md</code>를 그대로 씁니다(2단계 안내 참고)</li>
 </ul>
 <blockquote>
 <p>💡 <strong>플러그인 설치가 기억 안 나요.</strong> Claude Code 대화창에 <code>/plugin list</code>를 입력해 목록에 <code>harness</code>가 보이면 설치된 것입니다. 안 보이면 <code>first-contact</code> 실습 가이드의 <strong>하네스 설치</strong> 단계를 따라 하세요 — 전체 교육에서 처음 한 번만 하면 됩니다.</p>
@@ -137,8 +137,10 @@
 <h2 id="1단계-완성-예시-먼저-체험하기-15분">1단계 — 완성 예시 먼저 체험하기 (15분)</h2>
 <p>오늘 팀이 무엇을 만들어 주는지, 완성품을 먼저 눌러봅니다.</p>
 <ol>
-<li>함께 제공되는 폴더(또는 프로젝트) 안에서 <code>mvp/onboarding-smoke/index.html</code> 파일을 찾습니다.</li>
-<li><strong>더블클릭</strong>합니다 — 설치나 인터넷 연결 없이 기본 브라우저에서 바로 열립니다.</li>
+<li>완성 예시 파일을 엽니다. 둘 중 편한 쪽으로:
+   - <strong>바로 보기</strong>: 교육 사이트의 <a href="../../mvp-example/index.html">클릭되는 MVP 시제품</a>을 브라우저에서 엽니다.
+   - <strong>파일로 받아서 보기</strong>: 자료실에서 <code>완성 MVP 시제품</code>(저장소 경로 <code>content/mvp-example/index.html</code>)을 내려받습니다.</li>
+<li>내려받은 파일은 <strong>더블클릭</strong>하면 설치나 인터넷 연결 없이 기본 브라우저에서 바로 열립니다.</li>
 <li>아래 순서로 클릭하며 끝까지 완주해 보세요.</li>
 </ol>
 <table>
@@ -219,7 +221,9 @@
    - 화면3(예: 확인): 무엇을 요약해서 보여주나
    - 화면4(예: 완료): 완료 메시지, 다음 행동 버튼
    목표 사용자: {누구}. 톤: {깔끔하고 신뢰감 있게 등}.</code>
-3. 아이디어가 아직 안 떠오르면, <code>mvp/onboarding-smoke/</code>가 검증한 온보딩 흐름을 자기 서비스로 바꿔 적어도 됩니다.</p>
+3. 아이디어가 아직 안 떠오르면 두 가지 방법이 있습니다.
+   - 함께 제공되는 <strong><code>sample-idea.md</code></strong>(사내 회의실 예약 예시)를 작업 폴더에 <code>아이디어.md</code>라는 이름으로 복사해 넣고 그대로 진행합니다. 가장 빠른 길입니다.
+   - 또는 1단계에서 체험한 완성 예시(카페 온보딩)의 흐름을 자기 서비스로 바꿔 적습니다. 그 예시를 만든 입력 메모가 <strong><code>sample-idea-onboarding.md</code></strong>로 함께 제공되니, "이 정도만 적으면 그런 화면이 나온다"를 대조해 보고 시작하면 쉽습니다.</p>
 <h3 id="2-2-폴더에서-claude-code-열기">2-2. 폴더에서 Claude Code 열기</h3>
 <p><code>first-contact</code>에서 했던 것과 같습니다.
 - <strong>macOS</strong>: Spotlight(⌘+Space)에 <code>terminal</code>을 입력해 터미널을 엽니다 → 창에 <code>cd</code>를 입력하고 한 칸 띄운 뒤, 만든 폴더를 터미널 창 안으로 드래그하면 경로가 자동 입력됩니다 → Enter → <code>claude</code> 입력 후 Enter. (Finder 우클릭 → "폴더에서 새로운 터미널 열기" 메뉴가 보인다면 그걸 써도 되지만, 이 메뉴는 기본값으로 꺼져 있는 Mac이 많습니다 — 안 보여도 정상이니 위 Spotlight 방법을 쓰세요.)
@@ -285,7 +289,7 @@
 </blockquote>
 <hr />
 <h2 id="5단계-검증-범위-정의-5분">5단계 — 검증 범위 정의 (5분)</h2>
-<p>MVP는 "무엇이든 다 보여주는 화면"이 아닙니다. 아래 표를 직접 채워, 오늘 만든 MVP로 <strong>검증할 수 있는 것 / 없는 것</strong>을 구분해 보세요. (<code>mvp/onboarding-smoke/README.md</code>의 방식과 같습니다.)</p>
+<p>MVP는 "무엇이든 다 보여주는 화면"이 아닙니다. 아래 표를 직접 채워, 오늘 만든 MVP로 <strong>검증할 수 있는 것 / 없는 것</strong>을 구분해 보세요. (완성 예시에 함께 들어 있는 <code>content/mvp-example/README.md</code>의 "검증할 수 있는 것 / 없는 것" 방식과 같습니다.)</p>
 <p><strong>검증할 수 있는 것</strong> (예: 화면 순서가 자연스러운가, 특정 버튼의 위치가 직관적인가)</p>
 <div class="prompt-card"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div><div class="terminal-body"><pre>-
 -
@@ -343,7 +347,7 @@
 <li>[ ] (선택) 실행한 <code>하네스 회고</code> 1건</li>
 </ul>
 <p><strong>다음 이어지는 것</strong>: 이번에 겪은 "이번만 고칠 일 vs 팀에 심을 일" 판단은 다음 모듈 <code>design-my-harness</code>에서 자기 반복 업무를 직접 설계할 때 다시 씁니다.</p><div class="pager"><a href="../research-persona-team/index.html"><span class="dir">← 이전 모듈</span><b>리서치 종합 팀 → 페르소나 팀 잇기</b></a><a class="next" href="../design-my-harness/index.html"><span class="dir">다음 모듈 →</span><b>내 반복 업무를 팀 구조로 직접 설계·진화</b></a></div></article>
-  <aside class="side"><div class="side-box"><h4>이 모듈의 자료</h4><a href="index.html" class="on">📘 실습 가이드</a><a href="handout.html">📄 핸드아웃</a></div><div class="side-box files"><h4>원본 파일 받기</h4><a class="file" href="guide.md" download><span class="ext">MD</span><span class="fname">실습 가이드<em>guide.md · 17 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="file" href="handout.md" download><span class="ext">MD</span><span class="fname">핸드아웃<em>handout.md · 4 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="ghlink" href="https://github.com/namojo/ux-edu/tree/main/content/program/modules/mvp-team" target="_blank" rel="noopener">GitHub 원본 폴더 ↗</a></div><div class="side-box toc"><h4>목차</h4><a href="#오늘의-목표">오늘의 목표</a><a href="#진행-순서-한눈에">진행 순서 한눈에</a><a href="#0단계-준비-확인-5분">0단계 — 준비 확인 (5분)</a><a href="#1단계-완성-예시-먼저-체험하기-15분">1단계 — 완성 예시 먼저 체험하기 (15분)</a><a href="#2단계-내-아이디어-정리-팀-구성-15분">2단계 — 내 아이디어 정리 + 팀 구성 (15분)</a><a href="#3단계-팀-실행-10분">3단계 — 팀 실행 (10분)</a><a href="#4단계-자연어로-화면-다듬기-10분">4단계 — 자연어로 화면 다듬기 (10분)</a><a href="#5단계-검증-범위-정의-5분">5단계 — 검증 범위 정의 (5분)</a><a href="#6단계-수정-vs-진화하네스-회고-구분-5분">6단계 — 수정 vs 진화(하네스 회고) 구분 (5분)</a><a href="#정리공유-15분">정리·공유 (15분)</a></div></aside>
+  <aside class="side"><div class="side-box"><h4>이 모듈의 자료</h4><a href="index.html" class="on">📘 실습 가이드</a><a href="handout.html">📄 핸드아웃</a><a href="sample-idea.md">💾 아이디어 메모 예시</a><a href="sample-idea-onboarding.md">💾 완성 예시의 입력 메모</a></div><div class="side-box files"><h4>원본 파일 받기</h4><a class="file" href="guide.md" download><span class="ext">MD</span><span class="fname">실습 가이드<em>guide.md · 18 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="file" href="handout.md" download><span class="ext">MD</span><span class="fname">핸드아웃<em>handout.md · 5 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="file" href="sample-idea.md" download><span class="ext">MD</span><span class="fname">실습 데이터 — 아이디어 메모 예시 (사내 회의실 예약)<em>sample-idea.md · 3 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="file" href="sample-idea-onboarding.md" download><span class="ext">MD</span><span class="fname">참고 — 완성 MVP 예시를 만든 아이디어 메모<em>sample-idea-onboarding.md · 3 KB</em></span><span class="dl" aria-hidden="true">⬇</span></a><a class="ghlink" href="https://github.com/namojo/ux-edu/tree/main/content/program/modules/mvp-team" target="_blank" rel="noopener">GitHub 원본 폴더 ↗</a></div><div class="side-box toc"><h4>목차</h4><a href="#오늘의-목표">오늘의 목표</a><a href="#진행-순서-한눈에">진행 순서 한눈에</a><a href="#0단계-준비-확인-5분">0단계 — 준비 확인 (5분)</a><a href="#1단계-완성-예시-먼저-체험하기-15분">1단계 — 완성 예시 먼저 체험하기 (15분)</a><a href="#2단계-내-아이디어-정리-팀-구성-15분">2단계 — 내 아이디어 정리 + 팀 구성 (15분)</a><a href="#3단계-팀-실행-10분">3단계 — 팀 실행 (10분)</a><a href="#4단계-자연어로-화면-다듬기-10분">4단계 — 자연어로 화면 다듬기 (10분)</a><a href="#5단계-검증-범위-정의-5분">5단계 — 검증 범위 정의 (5분)</a><a href="#6단계-수정-vs-진화하네스-회고-구분-5분">6단계 — 수정 vs 진화(하네스 회고) 구분 (5분)</a><a href="#정리공유-15분">정리·공유 (15분)</a></div></aside>
 </div>
 <footer><div class="wrap">
   <div>사내 CX/UX 팀 교육 프로그램 · <span style="font-family:var(--font-hand);font-size:17px">코딩 없이, 한국어 문장으로.</span></div>

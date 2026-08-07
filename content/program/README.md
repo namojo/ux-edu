@@ -21,9 +21,14 @@
 
 - [ ] Claude Code 설치 + 로그인 (사내 설치 가이드 참조)
 - [ ] revfactory/harness 플러그인 설치 — [first-contact](modules/first-contact/guide.md)에서 안내 (전 과정에서 한 번만)
-- [ ] 2단계(L2)부터는 자기 프로젝트의 실데이터(익명화된 리뷰·인터뷰) 준비
-- [ ] 실습 교재: `usecases/` 사례집(각 사례의 2단계가 곧 팀 구성 프롬프트)과 `mvp/onboarding-smoke/` 예시
-- [ ] 1단계 공용 샘플: [modules/first-contact/sample-reviews.txt](modules/first-contact/sample-reviews.txt)
+- [ ] 2단계(L2)부터는 자기 프로젝트의 실데이터(익명화된 리뷰·인터뷰) 준비 — 없으면 아래 대체 데이터로 진행
+- [ ] 실습 교재: `usecases/` 사례집(각 사례의 2단계가 곧 팀 구성 프롬프트)과 완성 MVP 예시 [`../mvp-example/`](../mvp-example/index.html)
+- [ ] 모듈별 실습 데이터 (전부 가상 데이터 · 사이트 자료실에서도 개별 다운로드 가능)
+  - L1 공용 샘플: [modules/first-contact/sample-reviews.txt](modules/first-contact/sample-reviews.txt) (리뷰 20건)
+  - `voc-team`: [sample-reviews-appstore.txt](modules/voc-team/sample-reviews-appstore.txt) (리뷰 60건·별점 있음) · [sample-tickets-cs.txt](modules/voc-team/sample-tickets-cs.txt) (CS 티켓 25건·별점 없음) · [sample-prev-quarter-report.md](modules/voc-team/sample-prev-quarter-report.md) (전 분기 리포트)
+  - `research-persona-team`: [sample-interview-p1.txt](modules/research-persona-team/sample-interview-p1.txt) ~ [p6.txt](modules/research-persona-team/sample-interview-p6.txt) (인터뷰 6건)
+  - `mvp-team`: [sample-idea.md](modules/mvp-team/sample-idea.md) (준비물 대체용) · [sample-idea-onboarding.md](modules/mvp-team/sample-idea-onboarding.md) (완성 예시의 입력 메모)
+  - `design-my-harness`: [sample-usability-notes.txt](modules/design-my-harness/sample-usability-notes.txt) (세션 노트 6건)
 
 ## 완료 기준
 
