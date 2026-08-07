@@ -163,6 +163,11 @@ def postprocess(body, root):
     # 코드블록 → 친근한 터미널 프롬프트 카드
     def to_card(m):
         code = m.group(1)
+        # 폴더 구조 트리는 복사해 쓰는 프롬프트가 아니므로 라벨을 구분한다(복사 버튼 없음)
+        if "├──" in code or "└──" in code:
+            return ('<div class="prompt-card"><div class="terminal">'
+                    '<div class="terminal-bar"><i></i><i></i><i></i><span>폴더 구조</span></div>'
+                    f'<div class="terminal-body"><pre>{code}</pre></div></div></div>')
         return ('<div class="prompt-card"><div class="terminal">'
                 '<div class="terminal-bar"><i></i><i></i><i></i>'
                 '<span>복사해서 쓰세요</span><button class="copy-btn" type="button">복사</button></div>'

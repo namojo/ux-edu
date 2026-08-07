@@ -27,7 +27,7 @@
 지금 여러분이 보고 있는 이 실습 가이드, 사례집, MVP 예시 — 이 교육 프로그램 전체가 사실 **revfactory/harness로 만든 팀**이 만든 결과물입니다. 이 프로젝트 폴더를 직접 열어 아래 구조를 확인하세요.
 
 ```
-harness-ux/
+ux-edu/                                ← 이 교육 프로그램의 프로젝트 폴더
 ├── .claude/
 │   ├── agents/                        ← 팀원 정의
 │   │   ├── curriculum-designer.md     (커리큘럼 설계 담당)
@@ -37,7 +37,11 @@ harness-ux/
 │   │   └── ux-enablement-reviewer.md  (검증 담당 — 읽기 전용, 수정 권한 없음)
 │   └── skills/
 │       └── ux-enablement/SKILL.md     ← 오케스트레이터(팀장 역할) 스킬
+├── content/                           ← 팀이 만들어 낸 산출물 (커리큘럼·모듈·사례집·MVP 예시)
+└── docs/                              ← 위 산출물로 빌드한 교육 사이트
 ```
+
+> 저장소를 내려받았다면(자료실의 **전체 ZIP** 또는 `git clone`) 이 파일들이 그대로 들어 있습니다. 사이트에서 보고 있다면 [GitHub 저장소의 `.claude/` 폴더](https://github.com/namojo/ux-edu/tree/main/.claude)에서 바로 열어볼 수 있습니다. `.claude`처럼 점으로 시작하는 폴더는 탐색기·Finder에서 숨겨져 있으니, 안 보이면 맥은 `Cmd+Shift+.`를 누르거나 Claude Code 대화창에 `.claude/agents 폴더에 뭐가 있는지 보여줘`라고 물어보세요.
 
 **짚고 넘어갈 3가지:**
 
